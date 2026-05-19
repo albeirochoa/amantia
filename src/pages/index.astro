@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import PreRegisterForm from '../components/PreRegisterForm.astro';
+---
+
+<Base>
+  <main class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Imagen de fondo con overlay -->
+    <div class="absolute inset-0 z-0">
+      <!-- Placeholder: reemplazar con imagen real del paisaje (niebla, valle) -->
+      <div
+        class="absolute inset-0 bg-cover bg-center"
+        style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2400&auto=format&fit=crop');"
+      >
+      </div>
+      <!-- Overlay navy oscuro para legibilidad -->
+      <div class="absolute inset-0 bg-navy/80"></div>
+      <!-- Gradiente vertical sutil -->
+      <div class="absolute inset-0 bg-gradient-to-b from-navy/40 via-transparent to-navy/90"></div>
+    </div>
+
+    <!-- Contenido -->
+    <div class="relative z-10 w-full max-w-md mx-auto px-6 py-16 md:py-20">
+      <!-- Logo / Marca -->
+      <div class="text-center mb-16 md:mb-20">
+        <h1 class="font-serif text-4xl md:text-5xl text-bone tracking-widest-3 mb-6">
+          AMANTIA
+        </h1>
+        <div class="w-12 h-px bg-gold mx-auto mb-6"></div>
+        <p class="font-serif italic text-gold-soft text-lg md:text-xl leading-relaxed">
+          Menos ruido.<br />Más presencia.
+        </p>
+      </div>
+
+      <!-- Tagline narrativo -->
+      <div class="text-center mb-12 space-y-4">
+        <p class="text-bone/80 leading-relaxed text-sm md:text-base">
+          Un refugio para dos en Quebradanegra, Cundinamarca.<br />
+          A 90 km de Bogotá.
+        </p>
+        <p class="text-bone/60 leading-relaxed text-sm">
+          Antes de abrir, cinco parejas vivirán Amantia sin costo.<br />
+          Pre-regístrense.
+        </p>
+      </div>
+
+      <!-- Formulario -->
+      <div class="bg-navy-soft/40 backdrop-blur-sm border border-bone/10 p-8 md:p-10">
+        <h2 class="text-center text-xs uppercase tracking-widest-3 text-gold mb-8">
+          Pre-registro · Orígenes
+        </h2>
+        <PreRegisterForm />
+      </div>
+
+      <!-- Footer mínimo -->
+      <footer class="text-center mt-16 space-y-2">
+        <p class="text-bone/40 text-xs uppercase tracking-widest-2">
+          <a href="https://instagram.com/amantiacundinamarca" class="hover:text-gold transition-colors">
+            @amantiacundinamarca
+          </a>
+        </p>
+        <p class="text-bone/30 text-xs">
+          hola@amantia.com.co
+        </p>
+        <p class="text-bone/20 text-xs pt-4">
+          © 2026 Amantia
+        </p>
+      </footer>
+    </div>
+  </main>
+</Base>
