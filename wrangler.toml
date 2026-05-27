@@ -3,6 +3,13 @@
 name = "amantia"
 compatibility_date = "2025-05-01"
 
+# Dominios personalizados del Worker (apex ya existente + www).
+# custom_domain=true le dice a Cloudflare que cree/gestione el binding como dominio propio.
+routes = [
+  { pattern = "amantia.com.co", custom_domain = true },
+  { pattern = "www.amantia.com.co", custom_domain = true },
+]
+
 # Astro compila a HTML/CSS/JS estáticos en ./dist — se sirven directo como assets.
 [assets]
 directory = "./dist"
