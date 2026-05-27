@@ -1,0 +1,9 @@
+# Configuración del Worker de Amantia (sitio estático Astro servido vía Static Assets).
+# El `name` debe coincidir con el Worker existente para actualizarlo (no crear uno nuevo).
+name = "amantia"
+compatibility_date = "2025-05-01"
+
+# Astro compila a HTML/CSS/JS estáticos en ./dist — se sirven directo como assets.
+[assets]
+directory = "./dist"
+not_found_handling = "404-page"
