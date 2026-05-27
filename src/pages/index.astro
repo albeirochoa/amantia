@@ -1,71 +1,178 @@
 ---
 import Base from '../layouts/Base.astro';
 import PreRegisterForm from '../components/PreRegisterForm.astro';
+
+// Imágenes de stock (Unsplash) · placeholders hasta tener fotos reales del lugar.
+// Reemplazar cada URL por la foto definitiva subida a /public/images/.
+const img = {
+  hero: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=2400&auto=format&fit=crop', // niebla / valle
+  queEs: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2400&auto=format&fit=crop', // bosque, luz cálida
+  viven: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2400&auto=format&fit=crop', // piscina al atardecer
+  origen: 'https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?q=80&w=2400&auto=format&fit=crop', // manos con café
+  cta: 'https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=2400&auto=format&fit=crop', // valle al atardecer
+};
 ---
 
 <Base>
-  <main class="relative min-h-screen flex items-center justify-center overflow-hidden">
-    <!-- Imagen de fondo con overlay -->
-    <div class="absolute inset-0 z-0">
-      <!-- Placeholder: reemplazar con imagen real del paisaje (niebla, valle) -->
-      <div
-        class="absolute inset-0 bg-cover bg-center"
-        style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2400&auto=format&fit=crop');"
-      >
-      </div>
-      <!-- Overlay navy oscuro para legibilidad -->
-      <div class="absolute inset-0 bg-navy/80"></div>
-      <!-- Gradiente vertical sutil -->
-      <div class="absolute inset-0 bg-gradient-to-b from-navy/40 via-transparent to-navy/90"></div>
-    </div>
-
-    <!-- Contenido -->
-    <div class="relative z-10 w-full max-w-md mx-auto px-6 py-16 md:py-20">
-      <!-- Logo / Marca -->
-      <div class="text-center mb-16 md:mb-20">
-        <h1 class="font-serif text-4xl md:text-5xl text-bone tracking-widest-3 mb-6">
-          AMANTIA
-        </h1>
-        <div class="w-12 h-px bg-gold mx-auto mb-6"></div>
-        <p class="font-serif italic text-gold-soft text-lg md:text-xl leading-relaxed">
-          Menos ruido.<br />Más presencia.
-        </p>
+  <main>
+    <!-- ════════════════════ SECCIÓN 1 · HERO ════════════════════ -->
+    <section id="pre-registro" class="relative min-h-screen flex items-center overflow-hidden">
+      <!-- Fondo -->
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${img.hero}')`}></div>
+        <div class="absolute inset-0 bg-navy/85"></div>
       </div>
 
-      <!-- Tagline narrativo -->
-      <div class="text-center mb-12 space-y-4">
-        <p class="text-bone/80 leading-relaxed text-sm md:text-base">
-          Un refugio para dos en Quebradanegra, Cundinamarca.<br />
-          A 90 km de Bogotá.
-        </p>
-        <p class="text-bone/60 leading-relaxed text-sm">
-          Antes de abrir, cinco parejas vivirán Amantia sin costo.<br />
-          Pre-regístrense.
-        </p>
+      <!-- Contenido: dos columnas 50/50 en desktop -->
+      <div class="relative z-10 w-full max-w-6xl mx-auto px-6 py-20 md:py-24 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Columna izquierda · Copy -->
+        <div class="text-center lg:text-left">
+          <h1 class="font-serif text-5xl md:text-6xl text-bone tracking-widest-3 mb-10">
+            AMANTIA
+          </h1>
+          <p class="font-serif text-bone/90 text-xl md:text-2xl leading-relaxed mb-8">
+            Un momento privado para que el cuerpo descanse,
+            la mente se libere y la pareja vuelva a conectar.
+          </p>
+          <p class="text-bone/70 leading-relaxed mb-6">
+            Antes de abrir, cinco parejas vivirán Amantia sin costo.
+            Su experiencia honesta ayudará a darle forma
+            a Amantia desde adentro.
+          </p>
+          <p class="text-gold-soft font-serif italic text-lg">
+            Pre-regístrense. La selección será privada y curada.
+          </p>
+        </div>
+
+        <!-- Columna derecha · Formulario -->
+        <div class="bg-navy-soft/50 backdrop-blur-sm border border-bone/10 p-8 md:p-10">
+          <h2 class="text-center text-xs uppercase tracking-widest-3 text-gold mb-8">
+            Pre-registro · Orígenes
+          </h2>
+          <PreRegisterForm />
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════ SECCIÓN 2 · QUÉ ES AMANTIA ════════════════════ -->
+    <section class="relative min-h-screen flex items-center overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${img.queEs}')`}></div>
+        <div class="absolute inset-0 bg-navy/80"></div>
       </div>
 
-      <!-- Formulario -->
-      <div class="bg-navy-soft/40 backdrop-blur-sm border border-bone/10 p-8 md:p-10">
-        <h2 class="text-center text-xs uppercase tracking-widest-3 text-gold mb-8">
-          Pre-registro · Orígenes
+      <div class="relative z-10 w-full max-w-3xl mx-auto px-6 py-24 text-center">
+        <h2 class="font-serif text-3xl md:text-5xl text-bone tracking-widest-2 mb-12 leading-tight">
+          MENOS RUIDO. MÁS PRESENCIA.
         </h2>
-        <PreRegisterForm />
+        <p class="font-serif text-bone/90 text-xl md:text-2xl leading-relaxed mb-8">
+          Amantia es un espacio para bajar el ritmo
+          y volver a estar.
+        </p>
+        <p class="text-bone/70 leading-relaxed text-lg mb-10">
+          Sin agenda. Sin interrupciones. Sin prisa.
+        </p>
+        <p class="text-gold uppercase tracking-widest-2 text-sm">
+          Quebradanegra · Cundinamarca
+        </p>
+      </div>
+    </section>
+
+    <!-- ════════════════════ SECCIÓN 3 · LO QUE VIVEN ════════════════════ -->
+    <section class="relative min-h-screen flex items-center overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${img.viven}')`}></div>
+        <div class="absolute inset-0 bg-navy/85"></div>
       </div>
 
-      <!-- Footer mínimo -->
-      <footer class="text-center mt-16 space-y-2">
-        <p class="text-bone/40 text-xs uppercase tracking-widest-2">
+      <div class="relative z-10 w-full max-w-3xl mx-auto px-6 py-24 text-center">
+        <h2 class="font-serif text-3xl md:text-5xl text-bone tracking-widest-2 mb-12">
+          LO QUE VIVEN EN AMANTIA
+        </h2>
+        <div class="space-y-6 font-serif text-bone/90 text-xl md:text-2xl leading-relaxed">
+          <p>72 metros cuadrados solo para ustedes.</p>
+          <p>Piscina al aire libre. Jacuzzi calefactado.</p>
+          <p>Un sistema de recuperación corporal<br />que el cuerpo agradece.</p>
+          <p>Cinema privado desde la cama.</p>
+        </div>
+        <p class="text-gold-soft font-serif italic text-lg mt-12">
+          Y el tiempo suficiente para volver a estar.
+        </p>
+      </div>
+    </section>
+
+    <!-- ════════════════════ SECCIÓN 4 · EL ORIGEN IMPORTA ════════════════════ -->
+    <section class="relative min-h-screen flex items-center overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${img.origen}')`}></div>
+        <div class="absolute inset-0 bg-navy/85"></div>
+      </div>
+
+      <div class="relative z-10 w-full max-w-3xl mx-auto px-6 py-24 text-center">
+        <h2 class="font-serif text-3xl md:text-5xl text-bone tracking-widest-2 mb-12">
+          EL ORIGEN IMPORTA
+        </h2>
+        <div class="space-y-5 text-bone/85 text-lg md:text-xl leading-relaxed">
+          <p class="font-serif text-bone/90 text-xl md:text-2xl">El café tiene origen. El pan también.</p>
+          <p>Don Hernán que ordeña temprano.</p>
+          <p>Doña Lucía que abre la tienda.</p>
+          <p>La familia García que cultiva el café.</p>
+        </div>
+        <p class="text-gold uppercase tracking-widest-2 text-sm mt-12 mb-4">
+          En Amantia, el origen importa.
+        </p>
+        <p class="text-gold-soft font-serif italic text-lg">
+          Y quizás por eso las parejas también vuelven al suyo.
+        </p>
+      </div>
+    </section>
+
+    <!-- ════════════════════ SECCIÓN 5 · CTA FINAL ════════════════════ -->
+    <section class="relative min-h-screen flex items-center overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${img.cta}')`}></div>
+        <div class="absolute inset-0 bg-navy/75"></div>
+      </div>
+
+      <div class="relative z-10 w-full max-w-2xl mx-auto px-6 py-24 text-center">
+        <p class="font-serif text-bone text-2xl md:text-3xl leading-relaxed mb-8">
+          Cinco parejas vivirán Amantia
+          antes de la apertura pública.
+        </p>
+        <p class="text-bone/80 leading-relaxed text-lg mb-12">
+          Si sienten que deberían estar entre ellas,
+          pre-regístrense.
+        </p>
+        <a
+          href="#pre-registro"
+          class="inline-block bg-gold hover:bg-gold-soft text-navy font-medium uppercase tracking-widest-2 text-sm px-12 py-4 transition-colors duration-300"
+        >
+          Pre-registrarse
+        </a>
+      </div>
+    </section>
+
+    <!-- ════════════════════ FOOTER ════════════════════ -->
+    <footer class="bg-navy border-t border-bone/10">
+      <div class="max-w-3xl mx-auto px-6 py-16 text-center space-y-4">
+        <p class="font-serif text-2xl text-bone tracking-widest-3">AMANTIA</p>
+        <p class="text-bone/60 text-sm leading-relaxed">
+          Vereda Casa Vieja, Quebradanegra, Cundinamarca · 90 km de Bogotá
+        </p>
+        <p class="font-serif italic text-gold-soft">
+          Menos ruido. Más presencia.
+        </p>
+        <p class="text-bone/50 text-sm pt-4">
           <a href="https://instagram.com/amantiacundinamarca" class="hover:text-gold transition-colors">
             @amantiacundinamarca
           </a>
+          <span class="text-bone/30 mx-2">·</span>
+          <a href="mailto:hola@amantia.com.co" class="hover:text-gold transition-colors">
+            hola@amantia.com.co
+          </a>
         </p>
-        <p class="text-bone/30 text-xs">
-          hola@amantia.com.co
-        </p>
-        <p class="text-bone/20 text-xs pt-4">
-          © 2026 Amantia
-        </p>
-      </footer>
-    </div>
+        <p class="text-bone/30 text-xs pt-4">© 2026 Amantia</p>
+      </div>
+    </footer>
   </main>
 </Base>
