@@ -7,12 +7,24 @@ Esta carpeta contiene la configuración de Claude Code para el proyecto Amantia.
 ```
 .claude/
 ├── agents/
-│   ├── amantia-deploy.md    # Especialista en deploy a producción
-│   └── amantia-content.md   # Especialista en copy y secciones
+│   ├── amantia-deploy.md             # Especialista en deploy a producción
+│   ├── amantia-content.md            # Especialista en copy y secciones
+│   ├── amantia-developer.md          # (Agent Pack) Implementación
+│   ├── amantia-qa.md                 # (Agent Pack) QA pre-deploy
+│   ├── amantia-seo-strategist.md     # (Agent Pack) Gobierno SEO / URLs
+│   ├── amantia-seo-content.md        # (Agent Pack) Briefs y contenido SEO
+│   ├── amantia-technical-seo.md      # (Agent Pack) SEO técnico
+│   ├── amantia-geo-local.md          # (Agent Pack) Entidad local
+│   ├── amantia-internal-linking.md   # (Agent Pack) Enlazado interno
+│   ├── amantia-ux.md                 # (Agent Pack) UX
+│   └── amantia-cro.md                # (Agent Pack) CRO
+├── skills/                           # (Agent Pack) 8 skills SEO/CRO/QA
 ├── commands/
 │   └── deploy.md            # Slash command /deploy
 └── settings.json            # Permisos del proyecto
 ```
+
+Las reglas globales del Agent Pack viven en `AGENTS.md` (raíz) y se importan desde `CLAUDE.md`. La estrategia y el gobierno SEO están en `docs/`.
 
 Además, el archivo `CLAUDE.md` en la raíz del proyecto es el contexto principal que Claude Code lee al iniciar la sesión.
 
