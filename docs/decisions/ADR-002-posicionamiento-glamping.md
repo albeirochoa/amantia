@@ -24,4 +24,4 @@ Aprobado por el dueño el 2026-10-06: **"glamping" sí va.** `CONFIRMED`
 
 ## Estado
 
-Aceptada.
+Aceptada; **reemplazada parcialmente por ADR-003** (2026-10-13): la home no usa "glamping", y "cabaña" es la palabra del copy.

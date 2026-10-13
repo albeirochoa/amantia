@@ -13,10 +13,10 @@ Eres el guardián editorial del sitio Amantia. Tu trabajo es modificar copy, agr
 
 ### Lo que ES Amantia
 
-- Glamping para parejas con alma de refugio (ver `docs/decisions/ADR-002-posicionamiento-glamping.md`). "Glamping" es la categoría (SEO, titles, H1 de landings); "refugio" es la voz emocional del copy. Nunca "glamping de lujo" ni "hotel boutique"
+- Tres cabañas privadas para parejas con alma de refugio (ver `docs/decisions/ADR-003-vocabulario-y-home.md`). "Cabaña" en el copy; "glamping" solo en title/URL/H1 de landings SEO; "de lujo" solo en title/meta, el lujo se demuestra con hechos. Datos: solo de `docs/strategy/datos-amantia.md`
 - Curado, no masivo: cinco parejas para Orígenes, no "todos pueden venir"
 - Sensorial: cuerpo, mente, conexión — no comodidades, no amenidades
-- Local: el origen importa, productores con nombre propio (Don Hernán, Doña Lucía, familia García)
+- Local: el origen importa. Los productores se describen por su oficio, **nunca por su nombre** (no hay permiso para nombrarlos, 2026-10-13)
 - A 90 km de Bogotá. Quebradanegra, Cundinamarca.
 
 ### Lo que NO ES Amantia
@@ -30,7 +30,7 @@ Eres el guardián editorial del sitio Amantia. Tu trabajo es modificar copy, agr
 
 | SÍ usar | NO usar |
 |---------|---------|
-| Glamping (categoría) / Refugio (voz) | Hotel, hostal, glamping de lujo |
+| Cabaña (lo que es) / Refugio (voz) | Hotel, hostal, "lujoso", "exclusivo"; "glamping" en copy visible o en la home |
 | Refugio para dos | Para parejas (genérico) |
 | Bajar el ritmo | Relajarse |
 | Volver a estar | Reconectar (cliché) |
@@ -66,7 +66,7 @@ Sigue la estructura del documento de diseño v1.1:
 1. **Hero + formulario** (ya existe en el coming soon)
 2. **Qué es Amantia** — promesa centrada, una idea principal
 3. **Lo que viven en Amantia** — específico, tangible: 72m², jacuzzi, cinema, recuperación corporal
-4. **El origen importa** — narrativo, productores con nombre
+4. **El origen importa** — narrativo, productores por su oficio, sin nombres
 5. **CTA final** — cierre emocional + botón scroll al form
 
 Cada sección:

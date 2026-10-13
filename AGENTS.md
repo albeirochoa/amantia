@@ -231,25 +231,11 @@ Descubrimiento → deseo → experiencia → alojamiento → disponibilidad → 
 
 ## 8. Prioridad de páginas
 
-### Core
-- `/`
-- `/alojamientos/`
-- `/alojamientos/[slug]/`
+**Fuente oficial: `docs/seo/url-map.md`** (estructura aprobada y congelada el 2026-10-13, ver ADR-003).
 
-### BOFU inicial
-- `/glamping-cerca-de-bogota/`
-- `/glamping-en-quebrada-negra/`
-- `/glamping-cerca-de-villeta/`
-- `/glamping-para-parejas/`
-- `/glamping-con-jacuzzi/`
-- `/cabana-con-jacuzzi-cerca-de-bogota/`
+Fase A (lanzamiento): `/`, `/cabanas/`, `/glamping-cerca-de-bogota/`, `/glamping-con-jacuzzi/`, `/glamping-cerca-de-villeta/`, `/origenes/` (noindex) y `/politica-de-privacidad/`.
 
-### MOFU inicial
-- `/escapada-romantica-cerca-de-bogota/`
-- `/plan-romantico-cerca-de-bogota/`
-- `/escapada-fin-de-semana-cerca-de-bogota/`
-
-Estas URLs son hipótesis iniciales, no dogma. Deben validarse con datos antes de expandir.
+Una URL nueva exige: ≥300 búsquedas/mes propias, un protagonista distinto y una SERP distinta. Si no los cumple, va como sección de una URL existente.
 
 ---
 

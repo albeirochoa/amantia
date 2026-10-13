@@ -1,33 +1,94 @@
 # URL Map — Amantia
 
-## Core
-- `/`
-- `/alojamientos/`
-- `/alojamientos/[slug]/`
+> **Estructura aprobada y congelada el 2026-10-13** (ver ADR-003). Fuente oficial de URLs; `AGENTS.md` §8 remite aquí.
+> **Evidencia:**
+> - `docs/seo/investigacion-fase1.md` (keywords y SERP)
+> - `docs/seo/silos-y-programatico.md` (silos, reparto con QuebradaNegra)
+> - `docs/strategy/datos-amantia.md` (datos confirmados)
 
-## P0 BOFU
-- `/glamping-cerca-de-bogota/`
-- `/glamping-en-quebrada-negra/`
-- `/glamping-cerca-de-villeta/`
-- `/glamping-para-parejas/`
-- `/glamping-con-jacuzzi/`
-- `/cabana-con-jacuzzi-cerca-de-bogota/`
+## Principio rector
 
-## P0 MOFU
-- `/escapada-romantica-cerca-de-bogota/`
-- `/plan-romantico-cerca-de-bogota/`
-- `/escapada-fin-de-semana-cerca-de-bogota/`
+**Amantia habla de Amantia. QuebradaNegra.com habla del territorio.**
+- Lo que tiene la **propiedad** (cabañas, jacuzzi y piscina privados, para parejas, cercanía) → Amantia.
+- Lo que tiene el **territorio** (qué hacer, clima, planes, comparativas de varios hospedajes) → QuebradaNegra.com, que enlaza a la URL específica de Amantia.
+- La misma keyword puede vivir en los dos dominios si el formato es distinto: QN es comparativa o guía, Amantia es una sola propiedad. Nunca se comparten textos.
 
-## P1/P2 — Solo después de validación
-- `/glamping-en-cundinamarca/`
-- `/alojamiento-romantico-cerca-de-bogota/`
-- `/lugares-para-descansar-cerca-de-bogota/`
-- `/lugares-para-desconectarse-cerca-de-bogota/`
-- `/lugares-privados-para-parejas/`
-- `/escapada-en-pareja/`
-- `/escapada-de-una-noche/`
-- `/escapada-naturaleza-cerca-de-bogota/`
+## Fase A: lanzamiento (noviembre 2026) · ESTRUCTURA CONGELADA
 
-## Estado
+**Regla para crear una URL.** Se crea solo si se cumplen las tres condiciones:
+1. ≥300 búsquedas/mes propias (sin sumar variantes duplicadas).
+2. Un protagonista distinto al de las demás URLs.
+3. Google muestra resultados distintos para esa búsqueda.
 
-Todas las P1/P2 comienzan como `PROPOSAL`.
+Si no se cumplen, la búsqueda va como **sección** de una URL existente.
+
+**Excepción: páginas de paquete u oferta real.** Un paquete con precio, qué incluye y fotos es un producto distinto, no una variación de keyword, así que puede tener URL propia aunque su volumen de búsqueda sea bajo. No aplica a paquetes hipotéticos: la URL se crea cuando el paquete existe. Esta estructura no se reabre hasta tener ≥3 meses de Search Console.
+
+| URL | Title | Absorbe (vol/mes) | Protagonista |
+|---|---|---|---|
+| `/` | Amantia · Cabañas privadas de lujo para dos | Marca ("amantia") | La experiencia y la marca (ADR-003) |
+| `/cabanas/` | Cabañas para parejas cerca a Bogotá · jacuzzi y piscina | **Todo "cabaña(s) + …":** cabañas para parejas 320 · cabaña con jacuzzi privado parejas 140 · cabañas para parejas con jacuzzi 90 · cabañas con piscina privada cerca a Bogotá 70 · cabañas de lujo 50 · cabañas románticas 50 · cabañas privadas 10 | Las 3 cabañas: qué tienen, qué incluyen, disponibilidad |
+| `/glamping-cerca-de-bogota/` | Glamping cerca a Bogotá para parejas · lujo a 90 km | glamping cerca a Bogotá 6.600 · glamping Bogotá 2.900 · glamping para pareja(s) 210+110 · glamping de lujo 140 · glamping romántico 70 | El viaje desde Bogotá |
+| `/glamping-con-jacuzzi/` | Glamping con jacuzzi y piscina privada cerca a Bogotá | glamping con jacuzzi 480 · glamping con piscina 110 · glamping con jacuzzi privado 90 · glamping con piscina privada 90 | El jacuzzi y la piscina privados |
+| `/glamping-cerca-de-villeta/` | Glamping Villeta · privado y con jacuzzi, en Quebradanegra | glamping Villeta 1.600 · glamping en Villeta 390 | La cercanía a Villeta (sin "cabañas en Villeta", que es de QN) |
+| `/origenes/` | — | — (campaña, `noindex`) | Pre-registro de las 5 parejas |
+| `/politica-de-privacidad/` | — | — | Legal |
+| `/404` | — | — | ✅ existe |
+
+**Por qué "glamping" tiene 3 landings y "cabaña" solo una:**
+- "Glamping" tiene volumen para dividir en tres temas con protagonista propio (6.600 / 1.600 / 480).
+- Todo "cabaña(s) + …" suma ≈700/mes y describe el mismo producto (3 cabañas iguales). Una página fuerte rinde más que cuatro casi idénticas, que Google trataría como contenido duplicado.
+
+**Silos:**
+
+```
+/  ──────────────┬── /cabanas/  (conversión)
+                 ├── /glamping-cerca-de-bogota/   ↔ /glamping-cerca-de-villeta/
+                 └── /glamping-con-jacuzzi/       ↔ /glamping-cerca-de-bogota/
+```
+
+- Cada landing enlaza a `/cabanas/` y a la home.
+- Los enlaces laterales van solo donde están las flechas.
+- `/glamping-cerca-de-villeta/` y `/glamping-cerca-de-bogota/` enlazan a QuebradaNegra.com para "qué hacer" y "cómo llegar".
+
+## Fase B: después de abrir, solo si se cumple la condición
+
+| URL | Condición |
+|---|---|
+| `/reservar/` (`noindex`) | Al tener motor de reservas con disponibilidad por cabaña (Fase 5) |
+| `/glamping-con-piscina-privada/` | Que Keyword Planner muestre volumen propio para "glamping/cabañas con piscina privada" (hoy ≈200 medido) |
+| `/plan-aniversario-cerca-de-bogota/` | Cuando el **paquete de aniversario** esté definido (precio, qué incluye, fotos). Página SEO: ≈480/mes, la SERP muestra paquetes |
+| `/pedida-de-mano-cerca-de-bogota/` | Cuando el **paquete de pedida de mano** esté definido. Página de oferta (excepción de paquete): tráfico de Instagram, WhatsApp, anuncios y la guía de QN. Ideal antes del pico de dic–ene ("pedida de mano" 720 → 1.300 en enero) |
+| `/experiencias/[slug]/` | ≥4 experiencias o paquetes reales con precio y fotos |
+| `/cabanas/[slug]/` | Solo si en el futuro hay cabañas **distintas** entre sí |
+
+## Cedidas a QuebradaNegra.com (Amantia no crea estas URLs)
+
+- Planes en pareja / escapada romántica cerca de Bogotá: guía publicada en QN, `/guias/escapada-romantica-cerca-de-bogota/`.
+- Hospedaje en Villeta, cabañas en Villeta, directorio de glamping de Quebradanegra.
+- Clima cálido / tierra caliente (Villeta); Amantia solo usa el dato concreto ("días de 28 °C").
+- Qué hacer, cascadas, cómo llegar al municipio, escapada de fin de semana, lugares para descansar, guía de precios.
+
+## Descartadas
+
+- `/glamping-para-parejas/` → `/`
+- `/glamping-en-quebrada-negra/` → competidor y directorio de QN
+- `/cabana-con-jacuzzi-cerca-de-bogota/` → `/glamping-con-jacuzzi/`
+- `/escapada-romantica-cerca-de-bogota/`, `/plan-romantico-cerca-de-bogota/`, `/planes-en-pareja-cerca-de-bogota/` → QN
+- `/escapada-fin-de-semana-cerca-de-bogota/`, `/lugares-para-descansar-…/`, `/lugares-para-desconectarse-…/` → QN
+- `/glamping-clima-calido-cerca-de-bogota/` → QN
+- `/escapada-en-pareja/`, `/escapada-de-una-noche/`, `/escapada-naturaleza-…/`, `/lugares-privados-para-parejas/`, `/alojamiento-romantico-…/` → sin demanda o fusionadas
+
+Ninguna de estas URLs estuvo publicada, así que no se requieren redirects.
+
+## Cambios necesarios en QuebradaNegra.com
+
+1. `CTAAmantia` con `href` hacia la URL equivalente de Amantia, no hacia la raíz:
+   - `/glamping/cerca-de-bogota/` → `/glamping-cerca-de-bogota/`
+   - `/villeta/glamping/` → `/glamping-cerca-de-villeta/`
+   - guía romántica → `/` o `/cabanas/`
+   - directorio → `/cabanas/`
+2. Actualizar `stays.ts`:
+   - Amantia ya no está "en desarrollo";
+   - agregar NAP y geo (5.137415, -74.480506);
+   - 3 cabañas con jacuzzi y piscina privados.

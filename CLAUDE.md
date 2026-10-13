@@ -82,7 +82,8 @@ Nunca commitear `.env`. Usar `.env.example` como plantilla.
 
 ### Tono editorial
 
-- "Glamping" es la categoría (SEO, titles, H1 de landings); "refugio" es la voz del copy. Nunca "glamping de lujo". Ver `docs/decisions/ADR-002-posicionamiento-glamping.md`
+- Vocabulario (ver `docs/decisions/ADR-003-vocabulario-y-home.md`): "cabaña" es lo que Amantia es (copy); "refugio" es la voz; "glamping" solo en URL/title/H1 de landings SEO, nunca en la home ni en el copy; "de lujo" solo en title/meta/schema, nunca como adjetivo visible.
+- Todo dato de hecho sale de `docs/strategy/datos-amantia.md`. Los productores locales nunca se nombran.
 - Sereno, contenido, sin grandilocuencia
 - Habla a parejas adultas (30-55), no a millennials genéricos
 - "Menos ruido. Más presencia." es la consigna
@@ -100,14 +101,7 @@ Nunca commitear `.env`. Usar `.env.example` como plantilla.
 
 ## Próximos hitos del proyecto
 
-1. ✅ Coming soon armado (este repo)
-2. ✅ Construir landing completa v1.1 (5 secciones del documento original)
-3. ✅ Agent Pack integrado (AGENTS.md, docs/, agentes y skills SEO)
-4. 🔄 Reemplazar MailerLite por el nuevo sistema de captura y deploy al Worker de Cloudflare
-5. ⏳ Conseguir foto/video real del lugar (hoy son placeholders de Unsplash)
-6. ⏳ Crear OG image (1200x630) en `public/images/og-image.jpg`
-7. ⏳ Lanzar al público + anunciar en Instagram
-8. ⏳ Fase 0 del plan maestro: completar la auditoría en `docs/audit/`
+**Fuente oficial: `docs/strategy/roadmap.md`** (incluye los paquetes de pedida de mano y aniversario, con fechas).
 
 ## Pendientes postergados (2026-10-06) · NO OLVIDAR
 
@@ -115,7 +109,7 @@ Bloquean el lanzamiento. Recordarlos al usuario al retomar, sin ejecutarlos sin 
 
 1. **Reemplazo de MailerLite**: decidir entre Cloudflare D1 (recomendado), Google Sheets, solo WhatsApp o Brevo.
 2. **Política de privacidad** (Ley 1581): faltan el nombre o razón social del responsable, el NIT o la cédula y el correo de contacto.
-3. **Confirmar** el Instagram `@amantiacundinamarca` y el permiso de los productores para nombrarlos.
+3. **Confirmar** el Instagram `@amantiacundinamarca`. (Productores: SIN permiso, nombres ya retirados del sitio el 2026-10-13.)
 4. **Merge + deploy**: los cambios del 2026-10-06 (Agent Pack, ADRs, auditoría, 404, sitemap, imagen para redes) ya tienen commit en la rama `agent-pack-integration`, pero falta el merge a `main` y el deploy. Hacerlo después de los puntos 1–3, con `pre-deploy-seo-qa` y un registro real de prueba.
 
 ## Cosas importantes que evitar

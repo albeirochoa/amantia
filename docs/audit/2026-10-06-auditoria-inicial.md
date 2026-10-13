@@ -41,7 +41,7 @@ El copy actual afirma lo siguiente. Si vienen del documento/PPT del cliente, mar
 | Vereda Casa Vieja, Quebradanegra | `index.astro` | `CONFIRMED` (PPT) |
 | 72 m² | `index.astro` | `CONFIRMED` (PPT) |
 | Piscina al aire libre, jacuzzi calefactado | `index.astro` | `CONFIRMED` (PPT) |
-| Productores con nombre (Don Hernán, Doña Lucía, familia García) | `index.astro` | `CONFIRMED` (PPT); `TODO` confirmar su permiso para nombrarlos |
+| Productores con nombre (Don Hernán, Doña Lucía, familia García) | `index.astro` | `CONFIRMED` (PPT); **sin permiso para nombrarlos** (2026-10-13) → nombres retirados del sitio |
 | Cinco parejas sin costo (Orígenes) | `index.astro` | `CONFIRMED` (PPT) |
 | Instagram `@amantiacundinamarca` | `index.astro` | `TODO` (el README ya pedía confirmarlo) |
 | Fotos | `index.astro` | Placeholders de Unsplash, no son del lugar. `CONFIRMED` |
