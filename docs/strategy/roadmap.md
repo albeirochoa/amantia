@@ -38,7 +38,8 @@ Leyenda: ✅ hecho · 🔄 en curso · ⏳ pendiente · 🔒 bloqueado · 👤 l
 
 - ✅ Redirección 301 `www.amantia.com.co` → `amantia.com.co`, hecha en `worker/index.js` (la Page Rule no actuaba sobre el custom domain del Worker).
 - ⏳ 👤 **Cloudflare Web Analytics** (gratis, sin cookies).
-- ⏳ 👤 **Google Search Console:** verificar el dominio por DNS y enviar `https://amantia.com.co/sitemap.xml`.
+- ✅ **Google Search Console:** propiedad de dominio `amantia.com.co` verificada por DNS (2026-10-15).
+- ⏳ 👤 En Search Console: enviar `sitemap.xml` y solicitar la indexación de las 5 URLs.
 - ⏳ **Política de privacidad definitiva** (Ley 1581). Hoy es provisional. Faltan el nombre o razón social del responsable, el NIT o la cédula y el correo de datos.
 - ⏳ 👤 **Confirmar el Instagram** `@amantiacundinamarca` → mostrarlo en el footer y agregarlo a `sameAs`.
 - ⏳ **Sistema de captura** (recomendado Cloudflare D1): endpoint `/api/lista` + `SITE.captureEnabled = true`. Mientras tanto funciona por WhatsApp.
