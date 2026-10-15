@@ -109,14 +109,13 @@ Nunca commitear `.env`. Usar `.env.example` como plantilla.
 
 **Fuente oficial: `docs/strategy/roadmap.md`** (incluye los paquetes de pedida de mano y aniversario, con fechas).
 
-## Pendientes postergados (2026-10-06) · NO OLVIDAR
+## Pendientes (sitio v2 publicado el 2026-10-15) · NO OLVIDAR
 
-Bloquean el lanzamiento. Recordarlos al usuario al retomar, sin ejecutarlos sin su confirmación:
-
-1. **Reemplazo de MailerLite**: decidir entre Cloudflare D1 (recomendado), Google Sheets, solo WhatsApp o Brevo.
-2. **Política de privacidad** (Ley 1581): faltan el nombre o razón social del responsable, el NIT o la cédula y el correo de contacto.
-3. **Confirmar** el Instagram `@amantiacundinamarca`. (Productores: SIN permiso, nombres ya retirados del sitio el 2026-10-13.)
-4. **Merge + deploy**: los cambios del 2026-10-06 (Agent Pack, ADRs, auditoría, 404, sitemap, imagen para redes) ya tienen commit en la rama `agent-pack-integration`, pero falta el merge a `main` y el deploy. Hacerlo después de los puntos 1–3, con `pre-deploy-seo-qa` y un registro real de prueba.
+1. **Captura**: hoy la lista de apertura y Orígenes van por WhatsApp (+57 312 631 1226). Para activar el formulario: endpoint `/api/lista` (recomendado Cloudflare D1) + `SITE.captureEnabled = true`.
+2. **Política de privacidad** definitiva (Ley 1581): faltan el nombre o razón social del responsable, el NIT o la cédula y el correo.
+3. **Instagram** por confirmar.
+4. **Cloudflare (panel)**: redirección 301 `www` → apex y Web Analytics.
+5. **Search Console**, **Google Business Profile**, cambios en **QuebradaNegra.com** (ver `docs/seo/url-map.md`).
 
 ## Cosas importantes que evitar
 
