@@ -37,7 +37,17 @@ Orígenes ocurre al terminar la obra; sin captura no se pueden elegir las pareja
 - ⏳ Schema `LodgingBusiness` + frase-entidad en la home.
 - ⏳ Datos pendientes para redactar: tiempo por carretera desde Bogotá y a Villeta, qué incluye la estadía, mascotas y niños, fecha de apertura.
 - ⏳ **Publicar en noviembre** + Search Console y sitemap enviados desde el día 1.
-- ⏳ Google Business Profile con fecha de apertura futura (fotos reales del entorno, no renders).
+- ⏳ **Ficha de Google Business Profile** (pedida por el dueño el 2026-10-15). Datos para crearla:
+  - **Nombre:** `Amantia`, sin "Glamping" ni palabras extra (Google penaliza el relleno en el nombre y hay que diferenciarse de "Glamping Quebradanegra", el vecino).
+  - **Ubicación (pin):** 5.137415, -74.480506 · vereda Casa Vieja, Quebradanegra, Cundinamarca · [Google Maps](https://www.google.com/maps?q=5.137415,-74.480506). Nunca "Villeta".
+  - **Categoría principal:** Cabaña (o Alojamiento / Hospedaje). Secundarias posibles: Hotel de lujo / Alojamiento con jacuzzi, según lo que ofrezca Google.
+  - **Sitio web:** https://amantia.com.co/ · **Teléfono / WhatsApp:** +57 312 631 1226.
+  - **Fecha de apertura:** futura (Google permite hasta 90 días antes). `TODO`: fecha estimada.
+  - **Descripción** (≤750 caracteres, a partir de la frase-entidad): tres cabañas privadas para parejas, desde 72 m² con terraza, jacuzzi calefactado y piscina propios, cinema privado, a 90 km de Bogotá. Sin "lujo" declarado, sin clichés.
+  - **Atributos:** piscina privada, jacuzzi, para parejas, etc., solo los confirmados.
+  - **Fotos:** **solo reales** (Google no acepta renders): entorno, vista y obra ahora; las cabañas al terminar la obra.
+  - **Verificación:** Google pedirá postal, video o llamada. Hay que tener acceso físico al lugar.
+  - **Después:** agregar la URL de la ficha a `sameAs` en el schema de la home y en el directorio de QuebradaNegra.com (misma dirección y nombre).
 
 ## 3. Paquetes: pedida de mano y aniversario
 

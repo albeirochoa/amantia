@@ -115,7 +115,8 @@ Nunca commitear `.env`. Usar `.env.example` como plantilla.
 2. **Política de privacidad** definitiva (Ley 1581): faltan el nombre o razón social del responsable, el NIT o la cédula y el correo.
 3. **Instagram** por confirmar.
 4. **Cloudflare (panel)**: redirección 301 `www` → apex y Web Analytics.
-5. **Search Console**, **Google Business Profile**, cambios en **QuebradaNegra.com** (ver `docs/seo/url-map.md`).
+5. **Search Console** y cambios en **QuebradaNegra.com** (ver `docs/seo/url-map.md`).
+6. **Ficha de Google Business Profile** con el pin 5.137415, -74.480506 (Quebradanegra): nombre "Amantia", fecha de apertura futura y solo fotos reales. Checklist completo en `docs/strategy/roadmap.md`.
 
 ## Cosas importantes que evitar
 
