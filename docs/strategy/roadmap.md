@@ -36,7 +36,7 @@ Leyenda: ✅ hecho · 🔄 en curso · ⏳ pendiente · 🔒 bloqueado · 👤 l
 
 ## 1. Ahora: terminar el lanzamiento
 
-- ⏳ 👤 **Cloudflare:** redirección 301 `www.amantia.com.co` → `amantia.com.co` (hoy duplica contenido; lo mitiga el canonical).
+- ✅ Redirección 301 `www.amantia.com.co` → `amantia.com.co`, hecha en `worker/index.js` (la Page Rule no actuaba sobre el custom domain del Worker).
 - ⏳ 👤 **Cloudflare Web Analytics** (gratis, sin cookies).
 - ⏳ 👤 **Google Search Console:** verificar el dominio por DNS y enviar `https://amantia.com.co/sitemap.xml`.
 - ⏳ **Política de privacidad definitiva** (Ley 1581). Hoy es provisional. Faltan el nombre o razón social del responsable, el NIT o la cédula y el correo de datos.
