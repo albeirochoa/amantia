@@ -1,0 +1,50 @@
+---
+import { NAV } from '../data/site';
+
+export interface Props {
+  /** El header va sobre una imagen oscura (texto claro). */
+  overImage?: boolean;
+  /** Destino de "Avísenme": #lista si la página tiene el formulario, si no /#lista. */
+  listaHref?: string;
+}
+const { overImage = false, listaHref = '#lista' } = Astro.props;
+const path = Astro.url.pathname;
+const tone = overImage ? 'text-bone' : 'text-navy';
+---
+
+<header class:list={['z-30 w-full', overImage ? 'absolute top-0 left-0' : 'relative bg-paper', tone]}>
+  <div class="shell flex h-20 md:h-24 items-center justify-between gap-6">
+    <a href="/" class="font-serif text-base md:text-lg tracking-widest-3" aria-label="Amantia, inicio">AMANTIA</a>
+
+    <nav aria-label="Principal" class="hidden lg:flex items-center gap-9 text-[12px] tracking-[0.18em] uppercase">
+      {NAV.map((item) => (
+        <a href={item.href} class="py-3 hover:opacity-70" aria-current={path === item.href ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))}
+      <a href={listaHref} class:list={['btn-outline min-h-[44px] px-5', overImage ? 'border-bone/60' : '']}>Avísenme</a>
+    </nav>
+
+    <!-- Menú móvil sin JavaScript: <details> nativo -->
+    <details class="lg:hidden group">
+      <summary class="list-none cursor-pointer flex h-11 w-11 items-center justify-end" aria-label="Menú">
+        <svg class="group-open:hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M3 9h18M3 15h18" /></svg>
+        <svg class="hidden group-open:block" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </summary>
+      <nav aria-label="Principal móvil" class="absolute left-0 right-0 top-20 bg-paper text-navy border-t border-linen shadow-[0_16px_32px_rgba(26,42,68,0.08)]">
+        <ul class="shell py-6 flex flex-col">
+          {NAV.map((item) => (
+            <li><a href={item.href} class="block py-4 text-[15px] border-b border-linen">{item.label}</a></li>
+          ))}
+          <li class="pt-6"><a href={listaHref} class="btn-primary w-full">Avísenme cuando abran</a></li>
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

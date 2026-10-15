@@ -1,0 +1,81 @@
+---
+// Landing SEO · glamping con jacuzzi / piscina (url-map). Protagonista: el agua privada.
+// Absorbe: glamping con jacuzzi, glamping con piscina, jacuzzi privado, piscina privada.
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Split from '../components/Split.astro';
+import SectionIntro from '../components/SectionIntro.astro';
+import Faq from '../components/Faq.astro';
+import ListaApertura from '../components/ListaApertura.astro';
+import { RENDERS } from '../data/renders';
+
+// Preguntas propias de esta página (ADR-003, enmienda 1: sin repetir en otras URLs).
+const faqs = [
+  { q: '¿El jacuzzi es privado?', a: 'Sí. Cada una de las tres cabañas tiene su propio jacuzzi calefactado, en su terraza.' },
+  { q: '¿La piscina se comparte con otras cabañas?', a: 'No. Cada cabaña tiene su propia piscina al aire libre.' },
+  { q: '¿Es un glamping con piscina?', a: 'Sí: cada cabaña tiene piscina privada y jacuzzi calefactado, además de cocina, baño con tina exenta y cinema privado.' },
+  { q: '¿A qué temperatura está el agua del jacuzzi?', a: 'Por confirmar.', pending: true },
+];
+---
+
+<Base
+  title="Glamping con jacuzzi y piscina privada cerca a Bogotá"
+  description="Glamping con jacuzzi privado y piscina privada para parejas, a 90 km de Bogotá. Tres cabañas en Quebradanegra, Cundinamarca, con el agua solo para dos."
+  headerOverImage
+>
+  <Hero
+    image={RENDERS.jacuzziMontanas}
+    h1="Glamping con jacuzzi y piscina privada"
+    display="Tu propio jacuzzi. Tu propia piscina. Nadie más."
+    cta={{ href: '/cabanas/', label: 'Ver las cabañas' }}
+  />
+  <Breadcrumbs current="Glamping con jacuzzi" />
+
+  <section class="shell py-20 md:py-28 grid gap-8 md:grid-cols-12">
+    <p class="eyebrow md:col-span-3 md:pt-3">El jacuzzi</p>
+    <div class="md:col-start-5 md:col-span-8">
+      <h2 class="font-serif font-normal text-[32px] md:text-[44px] leading-[1.2]">Un jacuzzi privado para parejas, calefactado.</h2>
+      <p class="mt-6 text-[17px] leading-[1.85] text-ink-muted max-w-2xl">Cada una de las tres cabañas de Amantia tiene su propio jacuzzi, en la terraza, sin turnos y sin vecinos. Las noches bajan a unos 17 °C; el agua no.</p>
+      <p class="mt-4 text-[17px] leading-[1.85] text-ink-muted max-w-2xl">La cabaña se abre en forma de L alrededor de esa terraza: el jacuzzi está a unos pasos de la habitación y se ve desde adentro.</p>
+    </div>
+  </section>
+
+  <Split image={RENDERS.piscinaDia} imageSide="right" eyebrow="Piscina privada, no compartida" title="Glamping con piscina, solo para ustedes.">
+    <p>Con días de alrededor de 28 °C, la piscina es parte de la cabaña, no una zona común. Ninguna de las tres la comparte con otra.</p>
+    <p>Es la diferencia que se nota: el agua es privada, como el resto de la estadía.</p>
+  </Split>
+
+  <section class="bg-sand">
+    <div class="shell py-20 md:py-28 grid gap-12 md:grid-cols-2 md:gap-20">
+      <div>
+        <p class="eyebrow">De día</p>
+        <h2 class="mt-4 font-serif font-normal text-[28px] md:text-[36px] leading-[1.25]">Sol, 28 °C y la piscina.</h2>
+        <p class="mt-5 text-[17px] leading-[1.85] text-ink-muted">A unos 1.080 metros de altitud, el día es cálido. La piscina privada y la terraza son el centro de la cabaña.</p>
+      </div>
+      <div>
+        <p class="eyebrow">De noche</p>
+        <h2 class="mt-4 font-serif font-normal text-[28px] md:text-[36px] leading-[1.25]">17 °C y el jacuzzi caliente.</h2>
+        <p class="mt-5 text-[17px] leading-[1.85] text-ink-muted">Cuando refresca, el jacuzzi calefactado hace su parte. Después, cinema privado desde la cama.</p>
+      </div>
+    </div>
+  </section>
+
+  <Split image={RENDERS.habitacionVentanal} eyebrow="La cabaña" title="Todo lo demás, también para dos.">
+    <p>Cocina, habitación con cinema privado desde la cama, baño con tina exenta y un sistema de recuperación corporal. Tres cabañas para parejas, cada una con su propia vista.</p>
+    <a href="/cabanas/" class="link-quiet text-navy">Las tres cabañas con jacuzzi y piscina privados</a>
+  </Split>
+
+  <section class="shell py-24 md:py-32">
+    <SectionIntro eyebrow="Cómo llegar" title="En Quebradanegra, a 90 km de Bogotá.">
+      A unos 14 km en línea recta de Villeta.
+    </SectionIntro>
+    <div class="flex flex-wrap gap-x-10">
+      <a href="/glamping-cerca-de-bogota/" class="link-quiet">Glamping cerca a Bogotá: el viaje</a>
+      <a href="/glamping-cerca-de-villeta/" class="link-quiet">Glamping cerca de Villeta</a>
+    </div>
+  </section>
+
+  <Faq items={faqs} />
+  <ListaApertura />
+</Base>

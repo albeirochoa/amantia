@@ -1,0 +1,58 @@
+---
+import { srcset, src, label, type Render } from '../data/renders';
+
+export interface Props {
+  image: Render;
+  /** H1 en versalitas pequeñas (keyword) o grande (marca). */
+  h1: string;
+  h1Style?: 'brand' | 'keyword';
+  /** Frase grande en Playfair (cuando el H1 es la keyword). */
+  display?: string;
+  subtitle?: string;
+  facts?: string[];
+  cta?: { href: string; label: string };
+  secondary?: { href: string; label: string };
+}
+const { image, h1, h1Style = 'keyword', display, subtitle, facts, cta, secondary } = Astro.props;
+---
+
+<section class="relative min-h-[640px] md:min-h-[760px] flex items-end text-bone">
+  <img
+    src={src(image.file)}
+    srcset={srcset(image.file)}
+    sizes="100vw"
+    alt={image.alt}
+    width="1600"
+    height={image.h}
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+    class="absolute inset-0 h-full w-full object-cover bg-navy"
+  />
+  <!-- Velo sólido y sutil para legibilidad (sin degradados, regla de marca 2) -->
+  <div class="absolute inset-0 bg-navy/60" aria-hidden="true"></div>
+
+  <div class="shell relative pt-32 pb-16 md:pb-24">
+    <div class="max-w-2xl">
+      {h1Style === 'brand' ? (
+        <h1 class="font-serif font-normal text-5xl md:text-7xl tracking-[0.3em] uppercase">{h1}</h1>
+      ) : (
+        <h1 class="text-[12px] md:text-[13px] font-normal tracking-[0.3em] uppercase text-bone">{h1}</h1>
+      )}
+      {display && <p class="mt-5 font-serif text-4xl md:text-6xl leading-[1.12] tracking-[-0.01em]">{display}</p>}
+      {subtitle && <p class="mt-5 font-serif italic text-2xl md:text-3xl text-gold-soft">{subtitle}</p>}
+      {facts && (
+        <ul class="mt-8 text-[12px] md:text-[13px] leading-[2.1] tracking-[0.22em] uppercase">
+          {facts.map((f) => <li>{f}</li>)}
+        </ul>
+      )}
+      {(cta || secondary) && (
+        <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3">
+          {cta && <a href={cta.href} class="btn-primary">{cta.label}</a>}
+          {secondary && <a href={secondary.href} class="link-quiet text-bone">{secondary.label}</a>}
+        </div>
+      )}
+    </div>
+  </div>
+  <span class="absolute top-24 md:top-28 right-4 md:right-6 bg-navy/40 px-2.5 py-1 text-[11px] tracking-[0.12em] uppercase text-bone">{label(image)} · proyecto en construcción</span>
+</section>

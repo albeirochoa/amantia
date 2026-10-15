@@ -4,24 +4,16 @@ import Base from '../layouts/Base.astro';
 
 <Base
   title="Página no encontrada · Amantia"
-  description="Esta página no existe. Vuelva al inicio de Amantia, refugio para dos en Quebradanegra, Cundinamarca."
+  description="Esta página no existe. Vuelva al inicio de Amantia, tres cabañas privadas para parejas en Quebradanegra, Cundinamarca."
+  noindex
+  mobileCta={false}
+  hasLista={false}
+  canonical={false}
 >
-  <meta slot="head" name="robots" content="noindex" />
-  <main class="min-h-screen flex items-center">
-    <div class="w-full max-w-xl mx-auto px-6 py-24 text-center">
-      <p class="font-serif text-2xl text-bone tracking-widest-3 mb-12">AMANTIA</p>
-      <h1 class="font-serif text-bone text-3xl md:text-4xl leading-relaxed mb-8">
-        Este camino no lleva a ningún lado.
-      </h1>
-      <p class="font-serif italic text-gold-soft text-lg mb-12">
-        A veces perderse también es parte de llegar.
-      </p>
-      <a
-        href="/"
-        class="inline-block bg-gold hover:bg-gold-soft text-navy font-medium uppercase tracking-widest-2 text-sm px-12 py-4 transition-colors duration-300"
-      >
-        Volver al inicio
-      </a>
-    </div>
-  </main>
+  <section class="shell py-28 md:py-40 text-center">
+    <p class="eyebrow">Página no encontrada</p>
+    <h1 class="mt-6 font-serif font-normal text-[34px] md:text-5xl leading-[1.2]">Este camino no lleva a ningún lado.</h1>
+    <p class="mt-6 font-serif italic text-[20px] text-gold-dark">A veces perderse también es parte de llegar.</p>
+    <a href="/" class="btn-primary mt-12">Volver al inicio</a>
+  </section>
 </Base>

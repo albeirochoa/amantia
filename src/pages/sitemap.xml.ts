@@ -1,13 +1,15 @@
 import type { APIRoute } from 'astro';
 
 // Sitemap generado en build sin dependencias extra.
-// Incluye cada página .astro de src/pages excepto 404 y rutas dinámicas.
+// Incluye cada página .astro de src/pages excepto 404, rutas dinámicas y páginas noindex.
 // Al agregar URLs nuevas, seguir docs/seo/seo-governance.md antes de publicarlas.
 const pages = import.meta.glob('./**/*.astro', { eager: true });
+// Páginas con noindex: no van al sitemap.
+const NOINDEX = ['origenes', 'politica-de-privacidad'];
 
 export const GET: APIRoute = ({ site }) => {
   const urls = Object.keys(pages)
-    .filter((file) => !file.includes('404') && !file.includes('['))
+    .filter((file) => !file.includes('404') && !file.includes('[') && !NOINDEX.some((n) => file.includes(n)))
     .map((file) => {
       const path = file.replace(/^\.\//, '/').replace(/\.astro$/, '').replace(/\/?index$/, '/');
       return new URL(path.endsWith('/') ? path : `${path}/`, site).href;

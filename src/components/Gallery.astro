@@ -1,0 +1,35 @@
+---
+import { srcset, src, label, type Render } from '../data/renders';
+export interface Props {
+  images: Render[];
+}
+const { images } = Astro.props;
+---
+
+<div>
+  <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+    {images.map((img) => (
+      <li class="min-w-0">
+        <figure>
+          <img
+            src={src(img.file, 800)}
+            srcset={srcset(img.file)}
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            alt={img.alt}
+            width="1600"
+            height={img.h}
+            loading="lazy"
+            decoding="async"
+            class="aspect-[4/3] w-full object-cover bg-linen"
+          />
+          <figcaption class="pt-3 text-[14px]">
+            {img.caption} <span class="text-ink-muted">· {label(img)}</span>
+          </figcaption>
+        </figure>
+      </li>
+    ))}
+  </ul>
+  <p class="mt-8 text-[14px] text-ink-muted max-w-2xl">
+    Proyecto en construcción. Imágenes renderizadas para comunicar la intención arquitectónica; la obra final puede variar.
+  </p>
+</div>

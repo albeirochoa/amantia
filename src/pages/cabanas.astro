@@ -1,0 +1,85 @@
+---
+// /cabanas/ · Conversión. Absorbe todo "cabaña(s) + …" (url-map).
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import FactsBar from '../components/FactsBar.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import SectionIntro from '../components/SectionIntro.astro';
+import CabinCards from '../components/CabinCards.astro';
+import Split from '../components/Split.astro';
+import Gallery from '../components/Gallery.astro';
+import Faq from '../components/Faq.astro';
+import ListaApertura from '../components/ListaApertura.astro';
+import { RENDERS } from '../data/renders';
+import { QN } from '../data/site';
+
+const faqs = [
+  { q: '¿Cuántas personas por cabaña?', a: 'Dos personas. Las tres cabañas están pensadas para parejas.' },
+  { q: '¿Qué tiene cada cabaña?', a: 'Entrada, cocina, habitación con cinema privado desde la cama, baño con tina exenta, un sistema de recuperación corporal y, afuera, terraza con jacuzzi calefactado y piscina privada.' },
+  { q: '¿Las tres cabañas son iguales?', a: 'Comparten lo esencial: privacidad, piscina y jacuzzi propios, cinema y recuperación corporal. Cada una tiene su propia vista, y una es un poco más amplia. Los detalles de cada una se publicarán con la apertura.' },
+  { q: '¿Admiten niños o mascotas?', a: 'Por confirmar.', pending: true },
+  { q: '¿Se puede preparar una celebración?', a: 'Estamos preparando opciones para aniversarios y pedidas de mano. Se anunciarán a la lista de apertura.' },
+];
+---
+
+<Base
+  title="Cabañas para parejas cerca a Bogotá · jacuzzi y piscina"
+  description="Tres cabañas privadas para dos, cada una con jacuzzi calefactado y piscina propios, cinema privado y recuperación corporal. Quebradanegra, a 90 km de Bogotá."
+  headerOverImage
+  mobileCta={{ href: '#lista', label: 'Avísenme' }}
+>
+  <Hero
+    image={RENDERS.habitacionVentanal}
+    h1="Cabañas para parejas con jacuzzi y piscina privada"
+    display="Tres cabañas. Cada una, solo para dos."
+    cta={{ href: '#lista', label: 'Quiero saber cuándo abren' }}
+  />
+  <FactsBar />
+  <Breadcrumbs current="Las cabañas" />
+
+  <section class="shell py-20 md:py-28">
+    <SectionIntro eyebrow="Las tres" title="Tres cabañas para parejas, cada una con su vista.">
+      Cabañas románticas y privadas a 90 km de Bogotá. Las tres comparten lo esencial: piscina y jacuzzi propios. Cada una mira hacia un lado distinto del paisaje, y una es un poco más amplia.
+    </SectionIntro>
+    <CabinCards />
+  </section>
+
+  <Split image={RENDERS.habitacionCalida} eyebrow="Qué encuentran" title="Cabaña con jacuzzi privado y piscina, solo para dos.">
+    <p>Una piscina privada al aire libre y un jacuzzi calefactado que no se comparten con nadie.</p>
+    <p>Adentro: cocina, habitación con cinema privado desde la cama, baño con tina exenta y un sistema de recuperación corporal que el cuerpo agradece.</p>
+  </Split>
+
+  <section class="shell py-20 md:py-28 grid gap-8 md:grid-cols-12">
+    <p class="eyebrow md:col-span-3 md:pt-3">El diseño</p>
+    <div class="md:col-start-5 md:col-span-8">
+      <h2 class="font-serif font-normal text-[32px] md:text-[44px] leading-[1.2]">Un pabellón en L alrededor del agua.</h2>
+      <p class="mt-6 text-[17px] leading-[1.85] text-ink-muted max-w-2xl">Cada cabaña se abre en forma de L alrededor de su terraza y su jacuzzi, con ventanales de piso a techo: todos los espacios tienen vista y salida directa al exterior. Adentro, la luz se vuelve cálida y la sombra, fresca.</p>
+    </div>
+  </section>
+
+  <section class="shell py-24 md:py-32">
+    <SectionIntro eyebrow="Interiores" title="Piedra natural, nogal y microcemento.">
+      Muro de piedra en la cocina, deck de teca bajo la tina, verde salvia detrás de la cama. Renders del diseño arquitectónico; la obra final puede variar.
+    </SectionIntro>
+    <Gallery images={[RENDERS.habitacionDetalle, RENDERS.banoDucha, RENDERS.banoLavamanos, RENDERS.interiorPiedra, RENDERS.interiorBarra]} />
+  </section>
+
+  <section class="bg-navy text-bone">
+    <div class="shell py-20 md:py-28 grid gap-10 md:grid-cols-2 md:gap-20">
+      <div>
+        <p class="eyebrow !text-gold-soft">Dónde</p>
+        <h2 class="mt-4 font-serif font-normal text-[34px] md:text-5xl leading-[1.15]">Vereda Casa Vieja, Quebradanegra.</h2>
+      </div>
+      <div class="text-[17px] leading-[1.85] text-bone/90 space-y-5">
+        <p>A 90 km de Bogotá y a unos 14 km en línea recta de Villeta. Días de 28 °C, noches de 17 °C.</p>
+        <p class="text-bone/75">Tiempo por carretera: se publicará con la ruta recomendada.</p>
+        <a href="/glamping-cerca-de-bogota/" class="link-quiet text-bone">El viaje desde Bogotá</a>
+        <span class="mx-3 text-bone/40" aria-hidden="true">·</span>
+        <a href={QN.comoLlegar} class="link-quiet text-bone" rel="noopener">Cómo llegar a Quebradanegra</a>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} />
+  <ListaApertura title="Quiero saber cuándo abren." />
+</Base>

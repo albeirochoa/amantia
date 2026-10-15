@@ -1,0 +1,50 @@
+---
+// Campaña Orígenes (noindex): se cierra al abrir. La frase "Antes de abrir, cinco parejas…" no se parafrasea.
+import Base from '../layouts/Base.astro';
+import RenderImage from '../components/RenderImage.astro';
+import ListaApertura from '../components/ListaApertura.astro';
+import { RENDERS } from '../data/renders';
+---
+
+<Base
+  title="Orígenes · Amantia"
+  description="Antes de abrir, cinco parejas vivirán Amantia sin costo. Pre-registro al programa Orígenes."
+  noindex
+  mobileCta={{ href: '#lista', label: 'Pre-registrarse' }}
+>
+  <section class="shell pt-10 pb-20 md:pt-16 md:pb-28 grid gap-12 md:grid-cols-2 md:items-center md:gap-20">
+    <div>
+      <h1 class="eyebrow">Orígenes</h1>
+      <p class="mt-6 font-serif text-[36px] md:text-[54px] leading-[1.15]">Antes de abrir, cinco parejas vivirán Amantia sin costo.</p>
+      <p class="mt-8 text-[17px] leading-[1.85] text-ink-muted max-w-md">Su experiencia honesta ayudará a darle forma a Amantia desde adentro.</p>
+      <p class="mt-6 font-serif italic text-[20px] text-gold-dark">La selección será privada y curada.</p>
+      <a href="#lista" class="btn-primary mt-10">Pre-registrarse</a>
+    </div>
+    <RenderImage image={RENDERS.portonLlegada} priority sizes="(min-width: 768px) 50vw, 100vw" class="aspect-[4/5]" />
+  </section>
+
+  <section class="bg-sand">
+    <div class="shell py-20 md:py-24 grid gap-10 md:grid-cols-3">
+      <div>
+        <p class="eyebrow">Quiénes</p>
+        <p class="mt-4 text-[17px] leading-[1.8]">Cinco parejas, seleccionadas entre quienes se pre-registren.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Cuándo</p>
+        <p class="mt-4 text-[17px] leading-[1.8]">Antes de la apertura al público. Las fechas se comunicarán a las parejas seleccionadas.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Dónde</p>
+        <p class="mt-4 text-[17px] leading-[1.8]">Vereda Casa Vieja, Quebradanegra, Cundinamarca. A 90 km de Bogotá.</p>
+      </div>
+    </div>
+  </section>
+
+  <ListaApertura
+    title="Pre-registro."
+    text="Escríbannos por WhatsApp para pre-registrarse. Les escribiremos solo para Orígenes y la apertura."
+    button="Pre-registrarse"
+    source="origenes"
+    waText="Hola, quiero pre-registrarme al programa Orígenes de Amantia."
+  />
+</Base>

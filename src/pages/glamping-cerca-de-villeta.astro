@@ -1,0 +1,74 @@
+---
+// Landing SEO · "glamping villeta" (url-map). Amantia está en Quebradanegra, CERCA de Villeta:
+// nunca declararla "en Villeta" (coherencia NAP con RNT y Google Maps).
+// No usar "cabañas en Villeta" ni "hospedaje en Villeta": son de QuebradaNegra.com.
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import FactsBar from '../components/FactsBar.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Split from '../components/Split.astro';
+import Faq from '../components/Faq.astro';
+import ListaApertura from '../components/ListaApertura.astro';
+import { RENDERS } from '../data/renders';
+import { QN } from '../data/site';
+
+// Preguntas propias de esta página (ADR-003, enmienda 1).
+const faqs = [
+  { q: '¿Amantia queda en Villeta?', a: 'No. Amantia está en la vereda Casa Vieja de Quebradanegra, Cundinamarca, a 13,9 km en línea recta de Villeta.' },
+  { q: '¿Hace más calor que en Villeta?', a: 'Un poco menos. Villeta está a unos 795 metros y ronda los 24 °C de media; Amantia está a unos 1.080 metros, con 22 °C de media: días de unos 28 °C y noches más frescas, de unos 17 °C.' },
+  { q: '¿Qué hacer cerca, en Villeta y Quebradanegra?', a: 'El portal QuebradaNegra.com reúne qué hacer en la zona: cascadas, caminos y planes en Villeta y Quebradanegra.' },
+  { q: '¿Cuánto se tarda desde Villeta?', a: 'Por confirmar.', pending: true },
+];
+---
+
+<Base
+  title="Glamping Villeta · privado y con jacuzzi, en Quebradanegra"
+  description="Glamping cerca de Villeta: tres cabañas privadas para parejas a 13,9 km en línea recta, en Quebradanegra, con jacuzzi calefactado y piscina propios."
+  headerOverImage
+>
+  <Hero
+    image={RENDERS.terrazaNoche}
+    h1="Glamping cerca de Villeta"
+    display="Cerca de Villeta. En la calma de Quebradanegra."
+    cta={{ href: '/cabanas/', label: 'Conocer las cabañas' }}
+  />
+  <FactsBar />
+  <Breadcrumbs current="Glamping Villeta" />
+
+  <section class="shell py-20 md:py-28 grid gap-8 md:grid-cols-12">
+    <p class="eyebrow md:col-span-3 md:pt-3">Dónde estamos</p>
+    <div class="md:col-start-5 md:col-span-8">
+      <h2 class="font-serif font-normal text-[32px] md:text-[44px] leading-[1.2]">Glamping Villeta, del lado tranquilo: en Quebradanegra.</h2>
+      <p class="mt-6 text-[17px] leading-[1.85] text-ink-muted max-w-2xl">Amantia está en la vereda Casa Vieja de Quebradanegra, Cundinamarca, a 13,9 km en línea recta de Villeta y a 90 km de Bogotá. No queda en Villeta: queda cerca, lo justo para tener el pueblo a mano y dormir en silencio.</p>
+      <a href={QN.villeta} class="link-quiet mt-2" rel="noopener">Qué hacer en Villeta (QuebradaNegra.com)</a>
+    </div>
+  </section>
+
+  <section class="bg-sand">
+    <div class="shell py-20 md:py-28 grid gap-12 md:grid-cols-2 md:gap-20">
+      <div>
+        <p class="eyebrow">Por qué Quebradanegra</p>
+        <h2 class="mt-4 font-serif font-normal text-[28px] md:text-[36px] leading-[1.25]">Un poco más alto, un poco más fresco.</h2>
+        <p class="mt-5 text-[17px] leading-[1.85] text-ink-muted">Villeta está a unos 795 metros y ronda los 24 °C. Amantia, a unos 1.080 metros, tiene días de 28 °C y noches de 17 °C: el calor para la piscina y el fresco para el jacuzzi.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Para dos</p>
+        <h2 class="mt-4 font-serif font-normal text-[28px] md:text-[36px] leading-[1.25]">Tres cabañas para parejas.</h2>
+        <p class="mt-5 text-[17px] leading-[1.85] text-ink-muted">Cada una para dos personas, con cocina, baño con tina exenta, cinema privado desde la cama y un sistema de recuperación corporal.</p>
+      </div>
+    </div>
+  </section>
+
+  <Split image={RENDERS.piscinaAtardecer} imageSide="right" eyebrow="Lo privado" title="Jacuzzi y piscina, solo para ustedes.">
+    <p>Cada cabaña tiene su propia piscina al aire libre y su propio jacuzzi calefactado. No hay zonas comunes que compartir.</p>
+    <a href="/glamping-con-jacuzzi/" class="link-quiet text-navy">Glamping con jacuzzi y piscina privada</a>
+  </Split>
+
+  <Split image={RENDERS.habitacionCalida} eyebrow="Desde Bogotá" title="A 90 km de Bogotá.">
+    <p>Si vienen desde Bogotá, Amantia queda a 90 km: un fin de semana fuera de la ciudad, sin un viaje largo.</p>
+    <a href="/glamping-cerca-de-bogota/" class="link-quiet text-navy">Glamping cerca a Bogotá: el viaje</a>
+  </Split>
+
+  <Faq items={faqs} />
+  <ListaApertura />
+</Base>

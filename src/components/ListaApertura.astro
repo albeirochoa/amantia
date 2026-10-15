@@ -1,0 +1,67 @@
+---
+// Lista de apertura.
+// Mientras SITE.captureEnabled sea false (no hay sistema de captura que reemplace a MailerLite),
+// la sección muestra un botón de WhatsApp con mensaje prellenado. El formulario queda listo para
+// activarse cuando exista el endpoint (pendiente 1 del roadmap) y la política de privacidad (pendiente 2).
+import { SITE, waLink } from '../data/site';
+
+export interface Props {
+  title?: string;
+  text?: string;
+  button?: string;
+  source?: string; // para medir submit_form / click_whatsapp por origen
+  /** Mensaje prellenado de WhatsApp. */
+  waText?: string;
+}
+const {
+  title = 'Sean los primeros en saber.',
+  text = 'Fechas y tarifas de apertura, antes que nadie. Escríbannos y les avisamos.',
+  button = 'Avisarme',
+  source = 'lista-apertura',
+  waText = 'Hola, quiero saber cuándo abre Amantia y recibir las fechas y tarifas de apertura.',
+} = Astro.props;
+---
+
+<section id="lista" class="bg-sand scroll-mt-24">
+  <div class="shell py-24 md:py-32 grid gap-12 md:grid-cols-12 md:items-center">
+    <div class="md:col-span-5">
+      <h2 class="font-serif font-normal text-[34px] md:text-5xl leading-[1.15]">{title}</h2>
+      <p class="mt-5 text-[17px] leading-[1.8] text-ink-muted">{text}</p>
+    </div>
+
+    {SITE.captureEnabled ? (
+      <form class="md:col-start-7 md:col-span-6 flex flex-col gap-8" data-source={source} method="post" action="/api/lista">
+        <div class="grid gap-8 sm:grid-cols-2">
+          <label class="flex flex-col gap-2 text-[13px] tracking-[0.08em]">
+            Nombre
+            <input name="nombre" type="text" autocomplete="name" required class="h-12 border-0 border-b border-navy/50 bg-transparent px-0 text-[16px] focus:border-navy focus:ring-0" />
+          </label>
+          <label class="flex flex-col gap-2 text-[13px] tracking-[0.08em]">
+            Correo
+            <input name="email" type="email" autocomplete="email" required class="h-12 border-0 border-b border-navy/50 bg-transparent px-0 text-[16px] focus:border-navy focus:ring-0" />
+          </label>
+        </div>
+        <label class="flex items-start gap-3 text-[14px] leading-relaxed">
+          <input name="autorizacion" type="checkbox" required class="mt-0.5 h-5 w-5 flex-none accent-[#1A2A44]" />
+          <span>Autorizo el tratamiento de mis datos según la <a href="/politica-de-privacidad/" class="underline underline-offset-4">política de privacidad</a>.</span>
+        </label>
+        <button type="submit" class="btn-outline text-navy hover:bg-navy hover:text-paper transition-colors self-start">{button}</button>
+      </form>
+    ) : (
+      <div class="md:col-start-7 md:col-span-6 flex flex-col items-start gap-5">
+        <a
+          href={waLink(waText)}
+          class="btn-primary gap-3"
+          rel="noopener"
+          target="_blank"
+          data-event="click_whatsapp"
+          data-source={source}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.66 15l-1.3 4.76 4.87-1.28A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-2.89.76.77-2.82-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.78.97-.14.16-.29.18-.53.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.71-1.33.08-.16.04-.3-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.47a.9.9 0 0 0-.66.31 2.77 2.77 0 0 0-.86 2.06 4.8 4.8 0 0 0 1 2.56 11 11 0 0 0 4.2 3.7c1.56.68 2.18.73 2.96.62.48-.07 1.46-.6 1.67-1.18.2-.58.2-1.08.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+          Escribirnos por WhatsApp
+        </a>
+        <p class="text-[14px] text-ink-muted">WhatsApp {SITE.phoneDisplay}</p>
+      </div>
+    )}
+  </div>
+</section>

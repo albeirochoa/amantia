@@ -1,0 +1,37 @@
+---
+import { SITE, waLink } from '../data/site';
+export interface Props {
+  hasMobileCta?: boolean;
+}
+const { hasMobileCta = false } = Astro.props;
+---
+
+<footer class:list={['bg-sand text-navy', hasMobileCta && 'pb-24 lg:pb-0']}>
+  <div class="shell py-16 md:py-20 grid gap-10 md:grid-cols-4">
+    <div>
+      <p class="font-serif text-base tracking-widest-3">AMANTIA</p>
+      <p class="mt-3 font-serif italic text-gold-dark">{SITE.tagline}</p>
+    </div>
+    <nav aria-label="Pie de página" class="flex flex-col text-[15px]">
+      <a href="/cabanas/" class="py-1.5 hover:text-gold-dark">Las cabañas</a>
+      <a href="/glamping-con-jacuzzi/" class="py-1.5 hover:text-gold-dark">Jacuzzi y piscina privada</a>
+      <a href="/glamping-cerca-de-bogota/" class="py-1.5 hover:text-gold-dark">Desde Bogotá</a>
+      <a href="/glamping-cerca-de-villeta/" class="py-1.5 hover:text-gold-dark">Cerca de Villeta</a>
+      <a href="/origenes/" class="py-1.5 hover:text-gold-dark">Orígenes</a>
+    </nav>
+    <address class="not-italic text-[15px] leading-relaxed">
+      {SITE.address.street}<br />
+      {SITE.address.locality}, {SITE.address.region}<br />
+      A {SITE.facts.kmFromBogota} km de Bogotá
+    </address>
+    <div class="text-[15px] leading-relaxed flex flex-col">
+      {SITE.whatsapp && <a href={waLink('Hola, quiero información sobre Amantia.')} class="py-1.5 hover:text-gold-dark" rel="noopener" target="_blank">WhatsApp {SITE.phoneDisplay}</a>}
+      <a href={`mailto:${SITE.email}`} class="py-1.5 hover:text-gold-dark">{SITE.email}</a>
+      {SITE.instagram && <a href={`https://instagram.com/${SITE.instagram}`} class="py-1.5 hover:text-gold-dark">@{SITE.instagram}</a>}
+      <a href="/politica-de-privacidad/" class="py-1.5 hover:text-gold-dark">Política de privacidad</a>
+    </div>
+  </div>
+  <div class="shell border-t border-linen py-6 text-[13px] text-ink-muted">
+    © {new Date().getFullYear()} Amantia · Proyecto en construcción: las imágenes marcadas como render o imagen conceptual son ilustrativas y la obra final puede variar.
+  </div>
+</footer>

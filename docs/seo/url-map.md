@@ -26,8 +26,8 @@ Si no se cumplen, la búsqueda va como **sección** de una URL existente.
 
 | URL | Title | Absorbe (vol/mes) | Protagonista |
 |---|---|---|---|
-| `/` | Amantia · Cabañas privadas de lujo para dos | Marca ("amantia") | La experiencia y la marca (ADR-003) |
-| `/cabanas/` | Cabañas para parejas cerca a Bogotá · jacuzzi y piscina | **Todo "cabaña(s) + …":** cabañas para parejas 320 · cabaña con jacuzzi privado parejas 140 · cabañas para parejas con jacuzzi 90 · cabañas con piscina privada cerca a Bogotá 70 · cabañas de lujo 50 · cabañas románticas 50 · cabañas privadas 10 | Las 3 cabañas: qué tienen, qué incluyen, disponibilidad |
+| `/` | Amantia · Cabañas privadas de lujo para dos | Marca ("amantia") · cabañas de lujo 50 | La experiencia y la marca (ADR-003) |
+| `/cabanas/` | Cabañas para parejas cerca a Bogotá · jacuzzi y piscina | **Todo "cabaña(s) + …":** cabañas para parejas 320 · cabaña con jacuzzi privado parejas 140 · cabañas para parejas con jacuzzi 90 · cabañas con piscina privada cerca a Bogotá 70 · cabañas románticas 50 · cabañas privadas 10 | Las 3 cabañas: qué tienen, qué incluyen, disponibilidad |
 | `/glamping-cerca-de-bogota/` | Glamping cerca a Bogotá para parejas · lujo a 90 km | glamping cerca a Bogotá 6.600 · glamping Bogotá 2.900 · glamping para pareja(s) 210+110 · glamping de lujo 140 · glamping romántico 70 | El viaje desde Bogotá |
 | `/glamping-con-jacuzzi/` | Glamping con jacuzzi y piscina privada cerca a Bogotá | glamping con jacuzzi 480 · glamping con piscina 110 · glamping con jacuzzi privado 90 · glamping con piscina privada 90 | El jacuzzi y la piscina privados |
 | `/glamping-cerca-de-villeta/` | Glamping Villeta · privado y con jacuzzi, en Quebradanegra | glamping Villeta 1.600 · glamping en Villeta 390 | La cercanía a Villeta (sin "cabañas en Villeta", que es de QN) |
@@ -48,7 +48,7 @@ Si no se cumplen, la búsqueda va como **sección** de una URL existente.
 ```
 
 - Cada landing enlaza a `/cabanas/` y a la home.
-- Los enlaces laterales van solo donde están las flechas.
+- Los enlaces laterales van solo donde están las flechas, más `/glamping-con-jacuzzi/` ↔ `/glamping-cerca-de-villeta/` (añadido 2026-10-15).
 - `/glamping-cerca-de-villeta/` y `/glamping-cerca-de-bogota/` enlazan a QuebradaNegra.com para "qué hacer" y "cómo llegar".
 
 ## Fase B: después de abrir, solo si se cumple la condición
@@ -60,7 +60,7 @@ Si no se cumplen, la búsqueda va como **sección** de una URL existente.
 | `/plan-aniversario-cerca-de-bogota/` | Cuando el **paquete de aniversario** esté definido (precio, qué incluye, fotos). Página SEO: ≈480/mes, la SERP muestra paquetes |
 | `/pedida-de-mano-cerca-de-bogota/` | Cuando el **paquete de pedida de mano** esté definido. Página de oferta (excepción de paquete): tráfico de Instagram, WhatsApp, anuncios y la guía de QN. Ideal antes del pico de dic–ene ("pedida de mano" 720 → 1.300 en enero) |
 | `/experiencias/[slug]/` | ≥4 experiencias o paquetes reales con precio y fotos |
-| `/cabanas/[slug]/` | Solo si en el futuro hay cabañas **distintas** entre sí |
+| `/cabanas/[slug]/` | **Condición cumplida en principio** (2026-10-15: las 3 cabañas tienen nombre y vista distintos, y una es más grande). Se crean al entregar la obra, cuando haya nombres, medidas, vistas y fotos reales. Mientras tanto, `/cabanas/` muestra las 3 en tarjetas |
 
 ## Cedidas a QuebradaNegra.com (Amantia no crea estas URLs)
 

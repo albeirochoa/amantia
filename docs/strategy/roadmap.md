@@ -62,6 +62,8 @@ Cada paquete, cuando esté definido, tiene su URL (excepción de paquete en `doc
 ## 4. Diciembre–enero: apertura
 
 - ⏳ Fin de obra → **sesión de fotos reales**, que reemplazan los renders. La lista de tomas se prepara en la etapa 2.
+- ⏳ **SEO de imágenes con las fotos reales:** nombres de archivo con lugar y atributo (`amantia-cabana-piscina-privada-quebradanegra.webp`), alt con contexto, fotos en el schema y como og:image, mismas fotos en Google Business Profile, borrar los renders reemplazados.
+- ⏳ **ADR-004 motor de reservas:** channel manager (sincroniza Airbnb y Booking, evita la doble reserva; recomendado) o motor propio. El buscador ocupa el lugar de la barra de datos bajo el hero y sin selector de huéspedes (2 personas fijas); nueva `/reservar/` (noindex).
 - ⏳ Las 5 parejas de Orígenes viven Amantia; luego se cierra `/origenes/`.
 - ⏳ Motor de reservas con disponibilidad por cabaña (ADR-004, Fase 5) → `/reservar/`.
 - ⏳ Tarifas publicadas. Revisar si "de lujo" en los titles es coherente con el precio (ADR-003).

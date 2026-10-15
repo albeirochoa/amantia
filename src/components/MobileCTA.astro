@@ -1,0 +1,13 @@
+---
+export interface Props {
+  href: string;
+  label: string;
+}
+const { href, label } = Astro.props;
+---
+
+<!-- Barra fija solo en móvil: una acción clara siempre a mano, sin animaciones. -->
+<div class="lg:hidden fixed inset-x-0 bottom-0 z-20 bg-paper/95 border-t border-linen px-4 pt-3 pb-[calc(12px+env(safe-area-inset-bottom))] flex items-center justify-between gap-4">
+  <span class="text-[13px] leading-tight">Tres cabañas<br /><span class="text-ink-muted">para dos</span></span>
+  <a href={href} class="btn-primary min-h-[48px] px-6">{label}</a>
+</div>

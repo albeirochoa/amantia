@@ -1,178 +1,142 @@
 ---
+// Home: marca y experiencia (ADR-003). Sin "glamping" en el copy visible.
+// Title, H1 y frase-entidad según docs/seo/url-map.md y ADR-003.
 import Base from '../layouts/Base.astro';
-import PreRegisterForm from '../components/PreRegisterForm.astro';
+import Hero from '../components/Hero.astro';
+import FactsBar from '../components/FactsBar.astro';
+import Split from '../components/Split.astro';
+import SectionIntro from '../components/SectionIntro.astro';
+import CabinCards from '../components/CabinCards.astro';
+import Gallery from '../components/Gallery.astro';
+import Faq from '../components/Faq.astro';
+import ListaApertura from '../components/ListaApertura.astro';
+import { RENDERS } from '../data/renders';
+import { SITE, QN } from '../data/site';
 
-// Imágenes de stock (Unsplash) · placeholders hasta tener fotos reales del lugar.
-// Reemplazar cada URL por la foto definitiva subida a /public/images/.
-const img = {
-  hero: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=2400&auto=format&fit=crop', // niebla / valle
-  queEs: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2400&auto=format&fit=crop', // bosque, luz cálida
-  viven: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2400&auto=format&fit=crop', // piscina al atardecer
-  origen: 'https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?q=80&w=2400&auto=format&fit=crop', // manos con café
-  cta: 'https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=2400&auto=format&fit=crop', // valle al atardecer
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  '@id': `${SITE.url}/#lodging`,
+  name: 'Amantia',
+  url: `${SITE.url}/`,
+  image: `${SITE.url}/images/og-image.jpg`,
+  hasMap: `https://www.google.com/maps?q=${SITE.geo.lat},${SITE.geo.lon}`,
+  description: SITE.entity,
+  email: SITE.email,
+  telephone: SITE.phoneDisplay,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.address.street,
+    addressLocality: SITE.address.locality,
+    addressRegion: SITE.address.region,
+    addressCountry: SITE.address.country,
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lon, elevation: SITE.geo.elevation },
+  containedInPlace: {
+    '@type': 'AdministrativeArea',
+    name: 'Quebradanegra',
+    containedInPlace: { '@type': 'AdministrativeArea', name: 'Cundinamarca' },
+  },
+  numberOfRooms: SITE.facts.cabins,
+  amenityFeature: [
+    { '@type': 'LocationFeatureSpecification', name: 'Jacuzzi calefactado privado', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Piscina privada al aire libre', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Cinema privado', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Sistema de recuperación corporal', value: true },
+  ],
+  // Sin nombres ni m² hasta que sean definitivos (nombres provisionales; área por aclarar).
+  containsPlace: Array.from({ length: SITE.facts.cabins }, () => ({
+    '@type': 'Accommodation',
+    occupancy: { '@type': 'QuantitativeValue', maxValue: SITE.facts.guestsPerCabin },
+  })),
+  // TODO: sameAs (Instagram, Google Business Profile), priceRange cuando existan.
 };
+const website = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Amantia', url: `${SITE.url}/` };
+
+// Cada pregunta vive en una sola página (ADR-003, enmienda 1).
+const faqs = [
+  { q: '¿Qué es Amantia?', a: 'Un refugio de tres cabañas privadas para parejas. Cada cabaña tiene su propia piscina al aire libre, jacuzzi calefactado, cinema privado y un sistema de recuperación corporal.' },
+  { q: '¿Dónde queda Amantia?', a: 'En la vereda Casa Vieja, Quebradanegra (Cundinamarca), a 90 km de Bogotá.' },
+  { q: '¿Cuándo abren?', a: 'La obra se estima terminar a finales de 2026. Quienes se inscriban en la lista de apertura recibirán primero las fechas y las tarifas.' },
+];
 ---
 
-<Base>
-  <main>
-    <!-- ════════════════════ SECCIÓN 1 · HERO ════════════════════ -->
-    <section id="pre-registro" class="relative min-h-screen flex items-center overflow-hidden">
-      <!-- Fondo -->
-      <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${img.hero}')`}></div>
-        <div class="absolute inset-0 bg-navy/85"></div>
-      </div>
+<Base
+  title="Amantia · Cabañas privadas de lujo para dos"
+  description="Tres cabañas privadas de lujo para parejas, con jacuzzi calefactado y piscina propios. Un refugio en Quebradanegra, Cundinamarca, a 90 km de Bogotá."
+  jsonLd={[jsonLd, website]}
+  headerOverImage
+>
+  <Hero
+    image={RENDERS.piscinaAtardecer}
+    h1="Amantia"
+    h1Style="brand"
+    subtitle="Un refugio para dos."
+    facts={['Tres cabañas privadas', 'Piscina y jacuzzi solo para ustedes', 'A 90 km de Bogotá']}
+    cta={{ href: '/cabanas/', label: 'Conocer las cabañas' }}
+    secondary={{ href: '#lista', label: 'Avísenme cuando abran' }}
+  />
+  <FactsBar />
 
-      <!-- Contenido: dos columnas 50/50 en desktop -->
-      <div class="relative z-10 w-full max-w-6xl mx-auto px-6 py-20 md:py-24 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <!-- Columna izquierda · Copy -->
-        <div class="text-center lg:text-left">
-          <h1 class="font-serif text-5xl md:text-6xl text-bone tracking-widest-3 mb-10">
-            AMANTIA
-          </h1>
-          <p class="font-serif text-bone/90 text-xl md:text-2xl leading-relaxed mb-8">
-            Un momento privado para que el cuerpo descanse,
-            la mente se libere y la pareja vuelva a conectar.
-          </p>
-          <p class="text-bone/70 leading-relaxed mb-6">
-            Antes de abrir, cinco parejas vivirán Amantia sin costo.
-            Su experiencia honesta ayudará a darle forma
-            a Amantia desde adentro.
-          </p>
-          <p class="text-gold-soft font-serif italic text-lg">
-            Pre-regístrense. La selección será privada y curada.
-          </p>
-        </div>
+  <section class="shell py-24 md:py-36 grid gap-8 md:grid-cols-12">
+    <p class="eyebrow md:col-span-3 md:pt-3">{SITE.tagline}</p>
+    <p class="md:col-start-5 md:col-span-8 font-serif text-[26px] md:text-[36px] leading-[1.45]">{SITE.entity}</p>
+  </section>
 
-        <!-- Columna derecha · Formulario -->
-        <div class="bg-navy-soft/50 backdrop-blur-sm border border-bone/10 p-8 md:p-10">
-          <h2 class="text-center text-xs uppercase tracking-widest-3 text-gold mb-8">
-            Pre-registro · Orígenes
-          </h2>
-          <PreRegisterForm />
-        </div>
-      </div>
-    </section>
+  <Split image={RENDERS.terrazaNoche} eyebrow="La cabaña" title="Sin agenda. Sin interrupciones. Sin prisa.">
+    <p>Una piscina al aire libre y un jacuzzi calefactado que no se comparten con nadie.</p>
+    <p>Cinema privado desde la cama y un sistema de recuperación corporal que el cuerpo agradece.</p>
+    <a href="/cabanas/" class="link-quiet text-navy">Ver las cabañas</a>
+  </Split>
 
-    <!-- ════════════════════ SECCIÓN 2 · QUÉ ES AMANTIA ════════════════════ -->
-    <section class="relative min-h-screen flex items-center overflow-hidden">
-      <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${img.queEs}')`}></div>
-        <div class="absolute inset-0 bg-navy/80"></div>
-      </div>
+  <section class="bg-sand py-24 md:py-32">
+    <div class="shell">
+      <SectionIntro eyebrow="Las cabañas" title="Tres cabañas. Cada una, solo para dos.">
+        Cada una con su propia vista. Los detalles de cada cabaña se anunciarán con la apertura.
+      </SectionIntro>
+      <CabinCards />
+      <div class="mt-12"><a href="/cabanas/" class="link-quiet">Conocer las cabañas</a></div>
+    </div>
+  </section>
 
-      <div class="relative z-10 w-full max-w-3xl mx-auto px-6 py-24 text-center">
-        <h2 class="font-serif text-3xl md:text-5xl text-bone tracking-widest-2 mb-12 leading-tight">
-          MENOS RUIDO. MÁS PRESENCIA.
-        </h2>
-        <p class="font-serif text-bone/90 text-xl md:text-2xl leading-relaxed mb-8">
-          Amantia es un espacio para bajar el ritmo
-          y volver a estar.
-        </p>
-        <p class="text-bone/70 leading-relaxed text-lg mb-10">
-          Sin agenda. Sin interrupciones. Sin prisa.
-        </p>
-        <p class="text-gold uppercase tracking-widest-2 text-sm">
-          Quebradanegra · Cundinamarca
-        </p>
-      </div>
-    </section>
+  <section class="shell py-24 md:py-32">
+    <SectionIntro eyebrow="El proyecto" title="Japandi tropical: piedra, madera y luz cálida.">
+      Muros de piedra natural, maderas en tono nogal, pisos de microcemento y fibras naturales. Todas las imágenes de esta sección son renders del diseño arquitectónico.
+    </SectionIntro>
+    <Gallery images={[RENDERS.habitacionVentanal, RENDERS.banoDucha, RENDERS.interiorPiedra, RENDERS.habitacionCalida, RENDERS.banoLavamanos, RENDERS.interiorBarra]} />
+  </section>
 
-    <!-- ════════════════════ SECCIÓN 3 · LO QUE VIVEN ════════════════════ -->
-    <section class="relative min-h-screen flex items-center overflow-hidden">
-      <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${img.viven}')`}></div>
-        <div class="absolute inset-0 bg-navy/85"></div>
-      </div>
+  <Split image={RENDERS.piscinaDia} imageSide="right" tone="dark" eyebrow="El lugar" title="Otro clima, a 90 km de Bogotá." id="lugar">
+    <p>Días de 28 °C y noches frescas de 17 °C en la vereda Casa Vieja, Quebradanegra, a pocos kilómetros de Villeta.</p>
+    <p>El café tiene origen. El pan también. Quien ordeña temprano, quien abre la tienda, la familia que cultiva el café.</p>
+    <a href={QN.queHacer} class="link-quiet text-bone" rel="noopener">Qué hacer en la zona (QuebradaNegra.com)</a>
+  </Split>
 
-      <div class="relative z-10 w-full max-w-3xl mx-auto px-6 py-24 text-center">
-        <h2 class="font-serif text-3xl md:text-5xl text-bone tracking-widest-2 mb-12">
-          LO QUE VIVEN EN AMANTIA
-        </h2>
-        <div class="space-y-6 font-serif text-bone/90 text-xl md:text-2xl leading-relaxed">
-          <p>72 metros cuadrados solo para ustedes.</p>
-          <p>Piscina privada al aire libre. Jacuzzi calefactado.</p>
-          <p>Un sistema de recuperación corporal<br />que el cuerpo agradece.</p>
-          <p>Cinema privado desde la cama.</p>
-        </div>
-        <p class="text-gold-soft font-serif italic text-lg mt-12">
-          Y el tiempo suficiente para volver a estar.
-        </p>
-      </div>
-    </section>
+  <section class="shell py-24 md:py-32 grid gap-14 md:grid-cols-3 md:gap-12">
+    <div>
+      <p class="eyebrow">Para celebrar</p>
+      <p class="mt-4 font-serif text-[26px] leading-[1.4]">Un aniversario. Una pregunta importante.</p>
+      <p class="mt-4 text-[16px] leading-[1.8] text-ink-muted">Dos personas, una cabaña privada y el tiempo suficiente para volver a estar.</p>
+    </div>
+    <div>
+      <p class="eyebrow">La obra hoy</p>
+      <p class="mt-4 font-serif text-[26px] leading-[1.4]">En construcción.</p>
+      <p class="mt-4 text-[16px] leading-[1.8] text-ink-muted">Las tres cabañas se están terminando; la obra se estima terminar a finales de 2026. Pronto compartiremos fotos reales.</p>
+    </div>
+    <div>
+      <p class="eyebrow">Orígenes</p>
+      <p class="mt-4 font-serif text-[26px] leading-[1.4]">Antes de abrir, cinco parejas vivirán Amantia sin costo.</p>
+      <a href="/origenes/" class="link-quiet mt-2">Conocer Orígenes</a>
+    </div>
+  </section>
 
-    <!-- ════════════════════ SECCIÓN 4 · EL ORIGEN IMPORTA ════════════════════ -->
-    <section class="relative min-h-screen flex items-center overflow-hidden">
-      <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${img.origen}')`}></div>
-        <div class="absolute inset-0 bg-navy/85"></div>
-      </div>
+  <section class="bg-cream py-24 md:py-32 text-center">
+    <div class="shell">
+      <p class="eyebrow">Amantia</p>
+      <p class="mt-6 font-serif italic text-[30px] md:text-[44px] leading-[1.35]">{SITE.tagline}</p>
+    </div>
+  </section>
 
-      <div class="relative z-10 w-full max-w-3xl mx-auto px-6 py-24 text-center">
-        <h2 class="font-serif text-3xl md:text-5xl text-bone tracking-widest-2 mb-12">
-          EL ORIGEN IMPORTA
-        </h2>
-        <div class="space-y-5 text-bone/85 text-lg md:text-xl leading-relaxed">
-          <p class="font-serif text-bone/90 text-xl md:text-2xl">El café tiene origen. El pan también.</p>
-          <p>Quien ordeña temprano.</p>
-          <p>Quien abre la tienda.</p>
-          <p>La familia que cultiva el café.</p>
-        </div>
-        <p class="text-gold uppercase tracking-widest-2 text-sm mt-12 mb-4">
-          En Amantia, el origen importa.
-        </p>
-        <p class="text-gold-soft font-serif italic text-lg">
-          Y quizás por eso las parejas también vuelven al suyo.
-        </p>
-      </div>
-    </section>
-
-    <!-- ════════════════════ SECCIÓN 5 · CTA FINAL ════════════════════ -->
-    <section class="relative min-h-screen flex items-center overflow-hidden">
-      <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${img.cta}')`}></div>
-        <div class="absolute inset-0 bg-navy/75"></div>
-      </div>
-
-      <div class="relative z-10 w-full max-w-2xl mx-auto px-6 py-24 text-center">
-        <p class="font-serif text-bone text-2xl md:text-3xl leading-relaxed mb-8">
-          Cinco parejas vivirán Amantia
-          antes de la apertura pública.
-        </p>
-        <p class="text-bone/80 leading-relaxed text-lg mb-12">
-          Si sienten que deberían estar entre ellas,
-          pre-regístrense.
-        </p>
-        <a
-          href="#pre-registro"
-          class="inline-block bg-gold hover:bg-gold-soft text-navy font-medium uppercase tracking-widest-2 text-sm px-12 py-4 transition-colors duration-300"
-        >
-          Pre-registrarse
-        </a>
-      </div>
-    </section>
-
-    <!-- ════════════════════ FOOTER ════════════════════ -->
-    <footer class="bg-navy border-t border-bone/10">
-      <div class="max-w-3xl mx-auto px-6 py-16 text-center space-y-4">
-        <p class="font-serif text-2xl text-bone tracking-widest-3">AMANTIA</p>
-        <p class="text-bone/60 text-sm leading-relaxed">
-          Vereda Casa Vieja, Quebradanegra, Cundinamarca · 90 km de Bogotá
-        </p>
-        <p class="font-serif italic text-gold-soft">
-          Menos ruido. Más presencia.
-        </p>
-        <p class="text-bone/50 text-sm pt-4">
-          <a href="https://instagram.com/amantiacundinamarca" class="hover:text-gold transition-colors">
-            @amantiacundinamarca
-          </a>
-          <span class="text-bone/30 mx-2">·</span>
-          <a href="mailto:hola@amantia.com.co" class="hover:text-gold transition-colors">
-            hola@amantia.com.co
-          </a>
-        </p>
-        <p class="text-bone/30 text-xs pt-4">© 2026 Amantia</p>
-      </div>
-    </footer>
-  </main>
+  <Faq items={faqs} />
+  <ListaApertura />
 </Base>

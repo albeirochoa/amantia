@@ -1,0 +1,90 @@
+---
+// Landing SEO · hub "glamping cerca a Bogotá" (url-map). Protagonista: el viaje desde Bogotá.
+// Absorbe: glamping cerca a Bogotá, glamping Bogotá, glamping para pareja(s), glamping romántico, glamping de lujo (title).
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import FactsBar from '../components/FactsBar.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Split from '../components/Split.astro';
+import SectionIntro from '../components/SectionIntro.astro';
+import Faq from '../components/Faq.astro';
+import ListaApertura from '../components/ListaApertura.astro';
+import { RENDERS } from '../data/renders';
+import { QN } from '../data/site';
+
+// Preguntas propias de esta página (ADR-003, enmienda 1).
+const faqs = [
+  { q: '¿Amantia es un glamping?', a: 'Amantia son tres cabañas privadas para parejas, con piscina y jacuzzi propios. Mucha gente las encuentra buscando "glamping cerca a Bogotá"; por dentro son cabañas completas, con cocina, baño con tina exenta y cinema privado.' },
+  { q: '¿A qué distancia está de Bogotá?', a: 'A 90 km, en la vereda Casa Vieja de Quebradanegra, Cundinamarca.' },
+  { q: '¿Qué clima hace?', a: 'Días de alrededor de 28 °C y noches frescas de unos 17 °C, a unos 1.080 metros de altitud. Bogotá ronda los 14 °C de media.' },
+  { q: '¿Es un plan romántico para parejas?', a: 'Sí. Cada cabaña es para dos personas, con piscina y jacuzzi privados.' },
+  { q: '¿Cuánto se tarda en llegar desde Bogotá?', a: 'Por confirmar.', pending: true },
+];
+---
+
+<Base
+  title="Glamping cerca a Bogotá para parejas · lujo a 90 km"
+  description="Glamping cerca a Bogotá para parejas: tres cabañas privadas a 90 km, con jacuzzi calefactado y piscina propios. Días de 28 °C en Quebradanegra, Cundinamarca."
+  headerOverImage
+>
+  <Hero
+    image={RENDERS.piscinaDia}
+    h1="Glamping cerca a Bogotá para parejas"
+    display="Noventa kilómetros. Otro clima. Otro ritmo."
+    cta={{ href: '/cabanas/', label: 'Conocer las cabañas' }}
+  />
+  <FactsBar />
+  <Breadcrumbs current="Glamping cerca a Bogotá" />
+
+  <section class="shell py-20 md:py-28 grid gap-8 md:grid-cols-12">
+    <p class="eyebrow md:col-span-3 md:pt-3">El viaje</p>
+    <div class="md:col-start-5 md:col-span-8">
+      <h2 class="font-serif font-normal text-[32px] md:text-[44px] leading-[1.2]">Salir de Bogotá sin irse lejos.</h2>
+      <p class="mt-6 text-[17px] leading-[1.85] text-ink-muted max-w-2xl">Amantia está a 90 km de Bogotá, en la vereda Casa Vieja de Quebradanegra, Cundinamarca, a unos 14 km en línea recta de Villeta. Es la distancia justa para un fin de semana fuera de la ciudad.</p>
+      <p class="mt-4 text-[15px] text-ink-muted">Tiempo por carretera y ruta recomendada: se publicarán con la apertura.</p>
+      <a href={QN.comoLlegar} class="link-quiet mt-2" rel="noopener">Cómo llegar a Quebradanegra</a>
+    </div>
+  </section>
+
+  <section class="bg-sand">
+    <div class="shell py-20 md:py-28">
+      <SectionIntro eyebrow="El clima" title="De 14 °C a 28 °C en una mañana.">
+        A unos 1.080 metros de altitud, Quebradanegra tiene días cálidos y noches frescas. Bogotá ronda los 14 °C de media.
+      </SectionIntro>
+      <dl class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div><dt class="text-[12px] tracking-[0.12em] uppercase text-ink-muted">Bogotá, media</dt><dd class="mt-2 font-serif text-3xl">≈14 °C</dd></div>
+        <div><dt class="text-[12px] tracking-[0.12em] uppercase text-ink-muted">Amantia, media</dt><dd class="mt-2 font-serif text-3xl">22 °C</dd></div>
+        <div><dt class="text-[12px] tracking-[0.12em] uppercase text-ink-muted">De día</dt><dd class="mt-2 font-serif text-3xl">≈28 °C</dd></div>
+        <div><dt class="text-[12px] tracking-[0.12em] uppercase text-ink-muted">De noche</dt><dd class="mt-2 font-serif text-3xl">≈17 °C</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <Split image={RENDERS.piscinaAtardecer} imageSide="right" eyebrow="Para parejas" title="Glamping para parejas, en cabañas privadas.">
+    <p>Tres cabañas, cada una para dos personas, con piscina al aire libre y jacuzzi calefactado propios. Un plan romántico sin zonas comunes que compartir.</p>
+    <p>Adentro: cocina, habitación con cinema privado desde la cama, baño con tina exenta y un sistema de recuperación corporal.</p>
+    <a href="/cabanas/" class="link-quiet text-navy">Las tres cabañas para parejas</a>
+  </Split>
+
+  <Split image={RENDERS.terrazaNoche} eyebrow="Al llegar" title="Las noches son frescas. El agua, caliente.">
+    <p>A 17 °C de noche, el jacuzzi calefactado de cada cabaña hace su parte. De día, la piscina privada.</p>
+    <a href="/glamping-con-jacuzzi/" class="link-quiet text-navy">Glamping con jacuzzi y piscina privada</a>
+  </Split>
+
+  <section class="shell py-24 md:py-32 grid gap-14 md:grid-cols-2 md:gap-20">
+    <div>
+      <p class="eyebrow">Para celebrar</p>
+      <h2 class="mt-4 font-serif font-normal text-[28px] md:text-[36px] leading-[1.25]">Un aniversario. Una pregunta importante.</h2>
+      <p class="mt-5 text-[17px] leading-[1.85] text-ink-muted">Estamos preparando opciones para aniversarios y pedidas de mano. Se anunciarán primero a la lista de apertura.</p>
+    </div>
+    <div>
+      <p class="eyebrow">Muy cerca de Villeta</p>
+      <h2 class="mt-4 font-serif font-normal text-[28px] md:text-[36px] leading-[1.25]">A unos 14 km, del lado tranquilo.</h2>
+      <p class="mt-5 text-[17px] leading-[1.85] text-ink-muted">Amantia está en Quebradanegra, cerca de Villeta y con su propia calma.</p>
+      <a href="/glamping-cerca-de-villeta/" class="link-quiet">Glamping cerca de Villeta</a>
+    </div>
+  </section>
+
+  <Faq items={faqs} />
+  <ListaApertura />
+</Base>

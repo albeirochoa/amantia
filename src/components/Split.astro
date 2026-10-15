@@ -1,0 +1,33 @@
+---
+import RenderImage from './RenderImage.astro';
+import type { Render } from '../data/renders';
+
+export interface Props {
+  image: Render;
+  /** Lado de la imagen en escritorio. */
+  imageSide?: 'left' | 'right';
+  eyebrow?: string;
+  title?: string;
+  tone?: 'light' | 'dark';
+  id?: string;
+}
+const { image, imageSide = 'left', eyebrow, title, tone = 'light', id } = Astro.props;
+const dark = tone === 'dark';
+---
+
+<section id={id} class:list={[dark ? 'bg-navy text-bone' : '', 'grid md:grid-cols-2 items-stretch']}>
+  <RenderImage
+    image={image}
+    sizes="(min-width: 768px) 50vw, 100vw"
+    class:list={['min-h-[340px] md:min-h-[600px]', imageSide === 'right' && 'md:order-2']}
+  />
+  <div class="flex items-center px-6 py-16 md:px-16 lg:px-24 md:py-24">
+    <div class="max-w-md">
+      {eyebrow && <p class:list={['eyebrow', dark && '!text-gold-soft']}>{eyebrow}</p>}
+      {title && <h2 class="mt-4 font-serif font-normal text-[32px] md:text-[44px] leading-[1.15] tracking-[-0.01em]">{title}</h2>}
+      <div class:list={['mt-6 text-[16px] md:text-[17px] leading-[1.85] space-y-5', dark ? 'text-bone/90' : 'text-ink-muted']}>
+        <slot />
+      </div>
+    </div>
+  </div>
+</section>

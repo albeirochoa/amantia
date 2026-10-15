@@ -4,7 +4,7 @@ Reemplaza parcialmente a ADR-002.
 
 ## Contexto
 
-Datos confirmados el 2026-10-13: Amantia son **3 cabañas iguales** de 72 m² para 2 personas, con jacuzzi calefactado privado, piscina privada, cinema privado y sistema de recuperación corporal. Es un producto más grande y más caro que los glampings pequeños de la zona.
+Datos confirmados el 2026-10-13: Amantia son **3 cabañas distintas en nombre y vista (una más amplia)** de 72 m² para 2 personas, con jacuzzi calefactado privado, piscina privada, cinema privado y sistema de recuperación corporal. Es un producto más grande y más caro que los glampings pequeños de la zona.
 
 Keyword Planner mostró dos patrones:
 - **"glamping"** domina cuando la gente busca dónde ir: "glamping cerca a bogota" 6.600 frente a "cabañas cerca a bogota" 720.
@@ -29,7 +29,7 @@ Aprobada por el dueño el 2026-10-13. `CONFIRMED`
   - ganar las búsquedas de marca;
   - concentrar la autoridad externa (Instagram, QuebradaNegra.com, prensa) y repartirla hacia las landings;
   - definir la entidad para buscadores e IAs mediante una frase-entidad visible y el schema `LodgingBusiness`.
-- Frase-entidad, en el primer párrafo visible: "Amantia es un refugio de tres cabañas privadas para parejas en la vereda Casa Vieja, Quebradanegra (Cundinamarca), a 90 km de Bogotá. Cada una tiene 72 m², jacuzzi calefactado y piscina propios."
+- Frase-entidad, en el primer párrafo visible: "Amantia es un refugio de tres cabañas privadas para parejas en la vereda Casa Vieja, Quebradanegra (Cundinamarca), a 90 km de Bogotá. Cada una tiene jacuzzi calefactado y piscina propios."
 - El hero muestra los datos concretos en los primeros 5 segundos en móvil: tres cabañas privadas, piscina y jacuzzi solo para ustedes, a 90 km de Bogotá.
 
 **Reparto de keywords** (detalle en `docs/seo/url-map.md`)
@@ -54,6 +54,13 @@ Aprobada por el dueño el 2026-10-13. `CONFIRMED`
 - Riesgo: si la tarifa no resulta de gama alta, "lujo" en los titles decepciona. Revisar cuando se fije el precio.
 - Pendiente (NEEDS_RESEARCH): comparar la SERP de "cabaña con jacuzzi privado parejas" con la de "glamping con jacuzzi". Si comparten 5 o más resultados del top 10, todo el bloque jacuzzi pasa a `/glamping-con-jacuzzi/`.
 
+## Enmienda 1 (2026-10-15, aprobada por el dueño tras la revisión de los agentes SEO)
+
+- En las 3 landings de glamping, "glamping" también puede ir en: la ruta de navegación (breadcrumb), **1 H2** y **1 pregunta frecuente** ("¿Amantia es un glamping?", en `/glamping-cerca-de-bogota/`). La home, el menú y el footer siguen sin la palabra.
+- "Romántico/a" está permitido en el copy (es territorio de Amantia, AGENTS.md §2): cubre "glamping romántico" y "cabañas románticas".
+- **"Cabañas de lujo" pertenece a la home** (no a `/cabanas/`).
+- Cada pregunta frecuente vive en **una sola** página (sin FAQ duplicadas entre URLs).
+
 ## Estado
 
-Aceptada.
+Aceptada, con la enmienda 1.

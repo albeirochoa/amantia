@@ -1,0 +1,45 @@
+---
+// Preguntas frecuentes con <details> nativo (sin JS) + datos estructurados FAQPage.
+export interface Props {
+  items: { q: string; a: string; pending?: boolean }[];
+  eyebrow?: string;
+  title?: string;
+}
+const { items, eyebrow = 'Antes de llegar', title = 'Preguntas frecuentes' } = Astro.props;
+// Las respuestas pendientes (TODO) no se muestran ni se marcan en schema.
+const visible = items.filter((i) => !i.pending);
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: visible.map((i) => ({
+    '@type': 'Question',
+    name: i.q,
+    acceptedAnswer: { '@type': 'Answer', text: i.a },
+  })),
+};
+---
+
+<section class="shell py-24 md:py-32 grid gap-10 md:grid-cols-[1fr_1.4fr] md:gap-20">
+  <div>
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 class="mt-4 font-serif font-normal text-[34px] md:text-5xl leading-[1.15]">{title}</h2>
+  </div>
+  <div class="border-t border-linen">
+    {visible.map((i) => (
+      <details class="group border-b border-linen">
+        <summary class="list-none cursor-pointer flex items-center justify-between gap-6 py-6 text-[17px] font-normal">
+          {i.q}
+          <span class="text-2xl font-light text-gold-dark group-open:rotate-45 transition-transform" aria-hidden="true">+</span>
+        </summary>
+        <p class="pb-6 pr-10 text-[16px] leading-[1.8] text-ink-muted">{i.a}</p>
+      </details>
+    ))}
+  </div>
+</section>
+{ld.mainEntity.length > 0 && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
+
+<style>
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

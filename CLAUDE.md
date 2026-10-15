@@ -34,7 +34,7 @@ src/
 ├── pages/index.astro          # Coming soon (única página por ahora)
 ├── layouts/Base.astro         # SEO meta tags, fuentes Google
 └── components/
-    └── PreRegisterForm.astro  # Form de pre-registro (aún con código MailerLite, pendiente de reemplazo)
+    └── …                       # Header, Footer, Hero, FactsBar, Split, CabinCards, Gallery, Faq, ListaApertura (form sin conexión: pendiente 1)
 
 public/
 ├── favicon.svg
@@ -72,6 +72,12 @@ Nunca commitear `.env`. Usar `.env.example` como plantilla.
 | Dorado suave | `#D4B872` | Tagline italic, hover |
 | Crema | `#F5F1E8` | Backgrounds claros (landing completa) |
 | Bone | `#E8E4DA` | Texto sobre fondo oscuro |
+| Paper | `#FAF8F3` | **Fondo principal** (versión clara, 2026-10-15) |
+| Sand | `#F1EDE4` | Secciones destacadas, footer, formularios |
+| Linen | `#E6E0D4` | Líneas finas y fondo de imágenes |
+| Dorado oscuro | `#7A5C24` | Etiquetas y acentos **sobre fondo claro** (contraste AA) |
+
+**Dirección visual (2026-10-15):** dominan los tonos claros; el navy es color de texto y solo aparece como fondo en una franja por página. Un solo botón dorado por pantalla. Las imágenes son renders del arquitecto, siempre con la etiqueta "Render".
 
 ### Tipografía
 

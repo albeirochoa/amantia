@@ -1,0 +1,19 @@
+---
+// TODO (pendiente 2 del roadmap): redactar la política completa (Ley 1581 de 2012).
+// Faltan: nombre o razón social del responsable, NIT o cédula, correo de contacto para datos,
+// y el sistema donde se guardan los registros (depende del reemplazo de MailerLite).
+// Se mantiene en noindex hasta tener el texto definitivo.
+import Base from '../layouts/Base.astro';
+import { SITE } from '../data/site';
+---
+
+<Base title="Política de privacidad · Amantia" description="Política de tratamiento de datos personales de Amantia." noindex mobileCta={false} hasLista={false}>
+  <article class="shell max-w-3xl py-20 md:py-28">
+    <h1 class="font-serif font-normal text-[36px] md:text-5xl">Política de privacidad</h1>
+    <p class="mt-8 text-[17px] leading-[1.85] text-ink-muted">
+      Estamos preparando nuestra política de tratamiento de datos personales conforme a la Ley 1581 de 2012.
+      Mientras tanto, para cualquier consulta sobre sus datos escríbanos a
+      <a href={`mailto:${SITE.email}`} class="underline underline-offset-4">{SITE.email}</a>.
+    </p>
+  </article>
+</Base>
