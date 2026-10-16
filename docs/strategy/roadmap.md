@@ -1,8 +1,8 @@
 # Roadmap de Amantia
 
-**Última actualización:** 2026-10-15
+**Última actualización:** 2026-10-16
 **Hito que manda:** las cabañas terminan entre mediados de noviembre y mediados de diciembre de 2026 (`docs/strategy/datos-amantia.md`). El pico de búsquedas de glamping es en enero.
-**Estado:** sitio v2 **publicado** en https://amantia.com.co el 2026-10-15 (`main`, versión de Worker `fa2e17a1`).
+**Estado:** sitio v2 **publicado** en https://amantia.com.co desde el 2026-10-15. Lanzamiento técnico completo: www → apex, Search Console, Web Analytics y GTM. Última versión del Worker: `c83a035a` (2026-10-16).
 
 Leyenda: ✅ hecho · 🔄 en curso · ⏳ pendiente · 🔒 bloqueado · 👤 lo hace el dueño
 
@@ -34,19 +34,25 @@ Leyenda: ✅ hecho · 🔄 en curso · ⏳ pendiente · 🔒 bloqueado · 👤 l
 - ✅ Lista de apertura y Orígenes **por WhatsApp** (MailerLite retirado; formulario listo para activar).
 - ✅ **Publicado en producción** (Cloudflare Workers) y verificado: todas las páginas responden 200, la 404 funciona, sitemap correcto.
 
-## 1. Ahora: terminar el lanzamiento
-
-- ✅ Redirección 301 `www.amantia.com.co` → `amantia.com.co`, hecha en `worker/index.js` (la Page Rule no actuaba sobre el custom domain del Worker).
-- ✅ **Cloudflare Web Analytics** activo (configuración automática; el medidor se inserta en todas las páginas, verificado 2026-10-15).
+**Lanzamiento técnico**
+- ✅ Redirección 301 `www.amantia.com.co` → `amantia.com.co`, hecha en `worker/index.js` (la Page Rule no actuaba sobre el custom domain del Worker; se puede borrar).
 - ✅ **Google Search Console:** propiedad de dominio `amantia.com.co` verificada por DNS (2026-10-15).
-- ⏳ 👤 En Search Console: enviar `sitemap.xml` y solicitar la indexación de las 5 URLs.
-- ⏳ **Política de privacidad definitiva** (Ley 1581). Hoy es provisional. Faltan el nombre o razón social del responsable, el NIT o la cédula y el correo de datos.
+- ✅ **Cloudflare Web Analytics** activo (configuración automática; el medidor se inserta en todas las páginas).
+- ✅ **Google Tag Manager** `GTM-5LCBVRGP` en todas las páginas (2026-10-16). Los clics en WhatsApp envían `click_whatsapp` al dataLayer con `event_source` (lista-apertura, origenes, footer) y `page_path`.
+
+## 1. Ahora: medir y cerrar lo legal
+
+- ⏳ 👤 **Search Console:** enviar `sitemap.xml` y solicitar la indexación de las 5 URLs (/, /cabanas/, /glamping-cerca-de-bogota/, /glamping-con-jacuzzi/, /glamping-cerca-de-villeta/).
+- ⏳ 👤 **Configurar GTM:**
+  - Google tag de GA4 en All Pages;
+  - activador "Evento personalizado = `click_whatsapp`";
+  - etiqueta de evento GA4 `click_whatsapp` con el parámetro `event_source`;
+  - publicar el contenedor y marcar `click_whatsapp` como **evento clave** en GA4.
+
+  Pasar el ID de GA4 para verificar la conexión.
+- ⏳ **Política de privacidad definitiva** (Ley 1581). Hoy es provisional. Faltan el nombre o razón social del responsable, el NIT o la cédula y el correo de datos. Debe mencionar las cookies de analítica (GTM/GA4) y el uso de WhatsApp como canal de contacto.
 - ⏳ 👤 **Confirmar el Instagram** `@amantiacundinamarca` → mostrarlo en el footer y agregarlo a `sameAs`.
-- ⏳ **Sistema de captura** (recomendado Cloudflare D1): endpoint `/api/lista` + `SITE.captureEnabled = true`. Mientras tanto funciona por WhatsApp.
-- ✅ **Google Tag Manager** `GTM-5LCBVRGP` instalado en todas las páginas (2026-10-16). Los clics en WhatsApp envían `click_whatsapp` al dataLayer con `event_source` (lista-apertura, origenes, footer) y `page_path`.
-- ⏳ 👤 **En GTM:** etiqueta de Google Analytics 4 (Google tag) y una etiqueta de evento GA4 `click_whatsapp` con un activador "Evento personalizado = click_whatsapp" → marcarlo como **evento clave** (conversión) en GA4. Publicar el contenedor.
-- ⏳ **Política de privacidad:** mencionar el uso de cookies de analítica (GTM/GA4).
-- ⏳ Eventos de analítica: `click_whatsapp` (los enlaces ya llevan `data-event`), y `submit_form` cuando haya captura.
+- ⏳ **Sistema de captura** (recomendado Cloudflare D1): endpoint `/api/lista` + `SITE.captureEnabled = true`, y el evento `submit_form` al dataLayer. Mientras tanto funciona por WhatsApp.
 
 ## 2. Octubre–noviembre: presencia local y contenido
 
