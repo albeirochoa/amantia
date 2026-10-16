@@ -43,6 +43,9 @@ Leyenda: ✅ hecho · 🔄 en curso · ⏳ pendiente · 🔒 bloqueado · 👤 l
 - ⏳ **Política de privacidad definitiva** (Ley 1581). Hoy es provisional. Faltan el nombre o razón social del responsable, el NIT o la cédula y el correo de datos.
 - ⏳ 👤 **Confirmar el Instagram** `@amantiacundinamarca` → mostrarlo en el footer y agregarlo a `sameAs`.
 - ⏳ **Sistema de captura** (recomendado Cloudflare D1): endpoint `/api/lista` + `SITE.captureEnabled = true`. Mientras tanto funciona por WhatsApp.
+- ✅ **Google Tag Manager** `GTM-5LCBVRGP` instalado en todas las páginas (2026-10-16). Los clics en WhatsApp envían `click_whatsapp` al dataLayer con `event_source` (lista-apertura, origenes, footer) y `page_path`.
+- ⏳ 👤 **En GTM:** etiqueta de Google Analytics 4 (Google tag) y una etiqueta de evento GA4 `click_whatsapp` con un activador "Evento personalizado = click_whatsapp" → marcarlo como **evento clave** (conversión) en GA4. Publicar el contenedor.
+- ⏳ **Política de privacidad:** mencionar el uso de cookies de analítica (GTM/GA4).
 - ⏳ Eventos de analítica: `click_whatsapp` (los enlaces ya llevan `data-event`), y `submit_form` cuando haya captura.
 
 ## 2. Octubre–noviembre: presencia local y contenido
