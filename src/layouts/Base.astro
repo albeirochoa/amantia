@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileCTA from '../components/MobileCTA.astro';
+import { SITE } from '../data/site';
 
 export interface Props {
   title: string;
@@ -35,6 +36,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 // Las redes sociales exigen URL absoluta para la imagen de preview.
 const ogImageUrl = new URL(ogImage, Astro.site);
 const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const gtm = SITE.gtmId;
 ---
 
 <!doctype html>
@@ -42,6 +44,16 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {gtm && (
+      <!-- Google Tag Manager -->
+      <script is:inline define:vars={{ gtm }}>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',gtm);
+      </script>
+    )}
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
@@ -77,6 +89,9 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <slot name="head" />
   </head>
   <body class="bg-paper text-navy font-sans font-light antialiased">
+    {gtm && (
+      <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${gtm}`} height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+    )}
     <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-paper focus:px-4 focus:py-3">
       Saltar al contenido
     </a>
@@ -86,6 +101,20 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     </main>
     <Footer hasMobileCta={!!mobileCta} />
     {mobileCta && <MobileCTA href={mobileCta.href} label={mobileCta.label} />}
+    {gtm && (
+      <!-- Eventos para GTM: cualquier enlace con data-event (p. ej. click_whatsapp) empuja al dataLayer -->
+      <script is:inline>
+        document.addEventListener('click', function (e) {
+          var el = e.target.closest && e.target.closest('[data-event]');
+          if (!el) return;
+          (window.dataLayer = window.dataLayer || []).push({
+            event: el.getAttribute('data-event'),
+            event_source: el.getAttribute('data-source') || '',
+            page_path: location.pathname
+          });
+        });
+      </script>
+    )}
   </body>
 </html>
 

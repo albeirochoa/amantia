@@ -28,6 +28,8 @@ export const SITE = {
   captureEnabled: false,
   openingDate: null as string | null, // TODO: fecha de apertura
   driveTimeFromBogota: null as string | null, // TODO: tiempo por carretera
+  // Google Tag Manager (dueño, 2026-10-16). null = desactivado.
+  gtmId: 'GTM-5LCBVRGP' as string | null,
   tagline: 'Menos ruido. Más presencia.',
   // Frase-entidad (ADR-003): primer párrafo visible de la home.
   entity:

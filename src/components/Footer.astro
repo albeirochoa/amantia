@@ -25,7 +25,7 @@ const { hasMobileCta = false } = Astro.props;
       A {SITE.facts.kmFromBogota} km de Bogotá
     </address>
     <div class="text-[15px] leading-relaxed flex flex-col">
-      {SITE.whatsapp && <a href={waLink('Hola, quiero información sobre Amantia.')} class="py-1.5 hover:text-gold-dark" rel="noopener" target="_blank">WhatsApp {SITE.phoneDisplay}</a>}
+      {SITE.whatsapp && <a href={waLink('Hola, quiero información sobre Amantia.')} class="py-1.5 hover:text-gold-dark" rel="noopener" target="_blank" data-event="click_whatsapp" data-source="footer">WhatsApp {SITE.phoneDisplay}</a>}
       <a href={`mailto:${SITE.email}`} class="py-1.5 hover:text-gold-dark">{SITE.email}</a>
       {SITE.instagram && <a href={`https://instagram.com/${SITE.instagram}`} class="py-1.5 hover:text-gold-dark">@{SITE.instagram}</a>}
       <a href="/politica-de-privacidad/" class="py-1.5 hover:text-gold-dark">Política de privacidad</a>
