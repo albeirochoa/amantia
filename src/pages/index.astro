@@ -11,7 +11,7 @@ import Gallery from '../components/Gallery.astro';
 import Faq from '../components/Faq.astro';
 import ListaApertura from '../components/ListaApertura.astro';
 import { RENDERS } from '../data/renders';
-import { SITE } from '../data/site';
+import { SITE, OFICIAL } from '../data/site';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -35,7 +35,8 @@ const jsonLd = {
   containedInPlace: {
     '@type': 'AdministrativeArea',
     name: 'Quebradanegra',
-    containedInPlace: { '@type': 'AdministrativeArea', name: 'Cundinamarca' },
+    sameAs: [OFICIAL.alcaldia, OFICIAL.wikipediaQuebradanegra],
+    containedInPlace: { '@type': 'AdministrativeArea', name: 'Cundinamarca', sameAs: OFICIAL.wikipediaCundinamarca },
   },
   numberOfRooms: SITE.facts.cabins,
   amenityFeature: [

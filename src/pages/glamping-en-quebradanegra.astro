@@ -13,7 +13,7 @@ import Split from '../components/Split.astro';
 import Faq from '../components/Faq.astro';
 import ListaApertura from '../components/ListaApertura.astro';
 import { RENDERS } from '../data/renders';
-import { SITE } from '../data/site';
+import { SITE, OFICIAL } from '../data/site';
 
 const mapa = `https://www.google.com/maps?q=${SITE.geo.lat},${SITE.geo.lon}`;
 
@@ -67,6 +67,7 @@ const faqs = [
         <p class="eyebrow">El entorno</p>
         <h2 class="mt-4 font-serif font-normal text-[28px] md:text-[36px] leading-[1.25]">Montaña verde, en el Gualivá.</h2>
         <p class="mt-5 text-[17px] leading-[1.85] text-ink-muted">Quebradanegra está en la provincia del Gualivá, en Cundinamarca. Desde la vereda Casa Vieja, cada cabaña mira hacia la montaña verde que rodea el municipio.</p>
+        <a href={OFICIAL.alcaldia} class="link-quiet" rel="noopener" target="_blank">Sitio oficial de la Alcaldía de Quebradanegra</a>
       </div>
     </div>
   </section>

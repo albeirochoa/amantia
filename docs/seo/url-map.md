@@ -12,7 +12,7 @@
 - Lo que tiene la **propiedad** (cabañas, jacuzzi y piscina privados, para parejas, cercanía) → Amantia.
 - Lo que tiene el **territorio** (qué hacer, clima, planes, comparativas de varios hospedajes) → QuebradaNegra.com, que enlaza a la URL específica de Amantia.
 - La misma keyword puede vivir en los dos dominios si el formato es distinto: QN es comparativa o guía, Amantia es una sola propiedad. Nunca se comparten textos.
-- **Neutralidad (dueño, 2026-10-17):** QuebradaNegra.com es un portal ecuánime que posiciona el municipio. **Amantia no enlaza a QN.** QN enlaza a Amantia solo donde hay intención de hospedaje (3–4 páginas), con la marca como anchor. Que Amantia posicione por encima de QN en una búsqueda compartida es aceptable.
+- **Neutralidad (dueño, 2026-10-17):** QuebradaNegra.com es un portal ecuánime que posiciona el municipio. **Amantia no enlaza a QN**; cuando menciona el municipio, enlaza a la fuente oficial (Alcaldía, `quebradanegra-cundinamarca.gov.co`). QN enlaza a Amantia solo donde hay intención de hospedaje (3–4 páginas), con la marca como anchor. Que Amantia posicione por encima de QN en una búsqueda compartida es aceptable.
 
 ## Fase A: lanzamiento (noviembre 2026) · ESTRUCTURA CONGELADA
 

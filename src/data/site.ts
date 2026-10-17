@@ -51,3 +51,9 @@ export const waLink = (text: string) =>
 
 // Decisión del dueño (2026-10-17): Amantia NO enlaza a QuebradaNegra.com, para que el portal
 // se mantenga independiente y ecuánime. No agregar enlaces ni menciones hacia QN.
+// Cuando Amantia menciona el municipio, enlaza a la fuente OFICIAL (verificadas 2026-10-17).
+export const OFICIAL = {
+  alcaldia: 'https://www.quebradanegra-cundinamarca.gov.co/',
+  wikipediaQuebradanegra: 'https://es.wikipedia.org/wiki/Quebradanegra',
+  wikipediaCundinamarca: 'https://es.wikipedia.org/wiki/Cundinamarca',
+};
