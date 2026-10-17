@@ -118,6 +118,13 @@ Cada paquete, cuando esté definido, tiene su URL (excepción de paquete en `doc
 ## 5. 2027: crecimiento
 
 - ⏳ Marzo de 2027: revisar 3 meses de Search Console y decidir si abrir URLs de la Fase B (`url-map.md`).
+- ⏳ Marzo de 2027: **revisar si conviene un blog** (decisión del 2026-10-17: **no por ahora**). Disparadores, todos necesarios:
+  - Search Console muestra consultas informacionales sobre la propiedad sin URL que las absorba;
+  - Keyword Planner da ≥300/mes propias, con una SERP distinta a la de las landings;
+  - hay fotos reales y operación (datos de primera mano);
+  - hay capacidad de publicar con constancia.
+
+  Aun así, serían 1 a 3 piezas sueltas, no una sección de blog. Semillas para medir: "qué llevar a un glamping", "diferencia entre glamping y cabaña". Mientras tanto, lo informacional va en las FAQ de las landings, en los paquetes de la Fase B, en los posts de Google Business Profile e Instagram.
 - ⏳ Antes de agosto: campaña de Amor y Amistad con el paquete de aniversario.
 - ⏳ PR digital: lograr que Amantia salga en las listas de "glamping cerca de Bogotá" de los medios.
 
