@@ -49,8 +49,5 @@ export const NAV = [
 export const waLink = (text: string) =>
   `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
 
-export const QN = {
-  queHacer: 'https://quebradanegra.com/quebrada-negra/que-hacer/',
-  comoLlegar: 'https://quebradanegra.com/quebrada-negra/como-llegar/',
-  villeta: 'https://quebradanegra.com/villeta/que-hacer/',
-};
+// Decisión del dueño (2026-10-17): Amantia NO enlaza a QuebradaNegra.com, para que el portal
+// se mantenga independiente y ecuánime. No agregar enlaces ni menciones hacia QN.

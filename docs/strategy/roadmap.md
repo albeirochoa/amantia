@@ -122,16 +122,10 @@ Cada paquete, cuando esté definido, tiene su URL (excepción de paquete en `doc
 
 ## Coordinación con QuebradaNegra.com
 
-Estos cambios son del otro repo (`C:\proyectos\quebradanegra\quebradanegra`) y requieren aprobación allí.
+**Principio (dueño, 2026-10-17):** QuebradaNegra es un portal **neutral y ecuánime** que posiciona el municipio, su comercio, lo que se puede hacer y los municipios cercanos. Amantia aparece brevemente, como una opción más. **Amantia no enlaza a QN**, y QN enlaza a Amantia solo lo justo.
 
-- ⏳ `stays.ts` y `site.ts`:
-  - nombre **"Amantia"** (hoy dice "Amantia Glamping");
-  - quitar "en desarrollo";
-  - dirección `Vereda Casa Vieja, Quebradanegra, Cundinamarca` y geo `5.137415, -74.480506`;
-  - descripción con los hechos (3 cabañas, jacuzzi y piscina propios, 90 km de Bogotá).
-- ⏳ `CTAAmantia` hacia la URL equivalente de Amantia, con texto exacto (la palanca real de posicionamiento):
-  - `/glamping/cerca-de-bogota/` → `/glamping-cerca-de-bogota/` ("glamping cerca a Bogotá");
-  - `/villeta/glamping/` → `/glamping-cerca-de-villeta/` ("glamping Villeta");
-  - directorio y guía romántica → `/cabanas/`.
-- ⏳ `PROPOSAL`: guía "lugares para pedir matrimonio cerca de Bogotá", que enlace a `/pedida-de-mano-cerca-de-bogota/` cuando exista.
-- ⏳ Enlace desde Amantia hacia QuebradaNegra.com (ya existe en "El lugar" y en las landings).
+- ✅ Enlaces de Amantia hacia QN **retirados** del sitio (2026-10-17).
+- ⏳ 👤 Entregar a los agentes de QN el brief `docs/handoff/2026-10-16-brief-para-quebradanegra.md` (revisado el 2026-10-17). Puntos principales:
+  - ficha de Amantia con nombre "Amantia", dirección y geo, en igualdad de trato con el resto;
+  - CTA de Amantia solo en 3–4 páginas con intención de hospedaje, con anchor de marca;
+  - contenido nuevo centrado en el municipio.

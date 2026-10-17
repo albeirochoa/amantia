@@ -12,6 +12,7 @@
 - Lo que tiene la **propiedad** (cabañas, jacuzzi y piscina privados, para parejas, cercanía) → Amantia.
 - Lo que tiene el **territorio** (qué hacer, clima, planes, comparativas de varios hospedajes) → QuebradaNegra.com, que enlaza a la URL específica de Amantia.
 - La misma keyword puede vivir en los dos dominios si el formato es distinto: QN es comparativa o guía, Amantia es una sola propiedad. Nunca se comparten textos.
+- **Neutralidad (dueño, 2026-10-17):** QuebradaNegra.com es un portal ecuánime que posiciona el municipio. **Amantia no enlaza a QN.** QN enlaza a Amantia solo donde hay intención de hospedaje (3–4 páginas), con la marca como anchor. Que Amantia posicione por encima de QN en una búsqueda compartida es aceptable.
 
 ## Fase A: lanzamiento (noviembre 2026) · ESTRUCTURA CONGELADA
 
@@ -51,7 +52,7 @@ Si no se cumplen, la búsqueda va como **sección** de una URL existente.
 
 - Cada landing enlaza a `/cabanas/` y a la home.
 - Los enlaces laterales van solo donde están las flechas, más `/glamping-con-jacuzzi/` ↔ `/glamping-cerca-de-villeta/` (añadido 2026-10-15).
-- `/glamping-cerca-de-villeta/` y `/glamping-cerca-de-bogota/` enlazan a QuebradaNegra.com para "qué hacer" y "cómo llegar".
+- Sin enlaces hacia QuebradaNegra.com (decisión del dueño, 2026-10-17).
 
 ## Fase B: después de abrir, solo si se cumple la condición
 
@@ -84,12 +85,4 @@ Ninguna de estas URLs estuvo publicada, así que no se requieren redirects.
 
 ## Cambios necesarios en QuebradaNegra.com
 
-1. `CTAAmantia` con `href` hacia la URL equivalente de Amantia, no hacia la raíz:
-   - `/glamping/cerca-de-bogota/` → `/glamping-cerca-de-bogota/`
-   - `/villeta/glamping/` → `/glamping-cerca-de-villeta/`
-   - guía romántica → `/` o `/cabanas/`
-   - directorio → `/cabanas/`
-2. Actualizar `stays.ts`:
-   - Amantia ya no está "en desarrollo";
-   - agregar NAP y geo (5.137415, -74.480506);
-   - 3 cabañas con jacuzzi y piscina privados.
+Ver `docs/handoff/2026-10-16-brief-para-quebradanegra.md` (revisado el 2026-10-17 con el principio de neutralidad): ficha de Amantia corregida e igualada al resto; CTA de Amantia solo en 3–4 páginas con intención de hospedaje, con anchor de marca.

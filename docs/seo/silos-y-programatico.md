@@ -1,5 +1,7 @@
 # Silos de Amantia, SEO programático y reparto con QuebradaNegra.com
 
+> **Actualización 2026-10-17:** por decisión del dueño, Amantia **no enlaza a QuebradaNegra.com**, y QN enlaza a Amantia solo lo justo, con anchor de marca. Las secciones de este documento que proponen "salida desde Amantia" hacia QN o anchors exactos desde QN quedan **reemplazadas** por el principio de neutralidad (ver `docs/seo/url-map.md`).
+
 **Fecha:** 2026-10-13
 **Estado:** `PROPOSAL`, pendiente de aprobación.
 **Base:**

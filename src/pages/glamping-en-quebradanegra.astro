@@ -2,7 +2,7 @@
 // Landing de ubicación · "glamping en Quebradanegra" (url-map: excepción aprobada por el dueño, 2026-10-17).
 // Protagonista: DÓNDE está Amantia (vereda Casa Vieja, municipio de Quebradanegra). Distinta de:
 //  - /glamping-cerca-de-villeta/ (protagonista: la cercanía a Villeta)
-//  - QuebradaNegra.com/quebrada-negra/glamping/ (directorio de varios glampings; ese es de QN)
+//  - QuebradaNegra.com/quebrada-negra/glamping/ (directorio de varios glampings; Amantia NO enlaza a QN, decisión del dueño 2026-10-17)
 // "Glamping Quebradanegra" es también el nombre de un negocio vecino: esta página deja claro que
 // Amantia es un alojamiento distinto (desambiguación de entidad). Nunca insinuar relación con él.
 import Base from '../layouts/Base.astro';
@@ -13,7 +13,7 @@ import Split from '../components/Split.astro';
 import Faq from '../components/Faq.astro';
 import ListaApertura from '../components/ListaApertura.astro';
 import { RENDERS } from '../data/renders';
-import { SITE, QN } from '../data/site';
+import { SITE } from '../data/site';
 
 const mapa = `https://www.google.com/maps?q=${SITE.geo.lat},${SITE.geo.lon}`;
 
@@ -21,7 +21,6 @@ const mapa = `https://www.google.com/maps?q=${SITE.geo.lat},${SITE.geo.lon}`;
 const faqs = [
   { q: '¿Dónde queda exactamente Amantia?', a: 'En la vereda Casa Vieja del municipio de Quebradanegra, Cundinamarca, a unos 1.080 metros de altitud. Coordenadas: 5.137415, -74.480506.' },
   { q: '¿Amantia es el mismo "Glamping Quebradanegra"?', a: 'No. Amantia es un alojamiento independiente, con su propio nombre: tres cabañas privadas para parejas, cada una con jacuzzi calefactado y piscina propios. No tiene relación con otros alojamientos de la zona de nombre similar.' },
-  { q: '¿Qué hacer en Quebradanegra?', a: 'El portal QuebradaNegra.com reúne qué hacer en el municipio: cascadas, caminos, cultura panelera y cómo llegar.' },
   { q: '¿Cuánto se tarda desde el casco urbano de Quebradanegra?', a: 'Por confirmar.', pending: true },
 ];
 ---
@@ -67,11 +66,7 @@ const faqs = [
       <div>
         <p class="eyebrow">El entorno</p>
         <h2 class="mt-4 font-serif font-normal text-[28px] md:text-[36px] leading-[1.25]">Montaña verde, en el Gualivá.</h2>
-        <p class="mt-5 text-[17px] leading-[1.85] text-ink-muted">Quebradanegra está en la provincia del Gualivá. Para cascadas, caminos y qué hacer en el municipio, el portal QuebradaNegra.com tiene la guía completa.</p>
-        <div class="mt-2 flex flex-wrap gap-x-8">
-          <a href={QN.queHacer} class="link-quiet" rel="noopener">Qué hacer en Quebradanegra</a>
-          <a href={QN.comoLlegar} class="link-quiet" rel="noopener">Cómo llegar</a>
-        </div>
+        <p class="mt-5 text-[17px] leading-[1.85] text-ink-muted">Quebradanegra está en la provincia del Gualivá, en Cundinamarca. Desde la vereda Casa Vieja, cada cabaña mira hacia la montaña verde que rodea el municipio.</p>
       </div>
     </div>
   </section>

@@ -1,7 +1,7 @@
 ---
 // Landing SEO · "glamping villeta" (url-map). Amantia está en Quebradanegra, CERCA de Villeta:
 // nunca declararla "en Villeta" (coherencia NAP con RNT y Google Maps).
-// No usar "cabañas en Villeta" ni "hospedaje en Villeta": son de QuebradaNegra.com.
+// No usar "cabañas en Villeta" ni "hospedaje en Villeta": esas intenciones no son de Amantia.
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import FactsBar from '../components/FactsBar.astro';
@@ -10,13 +10,11 @@ import Split from '../components/Split.astro';
 import Faq from '../components/Faq.astro';
 import ListaApertura from '../components/ListaApertura.astro';
 import { RENDERS } from '../data/renders';
-import { QN } from '../data/site';
 
 // Preguntas propias de esta página (ADR-003, enmienda 1).
 const faqs = [
   { q: '¿Amantia queda en Villeta?', a: 'No. Amantia está en la vereda Casa Vieja de Quebradanegra, Cundinamarca, a 13,9 km en línea recta de Villeta.' },
   { q: '¿Hace más calor que en Villeta?', a: 'Un poco menos. Villeta está a unos 795 metros y ronda los 24 °C de media; Amantia está a unos 1.080 metros, con 22 °C de media: días de unos 28 °C y noches más frescas, de unos 17 °C.' },
-  { q: '¿Qué hacer en Villeta?', a: 'El portal QuebradaNegra.com reúne qué hacer en Villeta: planes, caminos y lo que ofrece el pueblo.' },
   { q: '¿Cuánto se tarda desde Villeta?', a: 'Por confirmar.', pending: true },
 ];
 ---
@@ -40,7 +38,7 @@ const faqs = [
     <div class="md:col-start-5 md:col-span-8">
       <h2 class="font-serif font-normal text-[32px] md:text-[44px] leading-[1.2]">Glamping Villeta, del lado tranquilo: en Quebradanegra.</h2>
       <p class="mt-6 text-[17px] leading-[1.85] text-ink-muted max-w-2xl">Amantia está en la vereda Casa Vieja de Quebradanegra, Cundinamarca, a 13,9 km en línea recta de Villeta y a 90 km de Bogotá. No queda en Villeta: queda cerca, lo justo para tener el pueblo a mano y dormir en silencio.</p>
-      <div class="mt-2 flex flex-wrap gap-x-8"><a href={QN.villeta} class="link-quiet" rel="noopener">Qué hacer en Villeta (QuebradaNegra.com)</a><a href="/glamping-en-quebradanegra/" class="link-quiet">Glamping en Quebradanegra: dónde estamos</a></div>
+      <a href="/glamping-en-quebradanegra/" class="link-quiet mt-2">Glamping en Quebradanegra: dónde estamos</a>
     </div>
   </section>
 
