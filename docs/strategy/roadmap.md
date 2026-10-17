@@ -1,6 +1,6 @@
 # Roadmap de Amantia
 
-**Última actualización:** 2026-10-16
+**Última actualización:** 2026-10-17
 **Hito que manda:** las cabañas terminan entre mediados de noviembre y mediados de diciembre de 2026 (`docs/strategy/datos-amantia.md`). El pico de búsquedas de glamping es en enero.
 **Estado:** sitio v2 **publicado** en https://amantia.com.co desde el 2026-10-15. Lanzamiento técnico completo: www → apex, Search Console, Web Analytics y GTM. Última versión del Worker: `c83a035a` (2026-10-16).
 
@@ -57,7 +57,11 @@ Leyenda: ✅ hecho · 🔄 en curso · ⏳ pendiente · 🔒 bloqueado · 👤 l
 
 ## 2. Octubre–noviembre: presencia local y contenido
 
-- 🔄 **Ficha de Google Business Profile**: crearla directamente en business.google.com (no como Local Guide). **Fotos reales de obra listas** (7 JPG) y textos para copiar en `Descargas/amantia-google-business-fotos/` (2026-10-17). Las fotos de obra se usan **solo en la ficha de Google**, no en el sitio (decisión del dueño). Datos para crearla:
+- ✅ **Ficha de Google Business Profile creada** (2026-10-17) en business.google.com, con fotos reales de obra y la descripción. Las fotos de obra se usan **solo en la ficha**, no en el sitio (decisión del dueño).
+- ⏳ 👤 **Verificar la ficha** con video (ver el checklist abajo). Mientras no esté verificada, no se muestra públicamente.
+- ⏳ Al verificarla: agregar la URL de la ficha a `sameAs` en el schema de la home y pedirle a QuebradaNegra.com que use el mismo nombre y dirección.
+- ⏳ 👤 Logo cuadrado para la ficha (`TODO`).
+- Datos usados para crearla (referencia):
   - **Nombre:** `Amantia`, sin "Glamping" ni palabras extra (Google penaliza el relleno en el nombre y hay que diferenciarse de "Glamping Quebradanegra", el vecino).
   - **Ubicación (pin):** 5.137415, -74.480506 · vereda Casa Vieja, Quebradanegra, Cundinamarca · [Google Maps](https://www.google.com/maps?q=5.137415,-74.480506). Nunca "Villeta".
   - **Categoría principal:** Cabaña (o Alojamiento / Hospedaje). Secundarias según lo que ofrezca Google.
