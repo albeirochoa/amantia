@@ -38,11 +38,12 @@ Leyenda: ✅ hecho · 🔄 en curso · ⏳ pendiente · 🔒 bloqueado · 👤 l
 - ✅ Redirección 301 `www.amantia.com.co` → `amantia.com.co`, hecha en `worker/index.js` (la Page Rule no actuaba sobre el custom domain del Worker; se puede borrar).
 - ✅ **Google Search Console:** propiedad de dominio `amantia.com.co` verificada por DNS (2026-10-15).
 - ✅ **Cloudflare Web Analytics** activo (configuración automática; el medidor se inserta en todas las páginas).
+- ✅ **`/glamping-en-quebradanegra/`** publicada el 2026-10-17 (página de ubicación; excepción aprobada por el dueño). Enlaza a la Alcaldía como fuente oficial. Sin enlaces a QuebradaNegra.com en todo el sitio.
 - ✅ **Google Tag Manager** `GTM-5LCBVRGP` en todas las páginas (2026-10-16). Los clics en WhatsApp envían `click_whatsapp` al dataLayer con `event_source` (lista-apertura, origenes, footer) y `page_path`.
 
 ## 1. Ahora: medir y cerrar lo legal
 
-- ⏳ 👤 **Search Console:** enviar `sitemap.xml` y solicitar la indexación de las 5 URLs (/, /cabanas/, /glamping-cerca-de-bogota/, /glamping-con-jacuzzi/, /glamping-cerca-de-villeta/).
+- ⏳ 👤 **Search Console:** enviar `sitemap.xml` y solicitar la indexación de las 6 URLs (/, /cabanas/, /glamping-cerca-de-bogota/, /glamping-con-jacuzzi/, /glamping-cerca-de-villeta/, /glamping-en-quebradanegra/).
 - ⏳ 👤 **Configurar GTM:**
   - Google tag de GA4 en All Pages;
   - activador "Evento personalizado = `click_whatsapp`";
