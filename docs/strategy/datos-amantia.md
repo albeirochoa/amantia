@@ -31,6 +31,13 @@ Toda afirmación de hecho en el sitio, en el schema o en el copy debe salir de a
 | Tarifa, paquetes | — | `TODO` | |
 | Entrega de obra (publicable) | "La obra se estima terminar a finales de 2026" (aprobado publicar el estimado, 2026-10-15) | `CONFIRMED` como estimado | Dueño |
 
+## Posicionamiento de precio y cliente (dueño, 2026-10-17)
+
+- **Precio más alto** que los glampings de la zona; **perfil de cliente más alto**: parejas de 30–55 que pagan por privacidad, espacio y diseño. Tarifa exacta: `TODO`.
+- **No competir por precio:** no usar en el copy ni perseguir búsquedas de "económico", "barato" o "precios económicos" (esas son de la guía de precios de QuebradaNegra.com).
+- **No compararse nombrando competidores.** Mostrar hechos verificables (piscina privada, desde 72 m² con terraza, cinema, recuperación corporal) y dejar que el cliente compare.
+- Los vecinos son **complementarios**, no rivales directos: un destino conocido beneficia a todos (principio de QuebradaNegra.com neutral).
+
 ## Cómo comunicar el clima
 
 - No usar "tierra caliente": técnicamente es clima templado, y "tierra caliente" es Villeta (795 m, 24 °C).
