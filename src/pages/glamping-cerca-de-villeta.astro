@@ -16,7 +16,7 @@ import { QN } from '../data/site';
 const faqs = [
   { q: '¿Amantia queda en Villeta?', a: 'No. Amantia está en la vereda Casa Vieja de Quebradanegra, Cundinamarca, a 13,9 km en línea recta de Villeta.' },
   { q: '¿Hace más calor que en Villeta?', a: 'Un poco menos. Villeta está a unos 795 metros y ronda los 24 °C de media; Amantia está a unos 1.080 metros, con 22 °C de media: días de unos 28 °C y noches más frescas, de unos 17 °C.' },
-  { q: '¿Qué hacer cerca, en Villeta y Quebradanegra?', a: 'El portal QuebradaNegra.com reúne qué hacer en la zona: cascadas, caminos y planes en Villeta y Quebradanegra.' },
+  { q: '¿Qué hacer en Villeta?', a: 'El portal QuebradaNegra.com reúne qué hacer en Villeta: planes, caminos y lo que ofrece el pueblo.' },
   { q: '¿Cuánto se tarda desde Villeta?', a: 'Por confirmar.', pending: true },
 ];
 ---
@@ -40,7 +40,7 @@ const faqs = [
     <div class="md:col-start-5 md:col-span-8">
       <h2 class="font-serif font-normal text-[32px] md:text-[44px] leading-[1.2]">Glamping Villeta, del lado tranquilo: en Quebradanegra.</h2>
       <p class="mt-6 text-[17px] leading-[1.85] text-ink-muted max-w-2xl">Amantia está en la vereda Casa Vieja de Quebradanegra, Cundinamarca, a 13,9 km en línea recta de Villeta y a 90 km de Bogotá. No queda en Villeta: queda cerca, lo justo para tener el pueblo a mano y dormir en silencio.</p>
-      <a href={QN.villeta} class="link-quiet mt-2" rel="noopener">Qué hacer en Villeta (QuebradaNegra.com)</a>
+      <div class="mt-2 flex flex-wrap gap-x-8"><a href={QN.villeta} class="link-quiet" rel="noopener">Qué hacer en Villeta (QuebradaNegra.com)</a><a href="/glamping-en-quebradanegra/" class="link-quiet">Glamping en Quebradanegra: dónde estamos</a></div>
     </div>
   </section>
 

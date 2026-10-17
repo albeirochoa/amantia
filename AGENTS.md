@@ -233,7 +233,7 @@ Descubrimiento → deseo → experiencia → alojamiento → disponibilidad → 
 
 **Fuente oficial: `docs/seo/url-map.md`** (estructura aprobada y congelada el 2026-10-13, ver ADR-003).
 
-Fase A (lanzamiento): `/`, `/cabanas/`, `/glamping-cerca-de-bogota/`, `/glamping-con-jacuzzi/`, `/glamping-cerca-de-villeta/`, `/origenes/` (noindex) y `/politica-de-privacidad/`.
+Fase A (lanzamiento): `/`, `/cabanas/`, `/glamping-cerca-de-bogota/`, `/glamping-con-jacuzzi/`, `/glamping-cerca-de-villeta/`, `/glamping-en-quebradanegra/` (excepción de ubicación, 2026-10-17), `/origenes/` (noindex) y `/politica-de-privacidad/`.
 
 Una URL nueva exige: ≥300 búsquedas/mes propias, un protagonista distinto y una SERP distinta. Si no los cumple, va como sección de una URL existente.
 

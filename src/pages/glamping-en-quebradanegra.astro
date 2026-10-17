@@ -1,0 +1,99 @@
+---
+// Landing de ubicación · "glamping en Quebradanegra" (url-map: excepción aprobada por el dueño, 2026-10-17).
+// Protagonista: DÓNDE está Amantia (vereda Casa Vieja, municipio de Quebradanegra). Distinta de:
+//  - /glamping-cerca-de-villeta/ (protagonista: la cercanía a Villeta)
+//  - QuebradaNegra.com/quebrada-negra/glamping/ (directorio de varios glampings; ese es de QN)
+// "Glamping Quebradanegra" es también el nombre de un negocio vecino: esta página deja claro que
+// Amantia es un alojamiento distinto (desambiguación de entidad). Nunca insinuar relación con él.
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import FactsBar from '../components/FactsBar.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Split from '../components/Split.astro';
+import Faq from '../components/Faq.astro';
+import ListaApertura from '../components/ListaApertura.astro';
+import { RENDERS } from '../data/renders';
+import { SITE, QN } from '../data/site';
+
+const mapa = `https://www.google.com/maps?q=${SITE.geo.lat},${SITE.geo.lon}`;
+
+// Preguntas propias de esta página (ADR-003, enmienda 1: sin repetir en otras URLs).
+const faqs = [
+  { q: '¿Dónde queda exactamente Amantia?', a: 'En la vereda Casa Vieja del municipio de Quebradanegra, Cundinamarca, a unos 1.080 metros de altitud. Coordenadas: 5.137415, -74.480506.' },
+  { q: '¿Amantia es el mismo "Glamping Quebradanegra"?', a: 'No. Amantia es un alojamiento independiente, con su propio nombre: tres cabañas privadas para parejas, cada una con jacuzzi calefactado y piscina propios. No tiene relación con otros alojamientos de la zona de nombre similar.' },
+  { q: '¿Qué hacer en Quebradanegra?', a: 'El portal QuebradaNegra.com reúne qué hacer en el municipio: cascadas, caminos, cultura panelera y cómo llegar.' },
+  { q: '¿Cuánto se tarda desde el casco urbano de Quebradanegra?', a: 'Por confirmar.', pending: true },
+];
+---
+
+<Base
+  title="Glamping en Quebradanegra, Cundinamarca · Amantia"
+  description="Amantia: tres cabañas privadas para parejas en la vereda Casa Vieja, Quebradanegra (Cundinamarca), con jacuzzi calefactado y piscina propios. A 90 km de Bogotá."
+  headerOverImage
+>
+  <Hero
+    image={RENDERS.portonLlegada}
+    h1="Glamping en Quebradanegra"
+    display="En la vereda Casa Vieja, Quebradanegra."
+    cta={{ href: '/cabanas/', label: 'Conocer las cabañas' }}
+    secondary={{ href: mapa, label: 'Ver en Google Maps' }}
+  />
+  <FactsBar />
+  <Breadcrumbs current="Glamping en Quebradanegra" />
+
+  <section class="shell py-20 md:py-28 grid gap-8 md:grid-cols-12">
+    <p class="eyebrow md:col-span-3 md:pt-3">Dónde estamos</p>
+    <div class="md:col-start-5 md:col-span-8">
+      <h2 class="font-serif font-normal text-[32px] md:text-[44px] leading-[1.2]">Un glamping en Quebradanegra, en la vereda Casa Vieja.</h2>
+      <p class="mt-6 text-[17px] leading-[1.85] text-ink-muted max-w-2xl">Amantia está en el municipio de Quebradanegra, Cundinamarca, en la vereda Casa Vieja, a unos 1.080 metros de altitud. Queda a 90 km de Bogotá y a 13,9 km en línea recta de Villeta.</p>
+      <p class="mt-4 text-[17px] leading-[1.85] text-ink-muted max-w-2xl">Son tres cabañas privadas para parejas. Aunque mucha gente las busca como "glamping en Quebradanegra", por dentro son cabañas completas: cocina, baño con tina exenta, cinema privado desde la cama y, afuera, jacuzzi calefactado y piscina propios.</p>
+      <dl class="mt-10 grid grid-cols-2 gap-6 max-w-xl text-[15px]">
+        <div><dt class="text-[12px] tracking-[0.12em] uppercase text-ink-muted">Municipio</dt><dd class="mt-1">Quebradanegra, Cundinamarca</dd></div>
+        <div><dt class="text-[12px] tracking-[0.12em] uppercase text-ink-muted">Vereda</dt><dd class="mt-1">Casa Vieja</dd></div>
+        <div><dt class="text-[12px] tracking-[0.12em] uppercase text-ink-muted">Altitud</dt><dd class="mt-1">≈1.080 m s. n. m.</dd></div>
+        <div><dt class="text-[12px] tracking-[0.12em] uppercase text-ink-muted">Coordenadas</dt><dd class="mt-1">5.137415, -74.480506</dd></div>
+      </dl>
+      <a href={mapa} class="link-quiet mt-6" rel="noopener" target="_blank">Ver la ubicación en Google Maps</a>
+    </div>
+  </section>
+
+  <section class="bg-sand">
+    <div class="shell py-20 md:py-28 grid gap-12 md:grid-cols-2 md:gap-20">
+      <div>
+        <p class="eyebrow">El clima</p>
+        <h2 class="mt-4 font-serif font-normal text-[28px] md:text-[36px] leading-[1.25]">Días de 28 °C, noches de 17 °C.</h2>
+        <p class="mt-5 text-[17px] leading-[1.85] text-ink-muted">A unos 1.080 metros, la vereda tiene una media de 22 °C: calor de día para la piscina y noches frescas para el jacuzzi calefactado.</p>
+      </div>
+      <div>
+        <p class="eyebrow">El entorno</p>
+        <h2 class="mt-4 font-serif font-normal text-[28px] md:text-[36px] leading-[1.25]">Montaña verde, en el Gualivá.</h2>
+        <p class="mt-5 text-[17px] leading-[1.85] text-ink-muted">Quebradanegra está en la provincia del Gualivá. Para cascadas, caminos y qué hacer en el municipio, el portal QuebradaNegra.com tiene la guía completa.</p>
+        <div class="mt-2 flex flex-wrap gap-x-8">
+          <a href={QN.queHacer} class="link-quiet" rel="noopener">Qué hacer en Quebradanegra</a>
+          <a href={QN.comoLlegar} class="link-quiet" rel="noopener">Cómo llegar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Split image={RENDERS.piscinaAtardecer} imageSide="right" eyebrow="Lo privado" title="Piscina y jacuzzi propios, en cada cabaña.">
+    <p>Cada una de las tres cabañas tiene su propia piscina al aire libre y su propio jacuzzi calefactado. Desde 72 m² con terraza, para dos personas.</p>
+    <a href="/cabanas/" class="link-quiet text-navy">Las tres cabañas de Amantia</a>
+  </Split>
+
+  <section class="shell py-24 md:py-32 grid gap-14 md:grid-cols-2 md:gap-20">
+    <div>
+      <p class="eyebrow">Desde Bogotá</p>
+      <h2 class="mt-4 font-serif font-normal text-[28px] md:text-[36px] leading-[1.25]">A 90 km de la ciudad.</h2>
+      <a href="/glamping-cerca-de-bogota/" class="link-quiet">Glamping cerca a Bogotá: el viaje</a>
+    </div>
+    <div>
+      <p class="eyebrow">Muy cerca de Villeta</p>
+      <h2 class="mt-4 font-serif font-normal text-[28px] md:text-[36px] leading-[1.25]">A 13,9 km en línea recta.</h2>
+      <a href="/glamping-cerca-de-villeta/" class="link-quiet">Glamping cerca de Villeta</a>
+    </div>
+  </section>
+
+  <Faq items={faqs} />
+  <ListaApertura />
+</Base>

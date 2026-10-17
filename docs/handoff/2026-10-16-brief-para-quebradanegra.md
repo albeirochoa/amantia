@@ -78,7 +78,7 @@ El `CLAUDE.md` de QN dice: *"`CTAAmantia` enlaza a `https://amantia.com.co/` (lu
 |---|---|---|
 | `/glamping/cerca-de-bogota/` | `https://amantia.com.co/glamping-cerca-de-bogota/` | "Glamping cerca a Bogotá para parejas: Amantia" |
 | `/villeta/glamping/` | `https://amantia.com.co/glamping-cerca-de-villeta/` | "Glamping cerca de Villeta, en Quebradanegra: Amantia" |
-| `/quebrada-negra/glamping/` (directorio) | `https://amantia.com.co/cabanas/` | "Cabañas para parejas con jacuzzi y piscina privada" |
+| `/quebrada-negra/glamping/` (directorio) | `https://amantia.com.co/glamping-en-quebradanegra/` | "Glamping en Quebradanegra: Amantia, vereda Casa Vieja" |
 | `/guias/escapada-romantica-cerca-de-bogota/` | `https://amantia.com.co/cabanas/` | "Cabañas privadas para parejas en Quebradanegra" |
 | `/quebrada-negra/que-hacer/`, home, `/guias/` y resto | `https://amantia.com.co/` | "Conocer Amantia" (se mantiene) |
 | Ficha de Amantia en el directorio (`StayCard`) | `https://amantia.com.co/cabanas/` | — |
@@ -162,7 +162,7 @@ Amantia **no va a crear** URLs para estas intenciones, por ser de territorio, co
 |---|---|---|---|
 | glamping cerca a Bogotá (6.600) | **Conviven** | Guía de decisión por zonas (ya existe; no tocar el title en 8–12 semanas, según QN) | Landing de una propiedad: "el viaje desde Bogotá" |
 | glamping Villeta (1.600) | **Conviven** | Directorio / decisión: "glamping en Villeta" (P1-1.1) | Propiedad "cerca de Villeta, en Quebradanegra" |
-| glamping quebradanegra (directorio) | **QN** | `/quebrada-negra/glamping/` | — (Amantia no crea esa URL) |
+| glamping quebradanegra | **Conviven** (actualizado 2026-10-17) | Directorio de varios glampings: `/quebrada-negra/glamping/` (sigue siendo el dueño del ángulo directorio) | Página de **ubicación propia**: `https://amantia.com.co/glamping-en-quebradanegra/` (dónde está Amantia; aclara que no es el negocio vecino "Glamping Quebradanegra") |
 | hospedaje en Villeta, cabañas en Villeta | **QN** | P2 #1 y #2 | — |
 | planes en pareja / escapada romántica | **QN** | Guía romántica (§3.2) | Solo secciones en su home |
 | pedida de mano (inspiración) | **QN** | Guía nueva (§3.1) | Página de oferta cuando exista el paquete |

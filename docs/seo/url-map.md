@@ -30,6 +30,7 @@ Si no se cumplen, la búsqueda va como **sección** de una URL existente.
 | `/cabanas/` | Cabañas para parejas cerca a Bogotá · jacuzzi y piscina | **Todo "cabaña(s) + …":** cabañas para parejas 320 · cabaña con jacuzzi privado parejas 140 · cabañas para parejas con jacuzzi 90 · cabañas con piscina privada cerca a Bogotá 70 · cabañas románticas 50 · cabañas privadas 10 | Las 3 cabañas: qué tienen, qué incluyen, disponibilidad |
 | `/glamping-cerca-de-bogota/` | Glamping cerca a Bogotá para parejas · lujo a 90 km | glamping cerca a Bogotá 6.600 · glamping Bogotá 2.900 · glamping para pareja(s) 210+110 · glamping de lujo 140 · glamping romántico 70 | El viaje desde Bogotá |
 | `/glamping-con-jacuzzi/` | Glamping con jacuzzi y piscina privada cerca a Bogotá | glamping con jacuzzi 480 · glamping con piscina 110 · glamping con jacuzzi privado 90 · glamping con piscina privada 90 | El jacuzzi y la piscina privados |
+| `/glamping-en-quebradanegra/` | Glamping en Quebradanegra, Cundinamarca · Amantia | glamping quebradanegra / glamping en quebradanegra (volumen bajo; QN tiene 20 impr., pos. 8,5) | **Dónde está Amantia**: vereda Casa Vieja, municipio, altitud, clima, entorno. **Excepción aprobada por el dueño (2026-10-17):** página de ubicación real de la propiedad (entidad local), no cumple ≥300/mes. Convive con el directorio de QN (`/quebrada-negra/glamping/`). Desambigua a Amantia del negocio vecino "Glamping Quebradanegra" |
 | `/glamping-cerca-de-villeta/` | Glamping Villeta · privado y con jacuzzi, en Quebradanegra | glamping Villeta 1.600 · glamping en Villeta 390 | La cercanía a Villeta (sin "cabañas en Villeta", que es de QN) |
 | `/origenes/` | — | — (campaña, `noindex`) | Pre-registro de las 5 parejas |
 | `/politica-de-privacidad/` | — | — | Legal |
@@ -44,7 +45,8 @@ Si no se cumplen, la búsqueda va como **sección** de una URL existente.
 ```
 /  ──────────────┬── /cabanas/  (conversión)
                  ├── /glamping-cerca-de-bogota/   ↔ /glamping-cerca-de-villeta/
-                 └── /glamping-con-jacuzzi/       ↔ /glamping-cerca-de-bogota/
+                 ├── /glamping-con-jacuzzi/       ↔ /glamping-cerca-de-bogota/
+                 └── /glamping-en-quebradanegra/  ↔ /glamping-cerca-de-villeta/ · /glamping-cerca-de-bogota/ (añadida 2026-10-17)
 ```
 
 - Cada landing enlaza a `/cabanas/` y a la home.
@@ -72,7 +74,6 @@ Si no se cumplen, la búsqueda va como **sección** de una URL existente.
 ## Descartadas
 
 - `/glamping-para-parejas/` → `/`
-- `/glamping-en-quebrada-negra/` → competidor y directorio de QN
 - `/cabana-con-jacuzzi-cerca-de-bogota/` → `/glamping-con-jacuzzi/`
 - `/escapada-romantica-cerca-de-bogota/`, `/plan-romantico-cerca-de-bogota/`, `/planes-en-pareja-cerca-de-bogota/` → QN
 - `/escapada-fin-de-semana-cerca-de-bogota/`, `/lugares-para-descansar-…/`, `/lugares-para-desconectarse-…/` → QN
