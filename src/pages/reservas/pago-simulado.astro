@@ -1,0 +1,42 @@
+---
+// /reservas/pago-simulado/ · SOLO desarrollo local (PAYMENT_PROVIDER=simulated en .dev.vars).
+// Reemplaza a Wompi para probar el flujo sin llaves. En producción la API responde 404 a la simulación.
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Pago simulado · Amantia" description="Simulador de pagos para desarrollo." noindex chrome="checkout" mobileCta={false} hasLista={false}>
+  <div class="shell max-w-xl py-16">
+    <p class="eyebrow">Solo pruebas</p>
+    <h1 class="mt-4 font-serif font-normal text-[34px] leading-[1.15]">Pasarela simulada</h1>
+    <p class="mt-4 text-[16px] leading-[1.7] text-ink-muted">Elige qué respuesta daría Wompi. No se mueve dinero.</p>
+    <div class="mt-8 grid gap-3">
+      <button class="btn-primary" data-resultado="APPROVED">Pago aprobado</button>
+      <button class="btn-outline" data-resultado="DECLINED">Pago rechazado</button>
+      <button class="btn-outline" data-resultado="PENDING">Pago pendiente</button>
+      <a class="link-quiet text-center" id="volver">Volver sin pagar</a>
+    </div>
+    <p class="mt-4 text-[14px] text-[#9b2c2c]" id="error" role="alert"></p>
+  </div>
+</Base>
+
+<script>
+  const qs = new URLSearchParams(location.search);
+  const ref = qs.get('ref') || '';
+  const t = qs.get('t') || '';
+  const back = `/reservas/confirmacion/?ref=${encodeURIComponent(ref)}&t=${encodeURIComponent(t)}`;
+  (document.getElementById('volver') as HTMLAnchorElement).href = back;
+  document.querySelectorAll<HTMLButtonElement>('[data-resultado]').forEach((b) =>
+    b.addEventListener('click', async () => {
+      const res = await fetch(`/api/reservas/${encodeURIComponent(ref)}/simular-pago`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ t, resultado: b.dataset.resultado }),
+      });
+      if (!res.ok) {
+        document.getElementById('error')!.textContent = 'La simulación no está disponible en este entorno.';
+        return;
+      }
+      location.href = `${back}&id=sim`;
+    }),
+  );
+</script>

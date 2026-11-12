@@ -1,0 +1,82 @@
+---
+// /reservas/confirmacion/ · Retorno desde Wompi. Consulta el estado real de la reserva (no confía en la URL).
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../data/site';
+const maps = `https://www.google.com/maps?q=${SITE.geo.lat},${SITE.geo.lon}`;
+---
+
+<Base title="Tu reserva · Amantia" description="Estado de tu reserva en Amantia." noindex chrome="checkout" mobileCta={false} hasLista={false}>
+  <div class="shell max-w-2xl py-12 md:py-20" id="confirmacion" data-wa={SITE.whatsapp} data-maps={maps}>
+    <section data-estado="cargando">
+      <p class="eyebrow">Un momento</p>
+      <h1 class="mt-4 font-serif font-normal text-[34px] md:text-[44px] leading-[1.15]">Confirmando el pago.</h1>
+      <p class="mt-4 text-[17px] leading-[1.7] text-ink-muted">No es necesario pagar de nuevo. Estamos verificando la transacción con Wompi; puede tardar unos segundos.</p>
+    </section>
+
+    <section data-estado="confirmada" hidden>
+      <p class="eyebrow">Reserva confirmada</p>
+      <h1 class="mt-4 font-serif font-normal text-[34px] md:text-[44px] leading-[1.15]">Te esperamos, <span data-campo="nombre"></span>.</h1>
+      <p class="mt-4 text-[17px] leading-[1.7] text-ink-muted">Guarda este código: con él te atendemos por WhatsApp.</p>
+    </section>
+
+    <section data-estado="fallida" hidden>
+      <p class="eyebrow">Pago no completado</p>
+      <h1 class="mt-4 font-serif font-normal text-[34px] md:text-[44px] leading-[1.15]">El pago no se completó.</h1>
+      <p class="mt-4 text-[17px] leading-[1.7] text-ink-muted">La cabaña sigue separada para ti <span data-campo="restante"></span>. Puedes intentarlo de nuevo sin empezar desde cero.</p>
+    </section>
+
+    <section data-estado="vencida" hidden>
+      <p class="eyebrow">Tiempo agotado</p>
+      <h1 class="mt-4 font-serif font-normal text-[34px] md:text-[44px] leading-[1.15]">La cabaña ya no está separada.</h1>
+      <p class="mt-4 text-[17px] leading-[1.7] text-ink-muted">Pasó el tiempo para pagar y la liberamos. Revisemos si tus fechas siguen libres.</p>
+    </section>
+
+    <section data-estado="conflicto" hidden>
+      <p class="eyebrow">Necesitamos hablar</p>
+      <h1 class="mt-4 font-serif font-normal text-[34px] md:text-[44px] leading-[1.15]">Recibimos tu pago, pero la cabaña se ocupó.</h1>
+      <p class="mt-4 text-[17px] leading-[1.7] text-ink-muted">El pago llegó después de que venciera la reserva temporal. Escríbenos por WhatsApp con tu código: te ofrecemos otras fechas o el reembolso completo.</p>
+    </section>
+
+    <section data-estado="error" hidden>
+      <h1 class="font-serif font-normal text-[34px] md:text-[44px] leading-[1.15]">No encontramos esa reserva.</h1>
+      <p class="mt-4 text-[17px] leading-[1.7] text-ink-muted">Si ya pagaste, escríbenos por WhatsApp y lo revisamos.</p>
+    </section>
+
+    <div id="detalle" hidden class="mt-10 bg-sand p-6 md:p-8">
+      <p class="text-[11px] tracking-[0.2em] uppercase text-ink-muted">Código de reserva</p>
+      <p class="mt-1 font-serif text-[28px] tracking-[0.05em]" data-campo="ref"></p>
+      <dl class="mt-6 grid grid-cols-[1fr_auto] gap-y-2 text-[15px]">
+        <dt>Cabaña</dt><dd class="text-right" data-campo="cabana"></dd>
+        <dt>Llegada</dt><dd class="text-right" data-campo="llegada"></dd>
+        <dt>Salida</dt><dd class="text-right" data-campo="salida"></dd>
+        <dt>Personas</dt><dd class="text-right">2</dd>
+        <dt class="pt-3 border-t border-linen">Alojamiento</dt><dd class="pt-3 border-t border-linen text-right" data-campo="alojamiento"></dd>
+      </dl>
+      <dl class="grid grid-cols-[1fr_auto] gap-y-2 text-[15px] mt-2" id="lista-extras-conf"></dl>
+      <dl class="mt-2 grid grid-cols-[1fr_auto] gap-y-2 text-[15px]">
+        <dt class="pt-3 border-t border-linen">Total</dt><dd class="pt-3 border-t border-linen text-right" data-campo="total"></dd>
+        <dt data-campo="lbl-anticipo">Anticipo</dt><dd class="text-right" data-campo="anticipo"></dd>
+        <dt class="text-ink-muted">Saldo</dt><dd class="text-right text-ink-muted" data-campo="saldo"></dd>
+      </dl>
+    </div>
+
+    <div class="mt-8 grid gap-3 md:flex md:flex-wrap" id="acciones">
+      <button type="button" class="btn-primary" data-accion="reintentar" hidden>Intentar el pago de nuevo</button>
+      <a class="btn-primary" data-accion="buscar" hidden href="/reservas/">Revisar disponibilidad</a>
+      <a class="btn-outline" data-accion="mapa" hidden target="_blank" rel="noopener" href={maps}>Ver ubicación</a>
+      <a class="btn-outline" data-accion="whatsapp" target="_blank" rel="noopener" data-event="click_whatsapp" data-source="reservar_confirmacion" href={`https://wa.me/${SITE.whatsapp}`}>Escribir por WhatsApp</a>
+    </div>
+    <p class="mt-3 text-[14px] text-[#9b2c2c] min-h-[1.5em]" id="error-accion" role="alert"></p>
+  </div>
+</Base>
+
+<script>
+  import { initConfirmacion } from '../../scripts/confirmacion';
+  initConfirmacion();
+</script>
+
+<style is:global>
+  [hidden] {
+    display: none !important;
+  }
+</style>

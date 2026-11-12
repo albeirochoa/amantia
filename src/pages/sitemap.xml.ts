@@ -5,7 +5,7 @@ import type { APIRoute } from 'astro';
 // Al agregar URLs nuevas, seguir docs/seo/seo-governance.md antes de publicarlas.
 const pages = import.meta.glob('./**/*.astro', { eager: true });
 // Páginas con noindex: no van al sitemap.
-const NOINDEX = ['origenes', 'politica-de-privacidad'];
+const NOINDEX = ['origenes', 'politica-de-privacidad', 'reservas', 'admin'];
 
 export const GET: APIRoute = ({ site }) => {
   const urls = Object.keys(pages)

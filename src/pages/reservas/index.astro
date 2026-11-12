@@ -1,0 +1,227 @@
+---
+// /reservas/ · Motor de reservas (ADR-004). noindex, fuera del sitemap y sin enlaces hasta abrir.
+// Flujo: fechas → cabaña → extras → datos → pago (Wompi) → /reservas/confirmacion/.
+// Excepción a "sin JS de cliente" (CLAUDE.md): el motor no funciona sin él. Registrada en ADR-004.
+import Base from '../../layouts/Base.astro';
+import { CABANAS } from '../../data/cabanas';
+import { src, srcset, label } from '../../data/renders';
+import { SITE } from '../../data/site';
+
+const media = Object.fromEntries(
+  CABANAS.map((c) => [
+    c.slug,
+    { src: src(c.image.file, 800), srcset: srcset(c.image.file), alt: c.image.alt, label: label(c.image), tagline: c.tagline, size: c.size },
+  ]),
+);
+const clientData = { media, whatsapp: SITE.whatsapp };
+const steps = ['Fechas', 'Cabaña', 'Extras', 'Tus datos'];
+---
+
+<Base
+  title="Reservar · Amantia"
+  description="Reserva directa de las cabañas de Amantia en Quebradanegra, Cundinamarca."
+  noindex
+  chrome="checkout"
+  mobileCta={false}
+  hasLista={false}
+>
+  <div class="shell max-w-3xl py-10 md:py-14 pb-16" id="motor">
+    <p id="banner-prueba" hidden class="mb-8 border border-gold-dark/40 bg-sand px-4 py-3 text-[14px] leading-relaxed">
+      Modo de prueba: no se cobra dinero real. <span id="banner-detalle"></span>
+    </p>
+
+    <p class="eyebrow">Reserva directa</p>
+    <ol class="mt-5 mb-10 grid grid-cols-4 gap-2" aria-label="Pasos de la reserva">
+      {steps.map((s, i) => (
+        <li class="text-[11px] md:text-[12px] tracking-[0.12em] uppercase text-ink-muted" data-progress={i}>
+          <span class="block h-[2px] bg-linen mb-2" aria-hidden="true"></span>{s}
+        </li>
+      ))}
+    </ol>
+
+    <!-- Paso 1: fechas -->
+    <section data-step="fechas" aria-labelledby="t-fechas">
+      <h1 id="t-fechas" class="font-serif font-normal text-[34px] md:text-[44px] leading-[1.15]">¿Cuándo quieres venir?</h1>
+      <p class="mt-4 text-[17px] leading-[1.7] text-ink-muted">Elige la noche de llegada y luego la de salida. Cada cabaña es para dos personas.</p>
+
+      <div class="mt-8 grid grid-cols-2 border border-linen bg-paper">
+        <button type="button" class="text-left px-5 py-4 border-r border-linen" data-pick="in">
+          <span class="block text-[11px] tracking-[0.2em] uppercase text-ink-muted">Llegada</span>
+          <span class="block mt-1 text-[17px]" id="lbl-in">Elegir</span>
+        </button>
+        <button type="button" class="text-left px-5 py-4" data-pick="out">
+          <span class="block text-[11px] tracking-[0.2em] uppercase text-ink-muted">Salida</span>
+          <span class="block mt-1 text-[17px]" id="lbl-out">Elegir</span>
+        </button>
+      </div>
+
+      <div class="mt-6 bg-sand p-4 md:p-6">
+        <div class="flex items-center justify-between">
+          <button type="button" class="h-11 w-11 flex items-center justify-center disabled:opacity-30" id="cal-prev" aria-label="Mes anterior">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+          </button>
+          <p class="font-serif text-[20px]" id="cal-month" aria-live="polite"></p>
+          <button type="button" class="h-11 w-11 flex items-center justify-center disabled:opacity-30" id="cal-next" aria-label="Mes siguiente">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+          </button>
+        </div>
+        <div class="mt-3 grid grid-cols-7 text-center text-[11px] tracking-[0.12em] uppercase text-ink-muted" aria-hidden="true">
+          <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
+        </div>
+        <div class="mt-2 grid grid-cols-7 gap-y-1" id="cal-grid" role="grid"></div>
+        <p class="mt-4 text-[13px] text-ink-muted"><span class="inline-block w-3 h-3 align-[-1px] mr-2 bg-linen line-through"></span>Sin cabañas libres esa noche</p>
+      </div>
+
+      <p class="mt-6 text-[15px] min-h-[1.5em]" id="resumen-fechas" aria-live="polite"></p>
+      <p class="mt-2 text-[14px] text-[#9b2c2c] min-h-[1.5em]" id="error-fechas" role="alert"></p>
+      <button type="button" class="btn-primary w-full md:w-auto mt-2" id="btn-buscar" disabled>Ver cabañas libres</button>
+    </section>
+
+    <!-- Paso 2: cabañas -->
+    <section data-step="cabanas" hidden aria-labelledby="t-cabanas">
+      <div class="flex items-start justify-between gap-6 border-b border-linen pb-5">
+        <p class="text-[15px]" id="chip-fechas"></p>
+        <button type="button" class="link-quiet !py-0 text-[14px]" data-goto="fechas">Cambiar fechas</button>
+      </div>
+      <h1 id="t-cabanas" class="mt-8 font-serif font-normal text-[32px] md:text-[40px] leading-[1.15]"></h1>
+      <p class="mt-3 text-[16px] leading-[1.7] text-ink-muted" id="sub-cabanas"></p>
+      <ul class="mt-8 grid gap-8" id="lista-cabanas"></ul>
+
+      <div id="sin-disponibilidad" hidden>
+        <ul class="mt-8 grid gap-4" id="lista-alternativas"></ul>
+        <div class="mt-10 pt-8 border-t border-linen">
+          <h2 class="font-serif font-normal text-[24px]">¿Prefieres conversarlo?</h2>
+          <p class="mt-3 text-[16px] leading-[1.7] text-ink-muted">Escríbenos por WhatsApp con tus fechas y buscamos juntos.</p>
+          <a class="btn-outline mt-5" id="wa-sin-disp" target="_blank" rel="noopener" data-event="click_whatsapp" data-source="reservar_sin_disponibilidad">Escribir por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Paso 3: extras -->
+    <section data-step="extras" hidden aria-labelledby="t-extras">
+      <h1 id="t-extras" class="font-serif font-normal text-[32px] md:text-[40px] leading-[1.15]">¿Quieres agregar algo?</h1>
+      <p class="mt-3 text-[16px] leading-[1.7] text-ink-muted">Puedes sumar extras ahora o seguir sin ellos.</p>
+      <ul class="mt-6 border-t border-linen" id="lista-extras"></ul>
+      <p class="mt-6 flex justify-between text-[17px]" id="total-extras" aria-live="polite"></p>
+      <button type="button" class="btn-primary w-full mt-8" id="btn-extras">Continuar</button>
+      <button type="button" class="link-quiet block mx-auto text-[14px]" id="btn-sin-extras">Continuar sin extras</button>
+    </section>
+
+    <!-- Paso 4: datos -->
+    <section data-step="datos" hidden aria-labelledby="t-datos">
+      <h1 id="t-datos" class="font-serif font-normal text-[32px] md:text-[40px] leading-[1.15]">Tus datos</h1>
+      <p class="mt-3 text-[16px] leading-[1.7] text-ink-muted">Solo lo necesario para confirmar la reserva y escribirte antes de la llegada.</p>
+
+      <form id="form-datos" class="mt-8 grid gap-6 md:grid-cols-2" novalidate>
+        <label class="block">
+          <span class="text-[12px] tracking-[0.2em] uppercase text-ink-muted">Nombre</span>
+          <input name="nombre" autocomplete="given-name" required class="campo" />
+          <span class="campo-error" data-error="nombre"></span>
+        </label>
+        <label class="block">
+          <span class="text-[12px] tracking-[0.2em] uppercase text-ink-muted">Apellido</span>
+          <input name="apellido" autocomplete="family-name" required class="campo" />
+          <span class="campo-error" data-error="apellido"></span>
+        </label>
+        <label class="block">
+          <span class="text-[12px] tracking-[0.2em] uppercase text-ink-muted">Correo</span>
+          <input name="email" type="email" autocomplete="email" inputmode="email" required class="campo" />
+          <span class="campo-error" data-error="email"></span>
+        </label>
+        <label class="block">
+          <span class="text-[12px] tracking-[0.2em] uppercase text-ink-muted">WhatsApp</span>
+          <input name="telefono" type="tel" autocomplete="tel" inputmode="tel" placeholder="+57 300 000 0000" required class="campo" />
+          <span class="campo-error" data-error="telefono"></span>
+        </label>
+
+        <div class="md:col-span-2 bg-sand p-5 md:p-6" id="resumen-reserva" aria-live="polite"></div>
+
+        <div class="md:col-span-2">
+          <label class="flex gap-3 items-start text-[15px] leading-[1.6]">
+            <input type="checkbox" name="aceptaCondiciones" class="mt-1 h-5 w-5 accent-[#7A5C24]" />
+            <span>Leí y acepto las condiciones de reserva y cancelación.</span>
+          </label>
+          <details class="mt-3 text-[14px] leading-[1.7] text-ink-muted">
+            <summary class="cursor-pointer underline underline-offset-4">Ver condiciones</summary>
+            <!-- TODO dueño: política de cambios y cancelación, saldo (cuándo y cómo se paga), horarios de llegada y salida. -->
+            <p class="mt-3">Condiciones pendientes de definir por Amantia (TODO): cambios de fecha, cancelación y reembolso, pago del saldo, horarios de llegada y salida.</p>
+            <p class="mt-2">Tus datos se usan solo para gestionar esta reserva. <a href="/politica-de-privacidad/" class="underline">Política de privacidad</a>.</p>
+          </details>
+          <span class="campo-error" data-error="aceptaCondiciones"></span>
+        </div>
+
+        <div class="md:col-span-2">
+          <p class="text-[14px] text-[#9b2c2c] min-h-[1.5em]" id="error-datos" role="alert"></p>
+          <button type="submit" class="btn-primary w-full" id="btn-pagar">Pagar</button>
+          <p class="mt-3 text-center text-[13px] text-ink-muted">El pago se hace en Wompi (Bancolombia). La cabaña queda separada para ti mientras pagas.</p>
+          <button type="button" class="link-quiet block mx-auto text-[14px]" data-goto="cabanas">Cambiar de cabaña</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Motor cerrado o error de carga -->
+    <section data-step="cerrado" hidden aria-labelledby="t-cerrado">
+      <h1 id="t-cerrado" class="font-serif font-normal text-[32px] md:text-[40px] leading-[1.15]">Las reservas en línea abren pronto.</h1>
+      <p class="mt-4 text-[17px] leading-[1.7] text-ink-muted" id="msg-cerrado">Mientras tanto, escríbenos por WhatsApp y te contamos las fechas disponibles.</p>
+      <a class="btn-primary mt-8" href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener" data-event="click_whatsapp" data-source="reservar_cerrado">Escribir por WhatsApp</a>
+    </section>
+  </div>
+
+  <script type="application/json" id="datos-motor" set:html={JSON.stringify(clientData)} />
+</Base>
+
+<script>
+  import { initReservar } from '../../scripts/reservar';
+  initReservar();
+</script>
+
+<style is:global>
+  /* .btn-primary y otras clases fijan display: sin esto, [hidden] no oculta. */
+  [hidden] {
+    display: none !important;
+  }
+  .campo {
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+    padding: 12px 0;
+    background: transparent;
+    border-bottom: 1px solid #1a2a44;
+    font-size: 17px;
+    border-radius: 0;
+  }
+  .campo[aria-invalid='true'] {
+    border-bottom-color: #9b2c2c;
+  }
+  .campo-error {
+    display: block;
+    min-height: 1.4em;
+    margin-top: 4px;
+    font-size: 13px;
+    color: #9b2c2c;
+  }
+  [data-progress].activo {
+    color: #1a2a44;
+  }
+  [data-progress].activo span {
+    background: #7a5c24;
+  }
+  .dia {
+    height: 44px;
+    font-size: 15px;
+  }
+  .dia:disabled {
+    color: #a3a9b4;
+    cursor: default;
+  }
+  .dia.lleno {
+    text-decoration: line-through;
+  }
+  .dia.rango {
+    background: #e6e0d4;
+  }
+  .dia.extremo {
+    background: #1a2a44;
+    color: #faf8f3;
+  }
+</style>

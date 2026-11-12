@@ -1,0 +1,17 @@
+---
+// Pie mínimo del flujo de reserva: contacto, privacidad y aviso de imágenes ilustrativas.
+import { SITE, waLink } from '../data/site';
+---
+
+<footer class="bg-sand text-navy">
+  <div class="shell max-w-3xl py-8 text-[14px] leading-relaxed">
+    <p class="flex flex-wrap gap-x-6 gap-y-1">
+      {SITE.whatsapp && <a href={waLink('Hola, quiero información sobre Amantia.')} class="py-1.5 underline underline-offset-4" target="_blank" rel="noopener" data-event="click_whatsapp" data-source="reservas_footer">WhatsApp {SITE.phoneDisplay}</a>}
+      <a href={`mailto:${SITE.email}`} class="py-1.5 underline underline-offset-4">{SITE.email}</a>
+      <a href="/politica-de-privacidad/" class="py-1.5 underline underline-offset-4">Política de privacidad</a>
+    </p>
+    <p class="mt-4 text-[13px] text-ink-muted">
+      © {new Date().getFullYear()} Amantia · {SITE.address.locality}, {SITE.address.region}. Las imágenes son renders ilustrativos: la obra final puede variar.
+    </p>
+  </div>
+</footer>
