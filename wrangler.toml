@@ -20,3 +20,40 @@ binding = "ASSETS"
 not_found_handling = "404-page"
 # El Worker corre primero en cada petición para poder redirigir www.
 run_worker_first = true
+
+# ── Motor de reservas (ADR-004) ─────────────────────────────────────────────
+# Producción (dueño, 2026-11-10): motor ENCENDIDO en /reservas/ pero SIN enlaces desde el sitio,
+# con pasarela SIMULADA (todavía no hay llaves de Wompi) y tarifa de prueba. Antes de abrir de verdad:
+# llaves de Wompi + PAYMENT_PROVIDER = "wompi" + borrar reservas de prueba (ver ADR-004).
+# En local, .dev.vars sobrescribe estos valores (ver .dev.vars.example).
+[vars]
+ENVIRONMENT = "production"
+BOOKING_ENABLED = "true"
+PAYMENT_PROVIDER = "simulated"
+WOMPI_ENV = "sandbox"
+BOOKING_OPENS_ON = "2026-12-15"   # primera noche reservable (dueño, 2026-11-10)
+# Panel /admin/ (dueño, 2026-11-10). ADMIN_SECRET va como secreto: npx wrangler secret put ADMIN_SECRET
+ADMIN_EMAILS = "hola@amantia.com.co"
+# Panel con ingreso por enlace al correo (ADMIN_EMAILS). "true" lo deja abierto SIN contraseña: no usar con reservas reales.
+ADMIN_OPEN = "false"
+NOTIFY_EMAIL = "hola@amantia.com.co"
+MAIL_FROM = "hola@amantia.com.co"
+# Correo por SMTP de Zoho Mail (plan de pago). La contraseña de aplicación va como SECRETO: npx wrangler secret put SMTP_PASSWORD
+SMTP_HOST = "smtp.zoho.com"
+SMTP_PORT = "465"
+SMTP_USER = "hola@amantia.com.co"
+# WOMPI_PUBLIC_KEY se define como variable o secreto; WOMPI_INTEGRITY_SECRET y WOMPI_EVENTS_SECRET
+# SIEMPRE como secretos: npx wrangler secret put WOMPI_INTEGRITY_SECRET (HARD RULE 9).
+
+# Base D1 creada el 2026-11-10 (región ENAM).
+[[d1_databases]]
+binding = "DB"
+database_name = "amantia-reservas"
+database_id = "9ae11049-8f23-4fd9-9121-797a92bf0106"
+migrations_dir = "migrations"
+
+# Alternativa de envío (solo se usa si NO existe SMTP_PASSWORD). El correo del dominio es Zoho, así que Email Routing
+# no puede ir en el apex; esta vía queda como respaldo.
+[[send_email]]
+name = "EMAIL"
+allowed_destination_addresses = ["hola@amantia.com.co"]

@@ -8,7 +8,11 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "dev:reservas": "astro build && wrangler dev",
+    "db:migrate:local": "wrangler d1 migrations apply amantia-reservas --local",
+    "db:seed:local": "wrangler d1 execute amantia-reservas --local --file=scripts/seed-dev.sql",
+    "db:migrate:remote": "wrangler d1 migrations apply amantia-reservas --remote"
   },
   "dependencies": {
     "astro": "^4.16.0",

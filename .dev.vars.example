@@ -1,0 +1,17 @@
+# Copiar a .dev.vars (ignorado por git) para desarrollo local con `npm run dev:reservas`.
+ENVIRONMENT=development
+# Origen para la redirect-url de Wompi en local.
+SITE_ORIGIN=http://localhost:8787
+BOOKING_ENABLED=true
+# simulated = pasarela falsa local, sin Wompi. Cambiar a wompi cuando existan llaves de prueba.
+PAYMENT_PROVIDER=simulated
+WOMPI_ENV=sandbox
+# Llaves de PRUEBA del panel de Wompi (Desarrolladores → Llaves). Nunca las de producción aquí.
+WOMPI_PUBLIC_KEY=pub_test_xxx
+WOMPI_INTEGRITY_SECRET=test_integrity_xxx
+WOMPI_EVENTS_SECRET=test_events_xxx
+# Panel: secreto para firmar sesiones (en local cualquier texto largo sirve).
+ADMIN_SECRET=dev-secret-cambiar-0123456789abcdef
+
+# Correo por SMTP de Zoho (solo producción: secreto SMTP_PASSWORD con `wrangler secret put`). Sin él, en local los correos se simulan.
+# SMTP_PASSWORD=contraseña-de-aplicación-de-zoho
