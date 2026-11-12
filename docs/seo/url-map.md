@@ -58,7 +58,7 @@ Si no se cumplen, la búsqueda va como **sección** de una URL existente.
 
 | URL | Condición |
 |---|---|
-| `/reservar/` (`noindex`) | Al tener motor de reservas con disponibilidad por cabaña (Fase 5) |
+| `/reservas/` (`noindex`) | Al tener motor de reservas con disponibilidad por cabaña (Fase 5) |
 | `/glamping-con-piscina-privada/` | Que Keyword Planner muestre volumen propio para "glamping/cabañas con piscina privada" (hoy ≈200 medido) |
 | `/plan-aniversario-cerca-de-bogota/` | Cuando el **paquete de aniversario** esté definido (precio, qué incluye, fotos). Página SEO: ≈480/mes, la SERP muestra paquetes |
 | `/pedida-de-mano-cerca-de-bogota/` | Cuando el **paquete de pedida de mano** esté definido. Página de oferta (excepción de paquete): tráfico de Instagram, WhatsApp, anuncios y la guía de QN. Ideal antes del pico de dic–ene ("pedida de mano" 720 → 1.300 en enero) |

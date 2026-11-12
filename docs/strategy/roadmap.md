@@ -1,8 +1,8 @@
 # Roadmap de Amantia
 
-**Última actualización:** 2026-10-17
+**Última actualización:** 2026-11-12
 **Hito que manda:** las cabañas terminan entre mediados de noviembre y mediados de diciembre de 2026 (`docs/strategy/datos-amantia.md`). El pico de búsquedas de glamping es en enero.
-**Estado:** sitio v2 **publicado** en https://amantia.com.co desde el 2026-10-15. Lanzamiento técnico completo: www → apex, Search Console, Web Analytics y GTM. Última versión del Worker: `c83a035a` (2026-10-16).
+**Estado:** sitio v2 **publicado** en https://amantia.com.co desde el 2026-10-15. Lanzamiento técnico completo: www → apex, Search Console, Web Analytics y GTM. Motor de reservas propio en producción desde el 2026-11-10 (`/reservas/`, sin enlaces, pago simulado) y panel `/admin/` desde el 2026-11-12. Última versión del Worker: `e36be179` (2026-11-12).
 
 Leyenda: ✅ hecho · 🔄 en curso · ⏳ pendiente · 🔒 bloqueado · 👤 lo hace el dueño
 
@@ -111,10 +111,28 @@ Cada paquete, cuando esté definido, tiene su URL (excepción de paquete en `doc
   - las mismas fotos en Google Business Profile;
   - borrar los renders reemplazados.
 - ⏳ **Nombres definitivos, vistas y medidas de cada cabaña** → páginas `/cabanas/[slug]/` (la condición ya se cumple: son distintas).
-- ⏳ **ADR-004 motor de reservas:**
-  - opciones: channel manager (sincroniza Airbnb y Booking y evita la doble reserva; **recomendado**) o motor propio;
-  - el buscador reemplaza la barra de datos bajo el hero, sin selector de huéspedes (2 personas fijas);
-  - nueva página `/reservar/` (noindex).
+- 🔨 **Motor de reservas** (`docs/decisions/ADR-004-motor-de-reservas.md`): decisión del dueño del 2026-11-10, **motor propio** (Worker + D1 + Wompi). **En producción en modo de prueba, sin enlaces desde el sitio.**
+  - ✅ **Reserva en línea** (`/reservas/`, noindex): fechas, cabaña, extras ($99.000 cada uno), datos y pago; retención de 15 min; sin doble reserva (a nivel de base de datos); estadía mínima de 1 noche; primera noche el **15 de diciembre de 2026**; texto tuteando; marco mínimo (sin menú ni pie del sitio).
+  - ✅ **Pago con Wompi** (sandbox) con webhook firmado, conciliación al volver y manejo del pago tardío. Hoy corre con la **pasarela simulada** porque aún no hay llaves.
+  - ✅ **Panel `/admin/`** (noindex, instalable como app en Android): Inicio, Calendario por cabaña, Reservas (buscador, ficha, nota interna, cancelar, saldo pagado), Bloqueos y Analítica (ventas, tarifa promedio, ocupación, embudo, fuentes, extras, demanda sin atender, reservas por recuperar). Ingreso con enlace al correo.
+  - ✅ **Correo** `hola@amantia.com.co` en Zoho Mail de pago, con MX, SPF y DKIM. El sitio envía por SMTP de Zoho: enlace de ingreso al panel y aviso de cada reserva.
+  - ✅ Eventos anónimos propios (visita, búsqueda, cabaña elegida, pago) desde el 2026-11-12.
+  - 👤 **Antes de abrir al público (bloqueantes):**
+    - llaves de Wompi (`PAYMENT_PROVIDER = "wompi"`, secretos y URL de eventos `https://amantia.com.co/api/wompi/eventos`) y cuenta productiva (RUT o NIT);
+    - **borrar las reservas de prueba** (comando en ADR-004);
+    - tarifa definitiva (hoy $100.000 plano, de prueba);
+    - política de cancelación y reembolso, y anticipo (el 30 % es una propuesta);
+    - registro `_dmarc` en el DNS (no bloquea, ayuda con el spam);
+    - decidir cuándo enlazar `/reservas/` desde el sitio y si pierde el `noindex` (HARD RULE 2 y 7).
+  - ⏳ **Siguientes funciones, por orden:**
+    1. **Tarifas por fecha y temporada** (fines de semana, festivos, diciembre): sin esto la analítica de ventas dice poco.
+    2. Correo de confirmación al huésped (el SMTP de Zoho ya lo permite).
+    3. Sincronización iCal con Airbnb y Booking (obligatoria antes de publicar en OTAs).
+    4. Exportar a CSV y editar una reserva desde el panel.
+    5. Notificaciones push en Android.
+    6. Límite por IP o Turnstile en el registro de eventos si aparecen cifras infladas.
+    7. Etiquetas de GTM para `booking_search`, `booking_select`, `booking_begin_payment` y `booking_confirmed`.
+  - ⏳ El buscador reemplaza la barra de datos bajo el hero (2 personas fijas).
 - ⏳ Las 5 parejas de Orígenes viven Amantia; luego se cierra `/origenes/`.
 - ⏳ Tarifas publicadas. Revisar si "de lujo" en los titles es coherente con el precio (ADR-003).
 - ⏳ Fichas en OTAs (Airbnb y Booking exigen fotos reales), con el mismo nombre y dirección.

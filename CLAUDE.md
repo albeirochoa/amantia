@@ -26,6 +26,7 @@ Etiquetar todo dato no definitivo como `CONFIRMED`, `ASSUMPTION`, `TODO` o `PROP
 - **Captura de pre-registros:** MailerLite DESCARTADO (2026-10-06). Reemplazo: `TODO` decisión pendiente
 - **Hosting:** Cloudflare Workers con Static Assets (`wrangler.toml`, Worker `amantia`) — ver `docs/decisions/ADR-001-stack.md`
 - **Dominio:** amantia.com.co + www.amantia.com.co
+- **Motor de reservas:** propio, con Worker (`worker/booking/`), D1 (`migrations/`) y Wompi. Ver `docs/decisions/ADR-004-motor-de-reservas.md` (cómo correrlo en local, pendientes)
 
 ## Estructura
 
@@ -121,7 +122,7 @@ Nunca commitear `.env`. Usar `.env.example` como plantilla.
 ## Cosas importantes que evitar
 
 - **No instalar dependencias innecesarias.** Cada `npm install` extra es código que mantener. Si una librería no aporta valor visible al usuario, no entra.
-- **No agregar JavaScript del lado cliente.** Astro es estático por diseño. El único JS aceptable es el del formulario de pre-registro. Si algo se puede resolver con CSS, va con CSS.
+- **No agregar JavaScript del lado cliente.** Astro es estático por diseño. El único JS aceptable es el del formulario de pre-registro y el del motor de reservas en `/reservas/*` (ADR-004). Si algo se puede resolver con CSS, va con CSS.
 - **No tocar imágenes reales sin permiso.** Los placeholders de Unsplash son temporales. Las fotos reales del lugar son finitas y costosas; no se cambian sin discutir.
 - **No deployar sin probar el form.** Antes de cualquier push a producción, verificar que el formulario efectivamente guarda el registro.
 
