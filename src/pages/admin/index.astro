@@ -1,0 +1,108 @@
+---
+// /admin/ · Panel de reservas. noindex, fuera del sitemap, sin enlaces desde el sitio.
+// Ingreso con enlace al correo autorizado (ADMIN_EMAILS). Vistas: Inicio, Calendario, Reservas y Analítica. Ver ADR-004.
+import Base from '../../layouts/Base.astro';
+
+const NAV = [
+  { id: 'inicio', label: 'Inicio', icon: 'M4 11l8-7 8 7v9H4z' },
+  { id: 'calendario', label: 'Calendario', icon: 'M4 6h16v14H4zM4 10h16M9 3v4M15 3v4' },
+  { id: 'reservas', label: 'Reservas', icon: 'M5 6h14M5 12h14M5 18h14' },
+  { id: 'analitica', label: 'Analítica', icon: 'M5 20V10M12 20V4M19 20v-7' },
+];
+---
+
+<Base title="Panel · Amantia" description="Panel de reservas de Amantia." noindex chrome="none" analytics={false} mobileCta={false} hasLista={false}>
+  <!-- PWA solo del panel (alcance /admin/); el resto del sitio no es una app. -->
+  <link slot="head" rel="manifest" href="/admin/manifest.webmanifest" />
+  <meta slot="head" name="theme-color" content="#1A2A44" />
+
+  <!-- Barra propia del panel: marca y sesión. Sin menú ni pie del sitio público. -->
+  <header class="bg-paper border-b border-linen pt-[env(safe-area-inset-top)]">
+    <div class="shell max-w-6xl flex h-14 items-center justify-between gap-4">
+      <p class="font-serif text-base tracking-widest-3">AMANTIA <span class="font-sans text-[11px] tracking-[0.25em] text-ink-muted ml-2">PANEL</span></p>
+      <p id="sesion" hidden class="text-right text-[13px] text-ink-muted leading-tight">
+        <span id="admin-email" class="hidden sm:inline"></span>
+        <button type="button" class="underline underline-offset-4 py-3 sm:ml-4" id="btn-salir">Salir</button>
+      </p>
+    </div>
+  </header>
+
+  <div class="shell max-w-6xl" id="admin">
+    <section data-vista="cargando" class="pt-8"><p class="text-[15px] text-ink-muted">Cargando…</p></section>
+
+    <!-- Ingreso -->
+    <section data-vista="login" hidden class="max-w-md py-10">
+      <p class="eyebrow">Panel</p>
+      <h1 class="mt-3 font-serif font-normal text-[34px] leading-[1.15]">Entrar</h1>
+      <p class="mt-3 text-[16px] leading-[1.7] text-ink-muted">Escribe tu correo y te enviamos un enlace para entrar.</p>
+      <form id="form-login" class="mt-8" novalidate>
+        <label class="block">
+          <span class="text-[12px] tracking-[0.2em] uppercase text-ink-muted">Correo</span>
+          <input name="email" type="email" autocomplete="email" required class="campo" />
+        </label>
+        <button class="btn-primary w-full mt-6" type="submit">Enviarme el enlace</button>
+      </form>
+      <p class="mt-4 text-[15px] min-h-[1.5em]" id="msg-login" role="status"></p>
+    </section>
+
+    <!-- Aplicación: navegación inferior en el celular, lateral en computador -->
+    <div data-vista="app" hidden class="pt-6 pb-28 lg:pb-16 lg:grid lg:grid-cols-[190px_minmax(0,1fr)] lg:gap-10">
+      <nav
+        aria-label="Secciones"
+        class="fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 bg-paper border-t border-linen pb-[env(safe-area-inset-bottom)] lg:static lg:block lg:self-start lg:sticky lg:top-6 lg:border-0 lg:bg-transparent lg:pb-0"
+      >
+        {NAV.map((n) => (
+          <button
+            type="button"
+            data-nav={n.id}
+            aria-current="false"
+            class="flex w-full flex-col lg:flex-row items-center gap-1 lg:gap-3 py-2.5 lg:py-3 lg:px-3 text-[11px] lg:text-[13px] tracking-[0.1em] uppercase text-ink-muted border-t-2 border-transparent lg:border-t-0 aria-[current=page]:text-navy aria-[current=page]:border-gold-dark lg:aria-[current=page]:bg-sand"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d={n.icon} /></svg>
+            <span>{n.label}</span>
+          </button>
+        ))}
+      </nav>
+
+      <div class="min-w-0">
+        {NAV.map((n, i) => <div data-view={n.id} hidden={i !== 0}></div>)}
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  import { initAdmin } from '../../scripts/admin/main';
+  initAdmin();
+</script>
+
+<style is:global>
+  [hidden] {
+    display: none !important;
+  }
+  .campo {
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+    padding: 10px 0;
+    background: transparent;
+    border-bottom: 1px solid #1a2a44;
+    font-size: 16px;
+    border-radius: 0;
+  }
+  .accion {
+    min-height: 40px;
+    padding: 0 14px;
+    border: 1px solid currentColor;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .accion.peligro {
+    color: #9b2c2c;
+  }
+  /* Noches bloqueadas en el calendario */
+  .bloqueo {
+    background: repeating-linear-gradient(135deg, #e6e0d4, #e6e0d4 4px, #f1ede4 4px, #f1ede4 8px);
+  }
+</style>
