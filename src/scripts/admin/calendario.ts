@@ -36,12 +36,12 @@ export async function renderCalendario(el: HTMLElement, ctx: Ctx) {
   el.innerHTML = `
     <div class="flex flex-wrap items-end justify-between gap-3">
       <div>
-        <h1 class="font-serif font-normal text-[30px] leading-tight">Calendario</h1>
-        <p class="mt-1 text-[14px] text-ink-muted" id="cal-titulo">${esc(monthTitle)}</p>
+        <h1 class="text-[22px] font-medium leading-tight tracking-[-0.01em]">Calendario</h1>
+        <p class="mt-0.5 text-[14px] text-ink-muted" id="cal-titulo">${esc(monthTitle)}</p>
       </div>
       <div class="flex flex-wrap items-center gap-2">
-        <label class="text-[12px] tracking-[0.12em] uppercase text-ink-muted flex items-center gap-2">Ir a
-          <input type="date" id="cal-ir" value="${d.from}" class="border border-linen bg-paper h-10 px-2 text-[14px] normal-case tracking-normal text-navy" />
+        <label class="text-[13px] text-ink-muted flex items-center gap-2">Ir a
+          <input type="date" id="cal-ir" value="${d.from}" class="border border-linen bg-paper h-10 px-2 text-[14px] text-navy rounded" />
         </label>
         <button type="button" class="accion" data-shift="-${DAYS}" aria-label="${DAYS} días antes">‹</button>
         <button type="button" class="accion" data-shift="today">Hoy</button>
@@ -49,7 +49,7 @@ export async function renderCalendario(el: HTMLElement, ctx: Ctx) {
       </div>
     </div>
 
-    <div class="mt-5 overflow-x-auto border border-linen bg-paper" id="cal-scroll">
+    <div class="mt-4 overflow-x-auto border border-linen bg-paper rounded-md" id="cal-scroll">
       <div style="min-width:${LABEL + d.days * CELL}px" id="cal-grid">
         <div class="grid text-center text-[11px] text-ink-muted" style="${cols}">
           <div class="sticky left-0 z-20 bg-paper"></div>
@@ -69,9 +69,9 @@ export async function renderCalendario(el: HTMLElement, ctx: Ctx) {
     </div>
 
     <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-ink-muted" aria-hidden="true">
-      <span><i class="inline-block w-3 h-3 bg-navy align-[-1px] mr-1.5"></i>Confirmada</span>
-      <span><i class="inline-block w-3 h-3 bg-gold-soft align-[-1px] mr-1.5"></i>Pagando</span>
-      <span><i class="inline-block w-3 h-3 bloqueo align-[-1px] mr-1.5"></i>Bloqueada</span>
+      <span><i class="inline-block w-3 h-3 bar-ok rounded-sm align-[-1px] mr-1.5"></i>Confirmada</span>
+      <span><i class="inline-block w-3 h-3 bar-warn rounded-sm align-[-1px] mr-1.5"></i>Pagando</span>
+      <span><i class="inline-block w-3 h-3 bloqueo rounded-sm align-[-1px] mr-1.5"></i>Bloqueada</span>
     </div>
     <div class="mt-6"><button type="button" class="btn-outline" id="btn-bloquear">Bloquear noches</button></div>`;
 
@@ -116,7 +116,7 @@ export async function renderCalendario(el: HTMLElement, ctx: Ctx) {
       bar.style.gridColumn = `${start + 2} / ${end + 2}`;
       bar.style.gridRow = '1';
       const confirmed = b.status === 'confirmed';
-      bar.className = `z-10 my-2.5 mx-0.5 px-2 text-left text-[12px] leading-tight overflow-hidden flex items-center ${confirmed ? 'bg-navy text-paper' : 'bg-gold-soft text-navy'}`;
+      bar.className = `z-10 my-2.5 mx-0.5 px-2 text-left text-[12px] font-medium leading-tight overflow-hidden flex items-center rounded ${confirmed ? 'bar-ok' : 'bar-warn'}`;
       const pending = confirmed && !b.balancePaidAt && b.balance > 0;
       bar.innerHTML = `<span class="truncate">${esc(b.name.split(' ')[0])}${pending ? ' · saldo' : ''}</span>`;
       bar.setAttribute('aria-label', `${b.name}, ${fmtDate(b.checkIn)} a ${fmtDate(b.checkOut)}, ${confirmed ? 'confirmada' : 'pagando'}`);
@@ -148,17 +148,17 @@ function blockSheet(d: Cal, ctx: Ctx, preset: { cabin?: string; desde?: string }
     body.innerHTML = `
       <p class="text-[15px] leading-[1.6] text-ink-muted">Cierra noches vendidas por fuera (WhatsApp, Airbnb, Booking) o que no quieres ofrecer. Desaparecen de la reserva en línea.</p>
       <form class="mt-5 grid gap-5" novalidate>
-        <label class="block"><span class="text-[12px] tracking-[0.2em] uppercase text-ink-muted">Cabaña</span>
+        <label class="block"><span class="etiqueta">Cabaña</span>
           <select name="cabana" class="campo">${d.cabins.map((c) => `<option value="${esc(c.id)}" ${c.id === preset.cabin ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select></label>
         <div class="grid grid-cols-2 gap-5">
-          <label class="block"><span class="text-[12px] tracking-[0.2em] uppercase text-ink-muted">Primera noche</span>
+          <label class="block"><span class="etiqueta">Primera noche</span>
             <input name="desde" type="date" required min="${d.today}" value="${esc(preset.desde ?? '')}" class="campo" /></label>
-          <label class="block"><span class="text-[12px] tracking-[0.2em] uppercase text-ink-muted">Última noche</span>
+          <label class="block"><span class="etiqueta">Última noche</span>
             <input name="hasta" type="date" required min="${d.today}" value="${esc(preset.desde ?? '')}" class="campo" /></label>
         </div>
-        <label class="block"><span class="text-[12px] tracking-[0.2em] uppercase text-ink-muted">Nota (opcional)</span>
+        <label class="block"><span class="etiqueta">Nota (opcional)</span>
           <input name="nota" maxlength="120" placeholder="Ej.: Airbnb, Juan" class="campo" /></label>
-        <p class="text-[14px] text-[#9b2c2c] min-h-[1.4em]" data-error role="alert"></p>
+        <p class="text-[14px] text-bad min-h-[1.4em]" data-error role="alert"></p>
         <button type="submit" class="btn-primary w-full">Bloquear</button>
       </form>`;
     const form = body.querySelector('form')!;
@@ -185,7 +185,7 @@ function blockSheet(d: Cal, ctx: Ctx, preset: { cabin?: string; desde?: string }
 function unblockSheet(cabinName: string, cabinId: string, night: string, note: string | null, ctx: Ctx) {
   sheet('Noche bloqueada', (body, close) => {
     body.innerHTML = `
-      <p class="font-serif text-[22px]">${esc(cabinName)}</p>
+      <p class="text-[18px] font-medium">${esc(cabinName)}</p>
       <p class="mt-1 text-[15px] text-ink-muted">${esc(fmtDate(night))}${note ? ' · ' + esc(note) : ''}</p>
       <p class="mt-4 text-[15px] leading-[1.6]">Si la liberas, vuelve a aparecer disponible en la reserva en línea.</p>
       <div class="mt-6" data-actions></div>`;

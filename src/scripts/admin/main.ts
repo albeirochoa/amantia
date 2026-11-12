@@ -16,7 +16,32 @@ const RENDER: Record<View, (el: HTMLElement, ctx: Ctx) => Promise<void>> = {
   analitica: renderAnalitica,
 };
 
+/** Tema claro/oscuro: respeta el del sistema hasta que la persona elige uno (se recuerda en este navegador). */
+function initTheme() {
+  const root = document.documentElement;
+  const meta = document.querySelector('meta[name="theme-color"]');
+  const paint = () => {
+    const dark = root.dataset.theme === 'dark';
+    meta?.setAttribute('content', dark ? '#0f1626' : '#1A2A44');
+    const btn = document.getElementById('btn-tema');
+    btn?.setAttribute('aria-pressed', String(dark));
+    btn?.setAttribute('aria-label', dark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
+  };
+  paint();
+  document.getElementById('btn-tema')?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('amt_admin_theme', next);
+    } catch {
+      /* sin almacenamiento: el cambio vale solo para esta visita */
+    }
+    paint();
+  });
+}
+
 export function initAdmin() {
+  initTheme();
   // PWA: habilita la instalación como app (el service worker no guarda datos en caché).
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('/admin/sw.js', { scope: '/admin/' }).catch(() => {});
 
@@ -58,7 +83,7 @@ export function initAdmin() {
     } catch (err) {
       if (my !== token) return;
       if (err instanceof ApiError && err.status === 401) return stage('login');
-      el.innerHTML = `<p class="text-[15px] text-[#9b2c2c]" role="alert">${esc((err as Error).message)}</p>`;
+      el.innerHTML = `<p class="text-[15px] text-bad" role="alert">${esc((err as Error).message)}</p>`;
     }
   }
 

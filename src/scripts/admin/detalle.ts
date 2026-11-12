@@ -25,23 +25,23 @@ export async function openDetail(ref: string, onChange: () => void) {
     body.innerHTML = `
       <div class="flex items-start justify-between gap-4">
         <div>
-          <p class="font-serif text-[24px] leading-tight">${esc(stay(b))}</p>
+          <p class="text-[20px] font-medium leading-tight">${esc(stay(b))}</p>
           <p class="mt-1 text-[14px] text-ink-muted">${b.nights} ${b.nights === 1 ? 'noche' : 'noches'} · ${esc(b.cabin.name)} · 2 personas</p>
         </div>
         ${chip(b.status)}
       </div>
-      ${b.status === 'conflict' ? '<p class="mt-4 bg-[#f4dcdc] text-[#9b2c2c] px-4 py-3 text-[14px] leading-snug">El pago llegó después de que venció la retención y la cabaña ya estaba ocupada. Contacta al huésped para reubicarlo o reembolsar desde Wompi.</p>' : ''}
-      ${b.status === 'hold' ? `<p class="mt-4 bg-sand px-4 py-3 text-[14px]">Está pagando ahora. Si no completa el pago, se libera sola a las ${new Date(b.holdExpiresAt).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit' })}.</p>` : ''}
+      ${b.status === 'conflict' ? '<p class="mt-4 note-bad rounded-md px-4 py-3 text-[14px] leading-snug">El pago llegó después de que venció la retención y la cabaña ya estaba ocupada. Contacta al huésped para reubicarlo o reembolsar desde Wompi.</p>' : ''}
+      ${b.status === 'hold' ? `<p class="mt-4 note-warn rounded-md px-4 py-3 text-[14px]">Está pagando ahora. Si no completa el pago, se libera sola a las ${new Date(b.holdExpiresAt).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit' })}.</p>` : ''}
 
-      <h3 class="mt-7 text-[11px] tracking-[0.2em] uppercase text-ink-muted">Huésped</h3>
-      <p class="mt-2 text-[17px]">${esc(b.name)}</p>
+      <h3 class="mt-6 text-[13px] font-medium text-ink-muted">Huésped</h3>
+      <p class="mt-1.5 text-[17px] font-medium">${esc(b.name)}</p>
       <p class="mt-1 text-[15px] flex flex-wrap gap-x-5">
         <a class="underline underline-offset-4 py-1" href="${esc(wa)}" target="_blank" rel="noopener">WhatsApp ${esc(b.phone)}</a>
         <a class="underline underline-offset-4 py-1" href="tel:${esc(b.phone)}">Llamar</a>
         <a class="underline underline-offset-4 py-1" href="mailto:${esc(b.email)}">${esc(b.email)}</a>
       </p>
 
-      <h3 class="mt-7 text-[11px] tracking-[0.2em] uppercase text-ink-muted">Cuenta</h3>
+      <h3 class="mt-6 text-[13px] font-medium text-ink-muted">Cuenta</h3>
       <dl class="mt-2 grid grid-cols-[1fr_auto] gap-y-1.5 text-[15px]">
         <dt>Alojamiento</dt><dd class="text-right">${money(b.lodging)}</dd>
         ${b.extras.map((e) => `<dt>${esc(e.name)}</dt><dd class="text-right">${money(e.priceCop)}</dd>`).join('')}
@@ -51,7 +51,7 @@ export async function openDetail(ref: string, onChange: () => void) {
         <dd class="text-right ${b.balancePaidAt ? 'text-ink-muted line-through' : ''}">${money(b.balance)}</dd>
       </dl>
 
-      <h3 class="mt-7 text-[11px] tracking-[0.2em] uppercase text-ink-muted">Pagos (Wompi)</h3>
+      <h3 class="mt-6 text-[13px] font-medium text-ink-muted">Pagos (Wompi)</h3>
       ${
         d.payments.length
           ? `<ul class="mt-2 divide-y divide-linen text-[14px]">${d.payments
@@ -60,11 +60,11 @@ export async function openDetail(ref: string, onChange: () => void) {
           : '<p class="mt-2 text-[14px] text-ink-muted">Todavía no hay intentos de pago.</p>'
       }
 
-      <h3 class="mt-7 text-[11px] tracking-[0.2em] uppercase text-ink-muted">Origen</h3>
+      <h3 class="mt-6 text-[13px] font-medium text-ink-muted">Origen</h3>
       <p class="mt-2 text-[14px]">${b.source ? esc(b.source) + (b.medium ? ' · ' + esc(b.medium) : '') : 'Directo o sin dato'} · creada ${esc(dateTime(b.createdAt))}</p>
 
-      <h3 class="mt-7 text-[11px] tracking-[0.2em] uppercase text-ink-muted">Nota interna</h3>
-      <textarea id="nota" rows="3" maxlength="1000" class="mt-2 w-full border border-linen bg-paper p-3 text-[15px]" placeholder="Solo la ves tú: alergias, hora de llegada, acuerdos…">${esc(b.note ?? '')}</textarea>
+      <h3 class="mt-6 text-[13px] font-medium text-ink-muted">Nota interna</h3>
+      <textarea id="nota" rows="3" maxlength="1000" class="mt-2 w-full border border-linen bg-paper p-3 text-[15px] rounded-md" placeholder="Solo la ves tú: alergias, hora de llegada, acuerdos…">${esc(b.note ?? '')}</textarea>
       <div class="mt-2" data-nota-actions></div>
       <div class="mt-7 flex flex-wrap gap-3" data-actions></div>`;
 

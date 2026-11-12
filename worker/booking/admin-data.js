@@ -59,8 +59,14 @@ export async function inicio(env) {
   const month = `${today.slice(0, 8)}01`;
   const since14 = new Date(Date.now() - 14 * 86_400_000).toISOString();
   const cabins = (await one(db, `SELECT COUNT(*) n FROM cabins WHERE active = 1`)).n;
+  // Mismo tramo del mes anterior (del día 1 al día de hoy), para comparar justo.
+  const y = Number(today.slice(0, 4));
+  const m = Number(today.slice(5, 7));
+  const prevStart = `${m === 1 ? y - 1 : y}-${String(m === 1 ? 12 : m - 1).padStart(2, '0')}-01`;
+  const prevEndRaw = addDays(prevStart, Number(today.slice(8, 10)));
+  const prevEnd = prevEndRaw < month ? prevEndRaw : month;
 
-  const [arrivals, departures, inhouse, next, recover, holds, conflicts, owed, sales, occ7, occ30] = await Promise.all([
+  const [arrivals, departures, inhouse, next, recover, holds, conflicts, owed, sales, salesPrev, occ7, occ30] = await Promise.all([
     all(db, `SELECT ${COLS} ${FROM} WHERE b.status = 'confirmed' AND b.check_in = ?1 ORDER BY c.sort`, today),
     all(db, `SELECT ${COLS} ${FROM} WHERE b.status = 'confirmed' AND b.check_out = ?1 ORDER BY c.sort`, today),
     all(db, `SELECT ${COLS} ${FROM} WHERE b.status = 'confirmed' AND b.check_in <= ?1 AND b.check_out > ?1 ORDER BY c.sort`, today),
@@ -71,6 +77,7 @@ export async function inicio(env) {
     one(db, `SELECT COALESCE(SUM(total_cop - deposit_cop), 0) amount, COUNT(*) n FROM bookings
              WHERE status = 'confirmed' AND balance_paid_at IS NULL AND check_out >= ?1`, today),
     one(db, `SELECT COALESCE(SUM(total_cop), 0) amount, COUNT(*) n FROM bookings WHERE status = 'confirmed' AND created_at >= ?1`, month),
+    one(db, `SELECT COALESCE(SUM(total_cop), 0) amount, COUNT(*) n FROM bookings WHERE status = 'confirmed' AND created_at >= ?1 AND created_at < ?2`, prevStart, prevEnd),
     occupancy(db, today, addDays(today, 7), cabins),
     occupancy(db, today, addDays(today, 30), cabins),
   ]);
@@ -86,6 +93,7 @@ export async function inicio(env) {
     conflicts: conflicts.n,
     owed,
     sales,
+    salesPrev,
     occ7,
     occ30,
   });
@@ -173,9 +181,12 @@ export async function analitica(env, url) {
   const since = new Date(Date.now() - dias * 86_400_000).toISOString();
   const ahead = addDays(today, dias);
 
-  const [bookings, statuses, funnel, visitSources, demand, unmet, cabins] = await Promise.all([
+  const since2 = new Date(Date.now() - 2 * dias * 86_400_000).toISOString();
+  const [bookings, prevBookings, statuses, funnel, visitSources, demand, unmet, cabins] = await Promise.all([
     all(db, `SELECT ref, nights, total_cop, extras_cop, extras, check_in, created_at, source FROM bookings
              WHERE status = 'confirmed' AND created_at >= ?1 LIMIT 5000`, since),
+    all(db, `SELECT ref, nights, total_cop, extras_cop, extras, check_in, created_at FROM bookings
+             WHERE status = 'confirmed' AND created_at >= ?1 AND created_at < ?2 LIMIT 5000`, since2, since),
     all(db, `SELECT status, COUNT(*) n FROM bookings WHERE created_at >= ?1 GROUP BY status`, since),
     all(db, `SELECT type, COUNT(DISTINCT sid) n FROM events WHERE created_at >= ?1 GROUP BY type`, since),
     all(db, `SELECT COALESCE(source, 'directo') source, COUNT(DISTINCT sid) n FROM events
@@ -200,20 +211,41 @@ export async function analitica(env, url) {
     return { id: c.id, name: c.name, sold, available, pct: pct(sold, available) };
   });
 
-  // Negocio (reservas confirmadas creadas en el período).
+  // Negocio (reservas confirmadas creadas en el período) y el mismo cálculo del período anterior.
+  const kpisOf = (list) => {
+    const count = list.length;
+    const nights = list.reduce((t, b) => t + b.nights, 0);
+    const lodging = list.reduce((t, b) => t + (b.total_cop - b.extras_cop), 0);
+    const lead = list.reduce((t, b) => t + Math.max(0, diffDays(b.created_at.slice(0, 10), b.check_in)), 0);
+    const withExtras = list.filter((b) => JSON.parse(b.extras || '[]').length).length;
+    return {
+      bookings: count,
+      sales: list.reduce((t, b) => t + b.total_cop, 0),
+      adr: nights ? Math.round(lodging / nights) : 0,
+      avgStay: count ? Math.round((nights / count) * 10) / 10 : 0,
+      avgLead: count ? Math.round(lead / count) : 0,
+      withExtrasPct: pct(withExtras, count),
+    };
+  };
+  const kpis = kpisOf(bookings);
+  const prev = kpisOf(prevBookings);
+  // Serie para la línea de tendencia: diaria (30 días), semanal (90) o mensual (365).
+  const buckets = dias === 30 ? 30 : dias === 90 ? 13 : 12;
+  const bucketMs = (dias * 86_400_000) / buckets;
+  const sinceMs = Date.parse(since);
+  const series = Array.from({ length: buckets }, () => ({ sales: 0, bookings: 0 }));
+  for (const b of bookings) {
+    const i = Math.min(buckets - 1, Math.max(0, Math.floor((Date.parse(b.created_at) - sinceMs) / bucketMs)));
+    series[i].sales += b.total_cop;
+    series[i].bookings++;
+  }
   const count = bookings.length;
-  const nights = bookings.reduce((t, b) => t + b.nights, 0);
-  const sales = bookings.reduce((t, b) => t + b.total_cop, 0);
-  const lodging = bookings.reduce((t, b) => t + (b.total_cop - b.extras_cop), 0);
-  const lead = bookings.reduce((t, b) => t + Math.max(0, diffDays(b.created_at.slice(0, 10), b.check_in)), 0);
   const weekdays = [0, 0, 0, 0, 0, 0, 0]; // lunes … domingo (según la noche de llegada)
   const extras = {};
-  let withExtras = 0;
   const bySource = {};
   for (const b of bookings) {
     weekdays[(new Date(`${b.check_in}T00:00:00Z`).getUTCDay() + 6) % 7]++;
     const list = JSON.parse(b.extras || '[]');
-    if (list.length) withExtras++;
     for (const e of list) {
       extras[e.id] ??= { id: e.id, name: e.name, count: 0, revenue: 0 };
       extras[e.id].count++;
@@ -234,14 +266,9 @@ export async function analitica(env, url) {
 
   return json({
     dias,
-    kpis: {
-      bookings: count,
-      sales,
-      adr: nights ? Math.round(lodging / nights) : 0,
-      avgStay: count ? Math.round((nights / count) * 10) / 10 : 0,
-      avgLead: count ? Math.round(lead / count) : 0,
-      withExtrasPct: pct(withExtras, count),
-    },
+    kpis,
+    prev,
+    series,
     outcomes: Object.fromEntries(statuses.map((r) => [r.status, r.n])),
     funnel: [
       { key: 'visit', label: 'Visitaron la reserva', n: f.visit ?? 0 },
